@@ -38,6 +38,7 @@ function onMouseDown(evt){
 	//carray[2] = new Circle(0,2,10,"rgba(255,255,0,0.5)");
 }
 
+
 function Circle(x,y,r,color)
 {
 	this.x = x;
@@ -107,9 +108,6 @@ function onmousedown(evt){
 }
 $(document).keydown(onKeyDown);
 $(document).keyup(onKeyUp);
-//$(document).mousedown(onMouseDown)
-//$(carray[2]).mousedown(onMouseDown)
-//$(document).mousedown(onmousedown);
-$(carray[2]).mousedown(function(evt) {
-    alert(document.getElementById(evt.which));
-});
+$(document).mousedown(onMouseDown)
+
+
