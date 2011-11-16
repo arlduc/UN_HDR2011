@@ -166,8 +166,8 @@
 	function build_network(network){
 		
 		// All code here from: http://bl.ocks.org/950642
-		var w = 1920,
-		    h = 1080;
+		var w = 960,
+		    h = 900;
         
 		var vis = d3.select("#network").append("svg:svg")
 		    .attr("width", w)
@@ -182,7 +182,7 @@
 	        //.friction(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue=0.9; else returnValue = (link.source.Overall_loss_percent/100);  console.log(returnValue); return returnValue;  })
           //.linkDistance(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue= 0; else returnValue = (link.source.Overall_loss_percent);  return returnValue;   })              
 			    //.distance(100)
-	        .distance(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue= 0; else returnValue = (100-link.source.Overall_loss_percent)*10;  return returnValue;   })
+	        .distance(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue= 0; else returnValue = (link.source.Overall_loss_percent)*10;  return returnValue;   })
 	        .charge(-100)
 	        .size([w, h])
 	        .start();
@@ -216,7 +216,9 @@
                       var blue = 0; 
                       var missingdata; 
                       if (red == -1 || green == -1 ){ red = 50; green = 50; blue = 50;} 
-                      var value = "rgba(" + red +","+ green + "," + blue + ",255)"; console.log(value); return value; })    
+                      var value = "rgba(" + red +","+ green + "," + blue + ",255)"; 
+                      //console.log(value); 
+                      return value; })    
         //node radious
         .attr("r", function(d) { var returnValue =0; if(d.Overall_loss_percent=="..") returnValue=5; else returnValue = (d.Overall_loss_percent); return  returnValue; })
         //text 
