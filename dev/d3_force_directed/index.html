@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+	<script type="text/javascript" src="http://mbostock.github.com/d3/d3.js"></script>
+	<script type="text/javascript" src="http://mbostock.github.com/d3/d3.csv.js"></script>
+	<script type="text/javascript" src="http://mbostock.github.com/d3/d3.layout.js"></script>
+	<script type="text/javascript" src="http://mbostock.github.com/d3/d3.geom.js"></script>
+	<script type="text/javascript">
+	
+	// If using the chrome browser you will not be able to see the network 
+	// since it is very strict about bringing in local files external to this 
+	// one. If you have Python installed, navigate to the UN_HDR2011 root
+	// folder and run this command from the terminal:
+	//     python -m SimpleHTTPServer 8000
+	// Then type the following into your browser:
+	//     http://localhost:8000/dev/d3_force_directed/
+	
+	// Init Variables
+	var country_lookup = {},
+		data_lookup = {},
+		network ={"nodes":[], "links":[]};
+	
+	// This function never gets called, though I needed it but didn't
+	function get_index(needle, haystack){
+		var index;
+		haystack.forEach(function(item, i){
+			if(item["name"] == needle){
+				index = i;
+			}
+		})
+		return index;
+	}
+	
+	// Use D3's built in CSV module for converting CSV files to arrays
+	d3.csv("../../CSV/Country_name_3char.csv", function(csv){
+		
+		// Create lookup dictionary of country codes and names
+		csv.forEach(function(c){
+			country_lookup[c["country_name"]] = c["country_name_3char"];
+		})
+		
+		// Convert data CSV to array
+		d3.csv("../../CSV/MIT_DuKode_Dataset03.csv", function(csv){
+			
+			// Add all data to nodes array in network
+			csv.forEach(function(d){
+				var country_abbrv = country_lookup[d["Country"]];
+				data_lookup[country_abbrv] = d;
+				network["nodes"].push({"name": country_abbrv, "sum":d["SUM"], "group":1})
+			})
+			
+			// Sort the array of nodes by sum
+			network["nodes"].sort(function(a,b){
+				return b["sum"] - a["sum"];
+			})
+			
+			// Create links by adding one for nodes neighbors,
+			// one link added for node ranked higher than yours
+			// and another added for node ranked lower than yours
+			network["nodes"].forEach(function(node, i){
+				if(network["nodes"][i+1]){ // make sure they exist, in case this is the last node
+					network["links"].push({"source":i, "target":i+1})
+				}
+				if(network["nodes"][i-1]){ // make sure they exist, in case this is the first node
+					network["links"].push({"source":i, "target":i-1})
+				}
+			})
+			
+			// Here we feed this data to the network function to actually build it
+			build_network(network);
+		})
+	});
+	
+	
+	
+	
+	
+	function build_network(network){
+		
+		// All code here from: http://bl.ocks.org/950642
+		var w = 960,
+		    h = 650
+
+		var vis = d3.select("body").append("svg:svg")
+		    .attr("width", w)
+		    .attr("height", h);
+
+	    var force = self.force = d3.layout.force()
+	        .nodes(network.nodes)
+	        .links(network.links)
+			.linkStrength(.5)
+	        .gravity(.15)
+	        .distance(100)
+	        .charge(-100)
+	        .size([w, h])
+	        .start();
+
+	    var link = vis.selectAll("line.link")
+	        .data(network.links)
+	        .enter().append("svg:line")
+	        .attr("class", "link")
+			.attr("stroke", "black")
+	        .attr("x1", function(d) { return d.source.x; })
+	        .attr("y1", function(d) { return d.source.y; })
+	        .attr("x2", function(d) { return d.target.x; })
+	        .attr("y2", function(d) { return d.target.y; });
+
+	    var node = vis.selectAll("g.node")
+	        .data(network.nodes)
+	      .enter().append("svg:g")
+	        .attr("class", "node")
+	        .call(force.drag);
+
+	    node.append("svg:circle")
+			.attr("fill", "skyblue")
+			.attr("stroke", "white")
+			.attr("stroke-width", 2)
+	        .attr("class", "circle")
+	        .attr("x", "-8px")
+	        .attr("y", "-8px")
+	        .attr("r", "8px")
+
+	    node.append("svg:text")
+	        .attr("class", "nodetext")
+	        .attr("dx", 12)
+	        .attr("dy", ".35em")
+	        .text(function(d) { return d.name });
+
+	    force.on("tick", function() {
+	      link.attr("x1", function(d) { return d.source.x; })
+	          .attr("y1", function(d) { return d.source.y; })
+	          .attr("x2", function(d) { return d.target.x; })
+	          .attr("y2", function(d) { return d.target.y; });
+
+	      node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+	    });
+	}
+	</script>
+</body>
+</html>
