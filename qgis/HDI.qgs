@@ -24,22 +24,37 @@
         </destinationsrs>
     </mapcanvas>
     <legend>
-        <legendlayer open="true" checked="Qt::Checked" name="cntry00" showFeatureCount="0">
+        <legendlayer open="true" checked="Qt::Unchecked" name="country00" showFeatureCount="0">
             <filegroup open="true" hidden="false">
-                <legendlayerfile isInOverview="0" layerid="cntry0020111112095412197" visible="1"/>
+                <legendlayerfile isInOverview="0" layerid="country0020111116095511641" visible="0"/>
             </filegroup>
         </legendlayer>
-        <legendlayer open="true" checked="Qt::Unchecked" name="Education_donotuse" showFeatureCount="0">
+        <legendlayer open="true" checked="Qt::Unchecked" name="country00" showFeatureCount="0">
             <filegroup open="true" hidden="false">
-                <legendlayerfile isInOverview="0" layerid="Education_donotuse20111112095437873" visible="1"/>
+                <legendlayerfile isInOverview="0" layerid="country0020111116094844325" visible="0"/>
+            </filegroup>
+        </legendlayer>
+        <legendlayer open="true" checked="Qt::Unchecked" name="IHDI" showFeatureCount="0">
+            <filegroup open="true" hidden="false">
+                <legendlayerfile isInOverview="0" layerid="country0020111116094423659" visible="0"/>
+            </filegroup>
+        </legendlayer>
+        <legendlayer open="true" checked="Qt::Unchecked" name="MIT_DuKode_Dataset01_forimport" showFeatureCount="0">
+            <filegroup open="true" hidden="false">
+                <legendlayerfile isInOverview="0" layerid="MIT_DuKode_Dataset01_forimport20111116093451990" visible="1"/>
+            </filegroup>
+        </legendlayer>
+        <legendlayer open="true" checked="Qt::Checked" name="environmental index" showFeatureCount="0">
+            <filegroup open="true" hidden="false">
+                <legendlayerfile isInOverview="0" layerid="cntry0020111114084405491" visible="1"/>
             </filegroup>
         </legendlayer>
     </legend>
-    <projectlayers layercount="2">
+    <projectlayers layercount="5">
         <maplayer minimumScale="0" maximumScale="1e+08" geometry="No geometry" type="vector" hasScaleBasedVisibilityFlag="0">
-            <id>Education_donotuse20111112095437873</id>
-            <datasource>/Users/iliaskoen/works/DuKode/Human_Development_Report_2011/dev/UN_HDR2011/CSV/Education_donotuse.csv</datasource>
-            <layername>Education_donotuse</layername>
+            <id>MIT_DuKode_Dataset01_forimport20111116093451990</id>
+            <datasource>/Users/iliaskoen/works/DuKode/Human_Development_Report_2011/dev/UN_HDR2011/CSV/MIT_DuKode_Dataset01_forimport.csv</datasource>
+            <layername>MIT_DuKode_Dataset01_forimport</layername>
             <srs>
                 <spatialrefsys>
                     <proj4>+proj=longlat +ellps=WGS84 +towgs84=0,0,0,0,0,0,0 +no_defs</proj4>
@@ -62,9 +77,9 @@
             <attributeactions/>
         </maplayer>
         <maplayer minimumScale="0" maximumScale="1e+08" geometry="Polygon" type="vector" hasScaleBasedVisibilityFlag="0">
-            <id>cntry0020111112095412197</id>
+            <id>cntry0020111114084405491</id>
             <datasource>/Users/iliaskoen/data/world/cntry00.shp</datasource>
-            <layername>cntry00</layername>
+            <layername>environmental index</layername>
             <srs>
                 <spatialrefsys>
                     <proj4>+proj=longlat +ellps=WGS84 +towgs84=0,0,0,0,0,0,0 +no_defs</proj4>
@@ -80,17 +95,19 @@
             <transparencyLevelInt>255</transparencyLevelInt>
             <provider encoding="TIS-620">ogr</provider>
             <vectorjoins>
-                <join targetField="5" joinField="0" memoryCache="1" joinLayerId="Education_donotuse20111112095437873"/>
+                <join targetField="4" joinField="0" memoryCache="1" joinLayerId="MIT_DuKode_Dataset01_forimport20111116093451990"/>
             </vectorjoins>
             <renderer-v2 symbollevels="0" type="RuleRenderer" firstrule="0">
                 <rules>
-                    <rule scalemaxdenom="1" description="" filter="" symbol="0" scalemindenom="2" label=""/>
-                    <rule scalemaxdenom="3" description="" filter="" symbol="1" scalemindenom="2" label=""/>
+                    <rule scalemaxdenom="0" description="" filter="&quot;Environmental Performance Index&quot; &lt; 25" symbol="0" scalemindenom="0" label=""/>
+                    <rule scalemaxdenom="0" description="" filter="(&quot;Environmental Performance Index&quot; &lt; 50)  AND (&quot;Environmental Performance Index&quot; >= 25)" symbol="1" scalemindenom="0" label=""/>
+                    <rule scalemaxdenom="0" description="" filter="(&quot;Environmental Performance Index&quot; &lt; 75)  AND (&quot;Environmental Performance Index&quot; >= 50)" symbol="2" scalemindenom="0" label=""/>
+                    <rule scalemaxdenom="0" description="" filter="(&quot;Environmental Performance Index&quot; &lt; 75)  AND (&quot;Environmental Performance Index&quot; >= 100)" symbol="3" scalemindenom="0" label=""/>
                 </rules>
                 <symbols>
                     <symbol outputUnit="MM" alpha="1" type="fill" name="0">
                         <layer pass="0" class="SimpleFill" locked="0">
-                            <prop k="color" v="145,0,0,255"/>
+                            <prop k="color" v="0,0,0,255"/>
                             <prop k="color_border" v="0,0,0,255"/>
                             <prop k="offset" v="0,0"/>
                             <prop k="style" v="solid"/>
@@ -98,10 +115,30 @@
                             <prop k="width_border" v="0.26"/>
                         </layer>
                     </symbol>
-                    <symbol outputUnit="MM" alpha="1" type="fill" name="1">
+                    <symbol outputUnit="MM" alpha="0.7450980392156863" type="fill" name="1">
                         <layer pass="0" class="SimpleFill" locked="0">
-                            <prop k="color" v="216,62,116,255"/>
-                            <prop k="color_border" v="0,0,0,255"/>
+                            <prop k="color" v="0,0,0,190"/>
+                            <prop k="color_border" v="0,0,0,190"/>
+                            <prop k="offset" v="0,0"/>
+                            <prop k="style" v="solid"/>
+                            <prop k="style_border" v="solid"/>
+                            <prop k="width_border" v="0.26"/>
+                        </layer>
+                    </symbol>
+                    <symbol outputUnit="MM" alpha="0.4901960784313726" type="fill" name="2">
+                        <layer pass="0" class="SimpleFill" locked="0">
+                            <prop k="color" v="0,0,0,125"/>
+                            <prop k="color_border" v="0,0,0,125"/>
+                            <prop k="offset" v="0,0"/>
+                            <prop k="style" v="solid"/>
+                            <prop k="style_border" v="solid"/>
+                            <prop k="width_border" v="0.26"/>
+                        </layer>
+                    </symbol>
+                    <symbol outputUnit="MM" alpha="0.2431372549019608" type="fill" name="3">
+                        <layer pass="0" class="SimpleFill" locked="0">
+                            <prop k="color" v="0,0,0,62"/>
+                            <prop k="color_border" v="0,0,0,62"/>
                             <prop k="offset" v="0,0"/>
                             <prop k="style" v="solid"/>
                             <prop k="style_border" v="solid"/>
@@ -110,7 +147,7 @@
                     </symbol>
                     <symbol outputUnit="MM" alpha="1" type="fill" name="default">
                         <layer pass="0" class="SimpleFill" locked="0">
-                            <prop k="color" v="145,83,127,255"/>
+                            <prop k="color" v="83,197,68,255"/>
                             <prop k="color_border" v="0,0,0,255"/>
                             <prop k="offset" v="0,0"/>
                             <prop k="style" v="solid"/>
@@ -148,8 +185,12 @@
                 <edittype type="0" name="COLOR_MAP"/>
                 <edittype type="0" name="CURR_CODE"/>
                 <edittype type="0" name="CURR_TYPE"/>
+                <edittype type="0" name="Environmental Performance Index"/>
                 <edittype type="0" name="FIPS_CNTRY"/>
+                <edittype type="0" name="GII: Gender Inequality Index, value"/>
                 <edittype type="0" name="GMI_CNTRY"/>
+                <edittype type="0" name="GNI: Gross National Income"/>
+                <edittype type="0" name="IHDI: Inequality-adjusted HDI value"/>
                 <edittype type="0" name="ISO_2DIGIT"/>
                 <edittype type="0" name="ISO_3DIGIT"/>
                 <edittype type="0" name="LANDLOCKED"/>
@@ -159,137 +200,342 @@
                 <edittype type="0" name="SQKM"/>
                 <edittype type="0" name="SQMI"/>
                 <edittype type="0" name="field_1"/>
-                <edittype type="0" name="field_10"/>
-                <edittype type="0" name="field_100"/>
-                <edittype type="0" name="field_101"/>
-                <edittype type="0" name="field_102"/>
-                <edittype type="0" name="field_103"/>
-                <edittype type="0" name="field_104"/>
-                <edittype type="0" name="field_105"/>
-                <edittype type="0" name="field_106"/>
-                <edittype type="0" name="field_107"/>
-                <edittype type="0" name="field_108"/>
-                <edittype type="0" name="field_109"/>
-                <edittype type="0" name="field_11"/>
-                <edittype type="0" name="field_110"/>
-                <edittype type="0" name="field_111"/>
-                <edittype type="0" name="field_112"/>
-                <edittype type="0" name="field_113"/>
-                <edittype type="0" name="field_114"/>
-                <edittype type="0" name="field_115"/>
-                <edittype type="0" name="field_116"/>
-                <edittype type="0" name="field_117"/>
-                <edittype type="0" name="field_118"/>
-                <edittype type="0" name="field_119"/>
-                <edittype type="0" name="field_12"/>
-                <edittype type="0" name="field_120"/>
-                <edittype type="0" name="field_121"/>
-                <edittype type="0" name="field_122"/>
-                <edittype type="0" name="field_123"/>
-                <edittype type="0" name="field_124"/>
-                <edittype type="0" name="field_125"/>
-                <edittype type="0" name="field_126"/>
-                <edittype type="0" name="field_127"/>
-                <edittype type="0" name="field_128"/>
-                <edittype type="0" name="field_129"/>
-                <edittype type="0" name="field_13"/>
-                <edittype type="0" name="field_130"/>
-                <edittype type="0" name="field_131"/>
-                <edittype type="0" name="field_14"/>
-                <edittype type="0" name="field_15"/>
-                <edittype type="0" name="field_16"/>
-                <edittype type="0" name="field_17"/>
-                <edittype type="0" name="field_18"/>
-                <edittype type="0" name="field_19"/>
-                <edittype type="0" name="field_2"/>
-                <edittype type="0" name="field_20"/>
-                <edittype type="0" name="field_21"/>
-                <edittype type="0" name="field_22"/>
-                <edittype type="0" name="field_23"/>
-                <edittype type="0" name="field_24"/>
-                <edittype type="0" name="field_25"/>
-                <edittype type="0" name="field_26"/>
-                <edittype type="0" name="field_27"/>
-                <edittype type="0" name="field_28"/>
-                <edittype type="0" name="field_29"/>
-                <edittype type="0" name="field_3"/>
-                <edittype type="0" name="field_30"/>
-                <edittype type="0" name="field_31"/>
-                <edittype type="0" name="field_32"/>
-                <edittype type="0" name="field_33"/>
-                <edittype type="0" name="field_34"/>
-                <edittype type="0" name="field_35"/>
-                <edittype type="0" name="field_36"/>
-                <edittype type="0" name="field_37"/>
-                <edittype type="0" name="field_38"/>
-                <edittype type="0" name="field_39"/>
-                <edittype type="0" name="field_4"/>
-                <edittype type="0" name="field_40"/>
-                <edittype type="0" name="field_41"/>
-                <edittype type="0" name="field_42"/>
-                <edittype type="0" name="field_43"/>
-                <edittype type="0" name="field_44"/>
-                <edittype type="0" name="field_45"/>
-                <edittype type="0" name="field_46"/>
-                <edittype type="0" name="field_47"/>
-                <edittype type="0" name="field_48"/>
-                <edittype type="0" name="field_49"/>
-                <edittype type="0" name="field_5"/>
-                <edittype type="0" name="field_50"/>
-                <edittype type="0" name="field_51"/>
-                <edittype type="0" name="field_52"/>
-                <edittype type="0" name="field_53"/>
-                <edittype type="0" name="field_54"/>
-                <edittype type="0" name="field_55"/>
-                <edittype type="0" name="field_56"/>
-                <edittype type="0" name="field_57"/>
-                <edittype type="0" name="field_58"/>
-                <edittype type="0" name="field_59"/>
-                <edittype type="0" name="field_6"/>
-                <edittype type="0" name="field_60"/>
-                <edittype type="0" name="field_61"/>
-                <edittype type="0" name="field_62"/>
-                <edittype type="0" name="field_63"/>
-                <edittype type="0" name="field_64"/>
-                <edittype type="0" name="field_65"/>
-                <edittype type="0" name="field_66"/>
-                <edittype type="0" name="field_67"/>
-                <edittype type="0" name="field_68"/>
-                <edittype type="0" name="field_69"/>
-                <edittype type="0" name="field_7"/>
-                <edittype type="0" name="field_70"/>
-                <edittype type="0" name="field_71"/>
-                <edittype type="0" name="field_72"/>
-                <edittype type="0" name="field_73"/>
-                <edittype type="0" name="field_74"/>
-                <edittype type="0" name="field_75"/>
-                <edittype type="0" name="field_76"/>
-                <edittype type="0" name="field_77"/>
-                <edittype type="0" name="field_78"/>
-                <edittype type="0" name="field_79"/>
-                <edittype type="0" name="field_8"/>
-                <edittype type="0" name="field_80"/>
-                <edittype type="0" name="field_81"/>
-                <edittype type="0" name="field_82"/>
-                <edittype type="0" name="field_83"/>
-                <edittype type="0" name="field_84"/>
-                <edittype type="0" name="field_85"/>
-                <edittype type="0" name="field_86"/>
-                <edittype type="0" name="field_87"/>
-                <edittype type="0" name="field_88"/>
-                <edittype type="0" name="field_89"/>
-                <edittype type="0" name="field_9"/>
-                <edittype type="0" name="field_90"/>
-                <edittype type="0" name="field_91"/>
-                <edittype type="0" name="field_92"/>
-                <edittype type="0" name="field_93"/>
-                <edittype type="0" name="field_94"/>
-                <edittype type="0" name="field_95"/>
-                <edittype type="0" name="field_96"/>
-                <edittype type="0" name="field_97"/>
-                <edittype type="0" name="field_98"/>
-                <edittype type="0" name="field_99"/>
+                <edittype type="0" name="test field"/>
+                <edittype type="0" name="test rotat"/>
+                <edittype type="0" name="test_field"/>
             </edittypes>
+            <editform></editform>
+            <editforminit></editforminit>
+            <annotationform></annotationform>
+            <attributeactions/>
+        </maplayer>
+        <maplayer minimumScale="0" maximumScale="1e+08" geometry="Polygon" type="vector" hasScaleBasedVisibilityFlag="0">
+            <id>country0020111116094423659</id>
+            <datasource>/Users/iliaskoen/works/DuKode/Human_Development_Report_2011/dev/UN_HDR2011/CSV/country00.shp</datasource>
+            <layername>IHDI</layername>
+            <srs>
+                <spatialrefsys>
+                    <proj4>+proj=longlat +ellps=WGS84 +towgs84=0,0,0,0,0,0,0 +no_defs</proj4>
+                    <srsid>3452</srsid>
+                    <srid>4326</srid>
+                    <authid>EPSG:4326</authid>
+                    <description>WGS 84</description>
+                    <projectionacronym>longlat</projectionacronym>
+                    <ellipsoidacronym>WGS84</ellipsoidacronym>
+                    <geographicflag>true</geographicflag>
+                </spatialrefsys>
+            </srs>
+            <transparencyLevelInt>255</transparencyLevelInt>
+            <provider encoding="TIS-620">ogr</provider>
+            <vectorjoins>
+                <join targetField="4" joinField="0" memoryCache="1" joinLayerId="MIT_DuKode_Dataset01_forimport20111116093451990"/>
+            </vectorjoins>
+            <renderer-v2 symbollevels="0" type="RuleRenderer" firstrule="0">
+                <rules>
+                    <rule scalemaxdenom="0" description="" filter="&quot;IHDI: Inequality-adjusted HDI value&quot; &lt; 25/100" symbol="0" scalemindenom="0" label=""/>
+                    <rule scalemaxdenom="0" description="" filter="(&quot;IHDI: Inequality-adjusted HDI value&quot; &lt; 50/100)  AND (&quot;IHDI: Inequality-adjusted HDI value&quot; >= 25/100)" symbol="1" scalemindenom="0" label=""/>
+                    <rule scalemaxdenom="0" description="" filter="(&quot;IHDI: Inequality-adjusted HDI value&quot;&lt; 75/100)  AND (&quot;IHDI: Inequality-adjusted HDI value&quot; >= 50/100)" symbol="2" scalemindenom="0" label=""/>
+                    <rule scalemaxdenom="0" description="" filter="(&quot;IHDI: Inequality-adjusted HDI value&quot; &lt; 75/100)  AND (&quot;IHDI: Inequality-adjusted HDI value&quot; >= 100/100)" symbol="3" scalemindenom="0" label=""/>
+                </rules>
+                <symbols>
+                    <symbol outputUnit="MM" alpha="1" type="fill" name="0">
+                        <layer pass="0" class="SimpleFill" locked="0">
+                            <prop k="color" v="0,0,0,255"/>
+                            <prop k="color_border" v="0,0,0,255"/>
+                            <prop k="offset" v="0,0"/>
+                            <prop k="style" v="solid"/>
+                            <prop k="style_border" v="solid"/>
+                            <prop k="width_border" v="0.26"/>
+                        </layer>
+                    </symbol>
+                    <symbol outputUnit="MM" alpha="0.7450980392156863" type="fill" name="1">
+                        <layer pass="0" class="SimpleFill" locked="0">
+                            <prop k="color" v="0,0,0,190"/>
+                            <prop k="color_border" v="0,0,0,190"/>
+                            <prop k="offset" v="0,0"/>
+                            <prop k="style" v="solid"/>
+                            <prop k="style_border" v="solid"/>
+                            <prop k="width_border" v="0.26"/>
+                        </layer>
+                    </symbol>
+                    <symbol outputUnit="MM" alpha="0.4901960784313726" type="fill" name="2">
+                        <layer pass="0" class="SimpleFill" locked="0">
+                            <prop k="color" v="0,0,0,125"/>
+                            <prop k="color_border" v="0,0,0,125"/>
+                            <prop k="offset" v="0,0"/>
+                            <prop k="style" v="solid"/>
+                            <prop k="style_border" v="solid"/>
+                            <prop k="width_border" v="0.26"/>
+                        </layer>
+                    </symbol>
+                    <symbol outputUnit="MM" alpha="0.2431372549019608" type="fill" name="3">
+                        <layer pass="0" class="SimpleFill" locked="0">
+                            <prop k="color" v="0,0,0,62"/>
+                            <prop k="color_border" v="0,0,0,62"/>
+                            <prop k="offset" v="0,0"/>
+                            <prop k="style" v="solid"/>
+                            <prop k="style_border" v="solid"/>
+                            <prop k="width_border" v="0.26"/>
+                        </layer>
+                    </symbol>
+                    <symbol outputUnit="MM" alpha="1" type="fill" name="default">
+                        <layer pass="0" class="SimpleFill" locked="0">
+                            <prop k="color" v="83,197,68,255"/>
+                            <prop k="color_border" v="0,0,0,255"/>
+                            <prop k="offset" v="0,0"/>
+                            <prop k="style" v="solid"/>
+                            <prop k="style_border" v="solid"/>
+                            <prop k="width_border" v="0.26"/>
+                        </layer>
+                    </symbol>
+                </symbols>
+            </renderer-v2>
+            <customproperties/>
+            <displayfield>FIPS_CNTRY</displayfield>
+            <label>0</label>
+            <labelattributes>
+                <label fieldname="" text="Label"/>
+                <family fieldname="" name="Lucida Grande"/>
+                <size fieldname="" units="pt" value="12"/>
+                <bold fieldname="" on="0"/>
+                <italic fieldname="" on="0"/>
+                <underline fieldname="" on="0"/>
+                <strikeout fieldname="" on="0"/>
+                <color fieldname="" red="0" blue="0" green="0"/>
+                <x fieldname=""/>
+                <y fieldname=""/>
+                <offset x="0" y="0" units="pt" yfieldname="" xfieldname=""/>
+                <angle fieldname="" value="0" auto="0"/>
+                <alignment fieldname="" value="center"/>
+                <buffercolor fieldname="" red="255" blue="255" green="255"/>
+                <buffersize fieldname="" units="pt" value="1"/>
+                <bufferenabled fieldname="" on=""/>
+                <multilineenabled fieldname="" on=""/>
+                <selectedonly on=""/>
+            </labelattributes>
+            <edittypes>
+                <edittype type="0" name="CNTRY_NAME"/>
+                <edittype type="0" name="COLOR_MAP"/>
+                <edittype type="0" name="CURR_CODE"/>
+                <edittype type="0" name="CURR_TYPE"/>
+                <edittype type="0" name="Environmental Performance Index"/>
+                <edittype type="0" name="FIPS_CNTRY"/>
+                <edittype type="0" name="GII: Gender Inequality Index, value"/>
+                <edittype type="0" name="GMI_CNTRY"/>
+                <edittype type="0" name="GNI: Gross National Income"/>
+                <edittype type="0" name="IHDI: Inequality-adjusted HDI value"/>
+                <edittype type="0" name="ISO_2DIGIT"/>
+                <edittype type="0" name="ISO_3DIGIT"/>
+                <edittype type="0" name="LANDLOCKED"/>
+                <edittype type="0" name="LONG_NAME"/>
+                <edittype type="0" name="POP_CNTRY"/>
+                <edittype type="0" name="SOVEREIGN"/>
+                <edittype type="0" name="SQKM"/>
+                <edittype type="0" name="SQMI"/>
+                <edittype type="0" name="field_1"/>
+                <edittype type="0" name="test field"/>
+                <edittype type="0" name="test rotat"/>
+                <edittype type="0" name="test_field"/>
+            </edittypes>
+            <editform></editform>
+            <editforminit></editforminit>
+            <annotationform></annotationform>
+            <attributeactions/>
+        </maplayer>
+        <maplayer minimumScale="0" maximumScale="1e+08" geometry="Polygon" type="vector" hasScaleBasedVisibilityFlag="0">
+            <id>country0020111116094844325</id>
+            <datasource>/Users/iliaskoen/works/DuKode/Human_Development_Report_2011/dev/UN_HDR2011/CSV/country00.shp</datasource>
+            <layername>country00</layername>
+            <srs>
+                <spatialrefsys>
+                    <proj4>+proj=longlat +ellps=WGS84 +towgs84=0,0,0,0,0,0,0 +no_defs</proj4>
+                    <srsid>3452</srsid>
+                    <srid>4326</srid>
+                    <authid>EPSG:4326</authid>
+                    <description>WGS 84</description>
+                    <projectionacronym>longlat</projectionacronym>
+                    <ellipsoidacronym>WGS84</ellipsoidacronym>
+                    <geographicflag>true</geographicflag>
+                </spatialrefsys>
+            </srs>
+            <transparencyLevelInt>255</transparencyLevelInt>
+            <provider encoding="TIS-620">ogr</provider>
+            <vectorjoins>
+                <join targetField="4" joinField="0" memoryCache="1" joinLayerId="MIT_DuKode_Dataset01_forimport20111116093451990"/>
+            </vectorjoins>
+            <renderer-v2 symbollevels="0" type="RuleRenderer" firstrule="0">
+                <rules>
+                    <rule scalemaxdenom="0" description="" filter="(&quot;GNI: Gross National Income&quot; &lt; 25)" symbol="0" scalemindenom="0" label=""/>
+                    <rule scalemaxdenom="0" description="" filter="(&quot;GNI: Gross National Income&quot; &lt; 50)  AND (&quot;GNI: Gross National Income&quot; >= 25)" symbol="1" scalemindenom="0" label=""/>
+                    <rule scalemaxdenom="0" description="" filter="(&quot;GNI: Gross National Income&quot;&lt; 75)  AND (&quot;GNI: Gross National Income&quot; >= 50)" symbol="2" scalemindenom="0" label=""/>
+                    <rule scalemaxdenom="0" description="" filter="(&quot;GNI: Gross National Income&quot; > 75)  AND (&quot;GNI: Gross National Income&quot;&lt;= 100)" symbol="3" scalemindenom="0" label=""/>
+                </rules>
+                <symbols>
+                    <symbol outputUnit="MM" alpha="1" type="fill" name="0">
+                        <layer pass="0" class="SimpleFill" locked="0">
+                            <prop k="color" v="0,0,0,255"/>
+                            <prop k="color_border" v="0,0,0,255"/>
+                            <prop k="offset" v="0,0"/>
+                            <prop k="style" v="solid"/>
+                            <prop k="style_border" v="solid"/>
+                            <prop k="width_border" v="0.26"/>
+                        </layer>
+                    </symbol>
+                    <symbol outputUnit="MM" alpha="0.7450980392156863" type="fill" name="1">
+                        <layer pass="0" class="SimpleFill" locked="0">
+                            <prop k="color" v="0,0,0,190"/>
+                            <prop k="color_border" v="0,0,0,190"/>
+                            <prop k="offset" v="0,0"/>
+                            <prop k="style" v="solid"/>
+                            <prop k="style_border" v="solid"/>
+                            <prop k="width_border" v="0.26"/>
+                        </layer>
+                    </symbol>
+                    <symbol outputUnit="MM" alpha="0.4901960784313726" type="fill" name="2">
+                        <layer pass="0" class="SimpleFill" locked="0">
+                            <prop k="color" v="0,0,0,125"/>
+                            <prop k="color_border" v="0,0,0,125"/>
+                            <prop k="offset" v="0,0"/>
+                            <prop k="style" v="solid"/>
+                            <prop k="style_border" v="solid"/>
+                            <prop k="width_border" v="0.26"/>
+                        </layer>
+                    </symbol>
+                    <symbol outputUnit="MM" alpha="0.2431372549019608" type="fill" name="3">
+                        <layer pass="0" class="SimpleFill" locked="0">
+                            <prop k="color" v="0,0,0,62"/>
+                            <prop k="color_border" v="0,0,0,62"/>
+                            <prop k="offset" v="0,0"/>
+                            <prop k="style" v="solid"/>
+                            <prop k="style_border" v="solid"/>
+                            <prop k="width_border" v="0.26"/>
+                        </layer>
+                    </symbol>
+                    <symbol outputUnit="MM" alpha="1" type="fill" name="default">
+                        <layer pass="0" class="SimpleFill" locked="0">
+                            <prop k="color" v="83,197,68,255"/>
+                            <prop k="color_border" v="0,0,0,255"/>
+                            <prop k="offset" v="0,0"/>
+                            <prop k="style" v="solid"/>
+                            <prop k="style_border" v="solid"/>
+                            <prop k="width_border" v="0.26"/>
+                        </layer>
+                    </symbol>
+                </symbols>
+            </renderer-v2>
+            <customproperties/>
+            <displayfield>FIPS_CNTRY</displayfield>
+            <label>0</label>
+            <labelattributes>
+                <label fieldname="" text="Label"/>
+                <family fieldname="" name="Lucida Grande"/>
+                <size fieldname="" units="pt" value="12"/>
+                <bold fieldname="" on="0"/>
+                <italic fieldname="" on="0"/>
+                <underline fieldname="" on="0"/>
+                <strikeout fieldname="" on="0"/>
+                <color fieldname="" red="0" blue="0" green="0"/>
+                <x fieldname=""/>
+                <y fieldname=""/>
+                <offset x="0" y="0" units="pt" yfieldname="" xfieldname=""/>
+                <angle fieldname="" value="0" auto="0"/>
+                <alignment fieldname="" value="center"/>
+                <buffercolor fieldname="" red="255" blue="255" green="255"/>
+                <buffersize fieldname="" units="pt" value="1"/>
+                <bufferenabled fieldname="" on=""/>
+                <multilineenabled fieldname="" on=""/>
+                <selectedonly on=""/>
+            </labelattributes>
+            <edittypes>
+                <edittype type="0" name="CNTRY_NAME"/>
+                <edittype type="0" name="COLOR_MAP"/>
+                <edittype type="0" name="CURR_CODE"/>
+                <edittype type="0" name="CURR_TYPE"/>
+                <edittype type="0" name="Environmental Performance Index"/>
+                <edittype type="0" name="FIPS_CNTRY"/>
+                <edittype type="0" name="GII: Gender Inequality Index, value"/>
+                <edittype type="0" name="GMI_CNTRY"/>
+                <edittype type="0" name="GNI: Gross National Income"/>
+                <edittype type="0" name="IHDI: Inequality-adjusted HDI value"/>
+                <edittype type="0" name="ISO_2DIGIT"/>
+                <edittype type="0" name="ISO_3DIGIT"/>
+                <edittype type="0" name="LANDLOCKED"/>
+                <edittype type="0" name="LONG_NAME"/>
+                <edittype type="0" name="POP_CNTRY"/>
+                <edittype type="0" name="SOVEREIGN"/>
+                <edittype type="0" name="SQKM"/>
+                <edittype type="0" name="SQMI"/>
+                <edittype type="0" name="field_1"/>
+                <edittype type="0" name="test field"/>
+                <edittype type="0" name="test rotat"/>
+                <edittype type="0" name="test_field"/>
+            </edittypes>
+            <editform></editform>
+            <editforminit></editforminit>
+            <annotationform></annotationform>
+            <attributeactions/>
+        </maplayer>
+        <maplayer minimumScale="0" maximumScale="1e+08" minLabelScale="0" maxLabelScale="1e+08" geometry="Polygon" type="vector" hasScaleBasedVisibilityFlag="0" scaleBasedLabelVisibilityFlag="0">
+            <id>country0020111116095511641</id>
+            <datasource>/Users/iliaskoen/works/DuKode/Human_Development_Report_2011/dev/UN_HDR2011/CSV/country00.shp</datasource>
+            <layername>country00</layername>
+            <srs>
+                <spatialrefsys>
+                    <proj4>+proj=longlat +ellps=WGS84 +towgs84=0,0,0,0,0,0,0 +no_defs</proj4>
+                    <srsid>3452</srsid>
+                    <srid>4326</srid>
+                    <authid>EPSG:4326</authid>
+                    <description>WGS 84</description>
+                    <projectionacronym>longlat</projectionacronym>
+                    <ellipsoidacronym>WGS84</ellipsoidacronym>
+                    <geographicflag>true</geographicflag>
+                </spatialrefsys>
+            </srs>
+            <transparencyLevelInt>255</transparencyLevelInt>
+            <provider encoding="TIS-620">ogr</provider>
+            <vectorjoins/>
+            <singlesymbol>
+                <symbol>
+                    <lowervalue></lowervalue>
+                    <uppervalue></uppervalue>
+                    <label></label>
+                    <pointsymbol>hard:circle</pointsymbol>
+                    <pointsize>2</pointsize>
+                    <pointsizeunits>pixels</pointsizeunits>
+                    <rotationclassificationfieldname></rotationclassificationfieldname>
+                    <scaleclassificationfieldname></scaleclassificationfieldname>
+                    <symbolfieldname></symbolfieldname>
+                    <outlinecolor red="0" blue="0" green="0"/>
+                    <outlinestyle>SolidLine</outlinestyle>
+                    <outlinewidth>0.26</outlinewidth>
+                    <fillcolor red="137" blue="83" green="170"/>
+                    <fillpattern>SolidPattern</fillpattern>
+                    <texturepath null="1"></texturepath>
+                </symbol>
+            </singlesymbol>
+            <customproperties/>
+            <displayfield></displayfield>
+            <label>0</label>
+            <labelattributes>
+                <label fieldname="" text="Label"/>
+                <family fieldname="" name="Lucida Grande"/>
+                <size fieldname="" units="pt" value="12"/>
+                <bold fieldname="" on="0"/>
+                <italic fieldname="" on="0"/>
+                <underline fieldname="" on="0"/>
+                <strikeout fieldname="" on="0"/>
+                <color fieldname="" red="0" blue="0" green="0"/>
+                <x fieldname=""/>
+                <y fieldname=""/>
+                <offset x="0" y="0" units="pt" yfieldname="" xfieldname=""/>
+                <angle fieldname="" value="0" auto="0"/>
+                <alignment fieldname="" value="center"/>
+                <buffercolor fieldname="" red="255" blue="255" green="255"/>
+                <buffersize fieldname="" units="pt" value="1"/>
+                <bufferenabled fieldname="" on=""/>
+                <multilineenabled fieldname="" on=""/>
+                <selectedonly on=""/>
+            </labelattributes>
             <editform></editform>
             <editforminit></editforminit>
             <annotationform></annotationform>
