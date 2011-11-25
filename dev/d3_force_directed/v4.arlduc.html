@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>UN HDR Challenge :: Network V3 ik</title>
+	<title>UN HDR Challenge :: Network V4 arlduc</title>
 	<style>
 	*, body {
 		font: 10px sans-serif;
@@ -127,7 +127,7 @@
 	}
 	
 	// Convert data CSV to array
-	d3.csv("../../CSV/MIT_DuKode_Dataset04.csv", function(csv){
+	d3.csv("../../CSV/MIT_DuKode_Dataset05.csv", function(csv){
 		
 		// Set networks nodes to CSV returned array
 		network["nodes"] = csv;
@@ -166,8 +166,8 @@
 	function build_network(network){
 		
 		// All code here from: http://bl.ocks.org/950642
-		var w = 1920,
-		    h = 1080;
+		var w = 960,
+		    h = 900;
         
 		var vis = d3.select("#network").append("svg:svg")
 		    .attr("width", w)
@@ -178,11 +178,19 @@
 	        .links(network.links)
 	        .gravity(.15)
 	        .charge(-30)
-	        .linkStrength(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue=0.9; else returnValue = ((100-link.source.Overall_loss_percent)/100);   return returnValue;  })
+	        .linkStrength(function(link){ 
+	        				var returnValue; 
+	        				if(link.source.Overall_loss_percent=="..") returnValue=0.9; 
+	        				else returnValue = ((100-link.source.Overall_loss_percent)/100);   
+	        				return returnValue;  })
 	        //.friction(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue=0.9; else returnValue = (link.source.Overall_loss_percent/100);  console.log(returnValue); return returnValue;  })
-          //.linkDistance(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue= 0; else returnValue = (link.source.Overall_loss_percent);  return returnValue;   })              
+          	//.linkDistance(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue= 0; else returnValue = (link.source.Overall_loss_percent);  return returnValue;   })              
 			    //.distance(100)
-	        .distance(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue= 0; else returnValue = (100-link.source.Overall_loss_percent)*10;  return returnValue;   })
+	        .distance(function(link){ 
+	        			var returnValue; 
+	        			if(link.source.Overall_loss_percent=="..") returnValue= 0; 
+	        			else returnValue = (100-link.source.Overall_loss_percent)*2;  
+	        			return returnValue;   })
 	        .charge(-100)
 	        .size([w, h])
 	        .start();
@@ -192,7 +200,7 @@
 	        .enter().append("svg:line")
 	        .attr("class", "link")
 			    .attr("stroke", function(d){ return d.color; })
-	        .style("stroke-width", function(d){ return 10;})
+	        .style("stroke-width", function(d){ return 3;})
 	        .attr("x1", function(d) { return d.source.x; })
 	        .attr("y1", function(d) { return d.source.y; })
 	        .attr("x2", function(d) { return d.target.x; })
@@ -218,7 +226,11 @@
                       if (red == -1 || green == -1 ){ red = 50; green = 50; blue = 50;} 
                       var value = "rgba(" + red +","+ green + "," + blue + ",255)"; console.log(value); return value; })    
         //node radious
-        .attr("r", function(d) { var returnValue =0; if(d.Overall_loss_percent=="..") returnValue=5; else returnValue = (d.Overall_loss_percent); return  returnValue; })
+        .attr("r", function(d) 
+        			{ var returnValue =0; 
+        			  if(d.Overall_loss_percent=="..") returnValue=2; 
+        			  else returnValue = (d.Overall_loss_percent/2); 
+        			  return  returnValue; })
         //text 
       
   	    
