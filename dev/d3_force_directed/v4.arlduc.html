@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>UN HDR Challenge :: Network V3 ik</title>
+	<style>
+	*, body {
+		font: 10px sans-serif;
+	}
+	p {
+		margin: 0;
+	}
+	h1 {
+		font-size: 160%;
+	}
+	h2 {
+		font-size: 130%;
+	}
+	#key {
+		float:left;
+		width: 250px;
+	}
+	#network {
+		box-shadow: 0 0 5px #888;
+		float: left;
+	}
+	</style>
+</head>
+<body>
+	<div id="key">
+		<h1>KEY</h1>
+		<h2>Links</h2>
+		<p><span style="color:rgba(30, 120, 180, 0.8)">Blue</span>: Environmental Performance Index</p>
+		<p><span style="color:rgba(255, 127, 14, 0.8)">Orange</span>: IHDI: Inequality-adjusted HDI value</p>
+		<p><span style="color:rgba(44, 160, 44, 0.8)">Green</span>: GII: Gender Inequality Index, value</p>
+		<p><span style="color:rgba(213, 39, 40, 0.8)">Red</span>: GNI: Gross National Income</p>
+	</div>
+	<div id="network"></div>
+	<script type="text/javascript" src="../d3/d3.js"></script>
+	<script type="text/javascript" src="../d3/d3.csv.js"></script>
+	<script type="text/javascript" src="../d3/d3.layout.js"></script>
+	<script type="text/javascript" src="../d3/d3.geom.js"></script>
+	<script type="text/javascript">
+	
+	// If using the chrome browser you will not be able to see the network 
+	// since it is very strict about bringing in local files external to this 
+	// one. If you have Python installed, navigate to the UN_HDR2011 root
+	// folder and run this command from the terminal:
+	//     python -m SimpleHTTPServer 8000
+	// Then type the following into your browser:
+	//     http://localhost:8000/dev/d3_force_directed/v2.html
+	
+	// Init Variables
+	var network ={"nodes":[], "links":[], },
+		// distance = d3.scale.log(10).domain([1e-6, 0.005]).range([10, 350]), // Uses log scaling
+		// Normalize function for distances
+		distance = d3.scale.linear().domain([0, 0.5]).range([2, 200]),
+		// Assign each index a different color
+		color = d3.scale.ordinal().domain([1,2,3]).range(["rgba(30, 120, 180, 0.3)", "rgba(255, 127, 14, 0.3)", "rgba(44, 160, 44, 0.3)", "rgba(213, 39, 40, 0.3)"]);
+	
+	// Gets min and max from array of nodes for the given index as key
+	function get_min_max(nodes, key){
+		
+		var min = d3.min(nodes, function(item){
+			// Dont't want any null values
+			if(item[key] != ".."){
+				return parseFloat(item[key].replace(/,/g, '')) // Need to remove ',' from numbers
+			}
+		})
+		
+		var max = d3.max(nodes, function(item){
+			if(item[key] != ".."){
+				return parseFloat(item[key].replace(/,/g, ''))
+			}
+		})
+		return [min, max]
+	}
+	
+	// Returns the links for the given country (node)
+	function get_links(country, index, min_max){
+
+		// Use just the values as an array i.e. flatten JSON to single dimensional array of values
+		var this_country_values = d3.values(country);
+		var links = [];
+		
+		// Need to loop through every node to find similar nodes
+		network["nodes"].forEach(function(comparison_country, comparison_country_index){
+			// Make sure we're not comparing with ourselves
+			if(comparison_country_index != index){
+				
+				// Again flatten JSON to array of values
+				var comparison_country_values = d3.values(comparison_country);
+				
+				// Start at index 1 to skip country column and stop at second to last index to skip sum column
+				for(var i = 1; i < (comparison_country_values.length-1); i++){
+					
+					var comparison_value = comparison_country_values[i],
+						this_value = this_country_values[i];
+					
+					// Need to watch out for null values (could be removed in data file)	
+					if(comparison_value != ".." && this_value != ".."){
+						
+						// Convert to floating point value and remove ',' from large numbers
+						comparison_value = parseFloat(comparison_value.replace(/,/g, ''))
+						this_value = parseFloat(this_value.replace(/,/g, ''))
+						
+						// Normalize all values to range of 0 - 100 to standardize ∆
+						normalized_comparison_value = d3.scale.linear().domain(min_max[i]).range([0, 100])(comparison_value)
+						normalized_this_value = d3.scale.linear().domain(min_max[i]).range([0, 100])(this_value)
+						
+						// Find ∆ as absolute value
+						var delta = Math.abs(normalized_comparison_value - normalized_this_value);
+						
+						// Completely arbritrary threshold here
+						if(delta <= 0.2){
+							var d = distance(delta); // use distance function to map values
+							var c = color(i); // color function to map index to ordinal color value
+							var link = {"source": index, "target": comparison_country_index, "distance":d, "color":c};
+							links.push(link)
+						}
+					}
+				} // end loop through each index
+			} // end loop through each node
+		})
+		
+		// Return array of links to concatonate into set of total links
+		return links;
+	}
+	
+	// Convert data CSV to array
+	d3.csv("../../CSV/MIT_DuKode_Dataset04.csv", function(csv){
+		
+		// Set networks nodes to CSV returned array
+		network["nodes"] = csv;
+		console.log(network);
+		// Need to get min and max for normalizing in links function
+		epi_min_max = get_min_max(network["nodes"], "Environmental_Performance_Index")
+		ihdi_min_max = get_min_max(network["nodes"], "IHDI_Inequality_adjusted_HDI_value")
+		gii_min_max = get_min_max(network["nodes"], "GII_Gender_Inequality_Index_value")
+		gni_min_max = get_min_max(network["nodes"], "GNI_Gross_National_Income")
+		loss_min_max = get_min_max(network["nodes"], "Overall_loss_percent")
+		
+		// WARNING: 0 index of this array intentionally left undefined,
+		// this so the indicies of the arrays line up in the data (column 1 is country name)
+		all_min_max = [, epi_min_max, ihdi_min_max, gii_min_max, gni_min_max, loss_min_max]
+		
+		// Get links for each node
+		network["nodes"].forEach(function(d, i){
+			var links = get_links(d, i, all_min_max);
+		  network["links"] = network["links"].concat(links);
+			// throw BreakException;
+		});
+
+		
+		// DEBUG find out how many links there are
+		console.log(network["links"].length)
+		
+		// Now pass the network JSON object to a function that will build it via SVG
+		build_network(network);
+		
+	});
+	
+	
+	
+	
+	
+	function build_network(network){
+		
+		// All code here from: http://bl.ocks.org/950642
+		var w = 1920,
+		    h = 1080;
+        
+		var vis = d3.select("#network").append("svg:svg")
+		    .attr("width", w)
+		    .attr("height", h);
+
+	    var force = self.force = d3.layout.force()
+	        .nodes(network.nodes)
+	        .links(network.links)
+	        .gravity(.15)
+	        .charge(-30)
+	        .linkStrength(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue=0.9; else returnValue = ((100-link.source.Overall_loss_percent)/100);   return returnValue;  })
+	        //.friction(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue=0.9; else returnValue = (link.source.Overall_loss_percent/100);  console.log(returnValue); return returnValue;  })
+          //.linkDistance(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue= 0; else returnValue = (link.source.Overall_loss_percent);  return returnValue;   })              
+			    //.distance(100)
+	        .distance(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue= 0; else returnValue = (100-link.source.Overall_loss_percent)*10;  return returnValue;   })
+	        .charge(-100)
+	        .size([w, h])
+	        .start();
+
+	    var link = vis.selectAll("line.link")
+	        .data(network.links)
+	        .enter().append("svg:line")
+	        .attr("class", "link")
+			    .attr("stroke", function(d){ return d.color; })
+	        .style("stroke-width", function(d){ return 10;})
+	        .attr("x1", function(d) { return d.source.x; })
+	        .attr("y1", function(d) { return d.source.y; })
+	        .attr("x2", function(d) { return d.target.x; })
+	        .attr("y2", function(d) { return d.target.y; });
+
+	    var node = vis.selectAll("g.node")
+	        .data(network.nodes)
+	        .enter().append("svg:g")
+	        .attr("class", "node")
+	        .attr("cx", function(d) { return d.x; })
+          .attr("cy", function(d) { return d.y; })
+         .style("fill", function(d) { return (d.color); });
+        //circle
+          node.append("svg:circle")
+          .attr("stroke", "white")
+          .attr("stroke-width", 1)   
+          .style("fill", function(d) { 
+                      var red; if(d.IHDI_Inequality_adjusted_HDI_value=="..")red = -1; else red = 255-(parseInt(d.IHDI_Inequality_adjusted_HDI_value*100)%255)+0; 
+                      var green; //green = 125;//
+                      if(d.IHDI_Inequality_adjusted_HDI_value=="..")green = -1; else green = 255-(parseInt(d.IHDI_Inequality_adjusted_HDI_value*100)%255)+0; 
+                      var blue = 0; 
+                      var missingdata; 
+                      if (red == -1 || green == -1 ){ red = 50; green = 50; blue = 50;} 
+                      var value = "rgba(" + red +","+ green + "," + blue + ",255)"; console.log(value); return value; })    
+        //node radious
+        .attr("r", function(d) { var returnValue =0; if(d.Overall_loss_percent=="..") returnValue=5; else returnValue = (d.Overall_loss_percent); return  returnValue; })
+        //text 
+      
+  	    
+        .call(force.drag);
+         
+           node.append("svg:text")
+     	    .attr("class", "nodetext")
+     			.style("font", "10px sans-serif")
+     			.style("text-shadow", "#bbb 1px 1px 2px")
+     	    .attr("dx", 12)
+     	    .attr("dy", ".35em")
+     	    .text(function(d) { return d.Country });
+
+
+
+	    force.on("tick", function() {
+	      link.attr("x1", function(d) { return d.source.x; })
+	          .attr("y1", function(d) { return d.source.y; })
+	          .attr("x2", function(d) { return d.target.x; })
+	          .attr("y2", function(d) { return d.target.y; });
+
+	      node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+	    });
+	}
+	</script>
+</body>
+</html>
