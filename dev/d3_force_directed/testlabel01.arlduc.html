@@ -54,7 +54,6 @@
 				return x.weight * 10
 			});
 
-
 			force.start();
 
 			var force2 = d3.layout.force().nodes(labelAnchors).links(labelAnchorLinks).gravity(1).linkDistance(labelDistance).linkStrength(5).charge(-2000).size([w, h]);
@@ -95,10 +94,9 @@
 
 			}
 
+			/*force.on("tick", function() {
 
-			force.on("tick", function() {
-
-				force2.start();
+				//force2.start();
 
 				node.call(updateNode);
 
@@ -119,8 +117,7 @@
 						var shiftY = 0;
 						this.childNodes[1].setAttribute("transform", "translate(" + shiftX + "," + shiftY + ")");
 					}
-				});
-
+				});*/
 
 				anchorNode.call(updateNode);
 
