@@ -178,11 +178,13 @@
 	        .links(network.links)
 	        .gravity(.15)
 	        .charge(-30)
-	        .linkStrength(function(link){ 
+	        /*.linkStrength(function(link){ 
 	        				var returnValue; 
 	        				if(link.source.Overall_loss_percent=="..") returnValue=0.9; 
 	        				else returnValue = ((100-link.source.Overall_loss_percent)/100);   
 	        				return returnValue;  })
+	        				*/
+	        .linkStrength(0)
 	        //.friction(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue=0.9; else returnValue = (link.source.Overall_loss_percent/100);  console.log(returnValue); return returnValue;  })
           	//.linkDistance(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue= 0; else returnValue = (link.source.Overall_loss_percent);  return returnValue;   })              
 			    //.distance(100)
