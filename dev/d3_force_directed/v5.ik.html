@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>UN HDR Challenge :: Network V4 ik</title>
+	<title>UN HDR Challenge :: Network V5 simoes</title>
 	<style>
 	*, body {
 		font: 10px sans-serif;
@@ -73,20 +73,19 @@
 	var links =[];
 	var $checkboxes = $('input:checkbox[name=indices]');
 	$checkboxes.change(function(){
-		console.log("clicked");
-		//network["links"]  = [];
-		network["links"].splice(0, network["links"].lenght);
-	   	links =[];
-		network["links"] = network["links"].concat(links);
-		var selected_indices = $("input:checkbox[name='indices']:checked");
+		
+		// Need to clear links array to empty
+		network["links"] = [];
+				
+	    var selected_indices = $("input:checkbox[name='indices']:checked");
 	    selected_indices.each(function(index, i){
-			console.log(index +" "+ i.id );
-				var target = network["nodes"];
-			
+		
+			// console.log(index +" "+ i.id );
+			var target = network["nodes"];
 			if(i.id == "EPI"){ 
 					links =[];
 					target.sort(SortByEnvironmental_Performance_Index);
-					console.log(target.length);
+					// console.log(target.length);
 					for(var i = 0; i < target.length-1; i++){
 					var c = linkcolor(0);
 					var d = distance(i); // use distance function to map values
@@ -98,7 +97,7 @@
 			else if(i.id == "IHDI"){
 					links =[];
 					target.sort(SortByIHDI_Inequality_adjusted_HDI_value);
-					console.log(target.length);
+					// console.log(target.length);
 					for(var i = 0; i < target.length-1; i++){
 					var c = linkcolor(3);
 					var d = distance(3); // use distance function to map values
@@ -112,7 +111,7 @@
 					links =[];
 					target = network["nodes"];
 					target.sort(SortByGII_Gender_Inequality_Index_value);
-					console.log(target.length);
+					// console.log(target.length);
 					for(var i = 0; i < target.length-1; i++){
 					var c = linkcolor(1);
 					var d = distance(1); // use distance function to map values
@@ -124,7 +123,7 @@
 			else if(i.id == "GNI"){ 
 					links =[];
 					target.sort(SortByGNI_Gross_National_Income);
-					console.log(target.length);
+					// console.log(target.length);
 					for(var i = 0; i < target.length-1; i++){
 					var c = linkcolor(2);
 					var d = distance(2); // use distance function to map values
@@ -137,9 +136,7 @@
 			
 	
 	    });
-		links = []; 
 		update_network(network);
-			console.log(network);
 	});
 
 	
@@ -194,7 +191,7 @@
 		
 		// Set networks nodes to CSV returned array
 		network["nodes"] = csv;
-		console.log(network);
+		// console.log(network);
 		// Need to get min and max for normalizing in links function
 		epi_min_max = get_min_max(network["nodes"], "Environmental_Performance_Index")
 		ihdi_min_max = get_min_max(network["nodes"], "IHDI_Inequality_adjusted_HDI_value")
@@ -211,7 +208,7 @@
   
     	
 		// DEBUG find out how many links there are
-		console.log(network["links"].length)
+		// console.log(network["links"].length)
 		
 		// Now pass the network JSON object to a function that will build it via SVG
 		build_network(network);
@@ -223,32 +220,24 @@
 	function update_network(network){
 		//remove links 
 		//link = [];
-		//network["links"].splice(0, network["links"].lenght);		
-		link = vis.selectAll("line").remove();
-			// .data(network.links);
-			// 	link.exit().remove();
-			// 	//update links 
+ 		// .data(network.links);
+ 		// 	link.exit().remove();
+ 		// 	//update links 
 		
-	 
-	
-	 		 
-	 	//  		// 	//update links 
-		// link = vis.selectAll("line_link")
-		// 				        .data(network.links);
-		// 				link.remove();		
+		// When we redraw, have to remember to clear all previous links
+		vis.selectAll("line").remove();
 		
-	 	link = vis.selectAll("line_link")
-				        .data(network.links)
-				        .enter().append("svg:line")
-				        .attr("class", "link")
-				.attr("stroke", function(d){ return d.color; })
-				        .style("stroke-width", function(d){ return 5;})
-				        .attr("x1", function(d) { return d.source.x; })
-				        .attr("y1", function(d) { return d.source.y; })
-				        .attr("x2", function(d) { return d.target.x; })
-				        .attr("y2", function(d) { return d.target.y; });
-		
-	
+		link = vis.selectAll("line")
+	        .data(network.links)
+	        .enter().append("svg:line")
+	        .attr("class", "link")
+			.attr("stroke", function(d){ return d.color; })
+	        .style("stroke-width", function(d){ return 5;})
+	        .attr("x1", function(d) { return d.source.x; })
+	        .attr("y1", function(d) { return d.source.y; })
+	        .attr("x2", function(d) { return d.target.x; })
+	        .attr("y2", function(d) { return d.target.y; });
+
 	}
 	// init
 	function build_network(network){
@@ -324,12 +313,23 @@
 
 
 
-	    force.on("tick", function() {
+	    force.on("tick", function(e) {
 	      link.attr("x1", function(d) { return d.source.x; })
 	          .attr("y1", function(d) { return d.source.y; })
 	          .attr("x2", function(d) { return d.target.x; })
 	          .attr("y2", function(d) { return d.target.y; });
+			  // Push different nodes in different directions for clustering.
+			  var k = 15 * e.alpha;
+			  // DEBUG 
+	  		  //console.log(e.alpha)
 
+			  network.nodes.forEach(function(o, i) {
+			  	//console.log(i)
+				o.y += i & 1 ? k : -k;
+				o.x += i & 2 ? k : -k;
+			  });
+
+	
 	      node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 	    });
 	}
