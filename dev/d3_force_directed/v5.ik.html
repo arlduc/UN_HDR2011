@@ -73,13 +73,16 @@
 	var links =[];
 	var $checkboxes = $('input:checkbox[name=indices]');
 	$checkboxes.change(function(){
-		//
-
-				
-	    var selected_indices = $("input:checkbox[name='indices']:checked");
+		console.log("clicked");
+		//network["links"]  = [];
+		network["links"].splice(0, network["links"].lenght);
+	   	links =[];
+		network["links"] = network["links"].concat(links);
+		var selected_indices = $("input:checkbox[name='indices']:checked");
 	    selected_indices.each(function(index, i){
 			console.log(index +" "+ i.id );
 				var target = network["nodes"];
+			
 			if(i.id == "EPI"){ 
 					links =[];
 					target.sort(SortByEnvironmental_Performance_Index);
@@ -134,7 +137,9 @@
 			
 	
 	    });
+		links = []; 
 		update_network(network);
+			console.log(network);
 	});
 
 	
@@ -218,22 +223,32 @@
 	function update_network(network){
 		//remove links 
 		//link = [];
-		link = vis.selectAll("line_link")
- 		// .data(network.links);
- 		// 	link.exit().remove();
- 		// 	//update links 
+		//network["links"].splice(0, network["links"].lenght);		
+		link = vis.selectAll("line").remove();
+			// .data(network.links);
+			// 	link.exit().remove();
+			// 	//update links 
 		
-		link = vis.selectAll("line_link")
-	        .data(network.links)
-	        .enter().append("svg:line")
-	        .attr("class", "link")
-			.attr("stroke", function(d){ return d.color; })
-	        .style("stroke-width", function(d){ return 5;})
-	        .attr("x1", function(d) { return d.source.x; })
-	        .attr("y1", function(d) { return d.source.y; })
-	        .attr("x2", function(d) { return d.target.x; })
-	        .attr("y2", function(d) { return d.target.y; });
-
+	 
+	
+	 		 
+	 	//  		// 	//update links 
+		// link = vis.selectAll("line_link")
+		// 				        .data(network.links);
+		// 				link.remove();		
+		
+	 	link = vis.selectAll("line_link")
+				        .data(network.links)
+				        .enter().append("svg:line")
+				        .attr("class", "link")
+				.attr("stroke", function(d){ return d.color; })
+				        .style("stroke-width", function(d){ return 5;})
+				        .attr("x1", function(d) { return d.source.x; })
+				        .attr("y1", function(d) { return d.source.y; })
+				        .attr("x2", function(d) { return d.target.x; })
+				        .attr("y2", function(d) { return d.target.y; });
+		
+	
 	}
 	// init
 	function build_network(network){
