@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>UN HDR Challenge :: Network V6 arlduc</title>
+	<title>UN HDR Challenge :: Network v6 arlduc</title>
 	<style>
 	*, body {
 		font: 10px sans-serif;
@@ -60,13 +60,13 @@
 	
 	function SortByEnvironmental_Performance_Index(a,b)
      { return a.Environmental_Performance_Index - b.Environmental_Performance_Index; }
- 	function SortByGII_Gender_Inequality_Index_value(a,b)
+     function SortByGII_Gender_Inequality_Index_value(a,b)
      { return a.GII_Gender_Inequality_Index_value - b.GII_Gender_Inequality_Index_value; }
-    function SortByGNI_Gross_National_Income(a,b)       
+     function SortByGNI_Gross_National_Income(a,b)       
      { return a.GNI_Gross_National_Income - b.GNI_Gross_National_Income; }
-    function SortByIHDI_Inequality_adjusted_HDI_value(a,b)
+     function SortByIHDI_Inequality_adjusted_HDI_value(a,b)
      { return a.IHDI_Inequality_adjusted_HDI_value - b.IHDI_Inequality_adjusted_HDI_value; }
-    function SortByOverall_loss_percent(a,b)
+     function SortByOverall_loss_percent(a,b)
      { return a.Overall_loss_percent - b.Overall_loss_percent; }
     
 	
@@ -80,17 +80,17 @@
 	    var selected_indices = $("input:checkbox[name='indices']:checked");
 	    selected_indices.each(function(index, i){
 		
-			console.log(index +" "+ i.id );
+			// console.log(index +" "+ i.id );
 			var target = network["nodes"];
 			if(i.id == "EPI"){ 
 					links =[];
 					target.sort(SortByEnvironmental_Performance_Index);
 					// console.log(target.length);
 					for(var i = 0; i < target.length-1; i++){
-						var c = linkcolor(0);
-						var d = distance(i); // use distance function to map values
-						var link = {"source": target[i], "target": target[i+1], "distance":d, "color":c};
-						links.push(link);
+					var c = linkcolor(0);
+					var d = distance(i); // use distance function to map values
+					var link = {"source": target[i], "target": target[i+1], "distance":d, "color":c};
+					links.push(link);
 					}
 					network["links"] = network["links"].concat(links);
 			 }
@@ -139,8 +139,7 @@
 		update_network(network);
 	});
 
-	
-	
+
 	
 	
 	// Init Variables
@@ -203,9 +202,6 @@
 		// this so the indicies of the arrays line up in the data (column 1 is country name)
 		all_min_max = [, epi_min_max, ihdi_min_max, gii_min_max, gni_min_max, loss_min_max]
 		
-		/*for (var key in all_min_max) {
-			console.log(all_min_max[key])
-		}*/
 
     var countries = network["nodes"]; 
   
@@ -218,6 +214,48 @@
 		
 	});
 	
+	function update_node(d){
+		console.log(d);
+		
+		// var circle = vis.selectAll("node")
+		// 	    //.data());
+		// 	//	circle.enter().append("d:circle")
+		// 		    .attr("cy", 90)
+		// 		    .attr("cx", String)
+		// 		    .attr("r", Math.sqrt);
+	
+		 //vis.select("d.circle")
+			// vis.selectAll("circle")
+			// 		 		//.data(d)
+			// 	//.enter().append("circle")
+			// 		 		.attr("stroke", "black")
+			// 		 		.attr("stroke-width", 2)  
+				// .enter().insert("svg:d")
+				// 			.attr("stroke", "white")
+				// 	 		.attr("stroke-width", 2)
+				// 
+		;// vis.selectAll("circle")
+		// 	.data(edit)
+		// 	//.data(d.id)
+		// 	.attr("stroke", "black")
+		// 	.attr("stroke-width", 2);
+	      
+		 // node =  vis.selectAll("g.node")
+		 // 		        .data(network.nodes)
+		 // 		        //.enter().append("svg:node")
+		 // 		        .attr("class", "node")
+		 // 		        .attr("cx", function(d) { return d.x; })
+		 //          	.attr("cy", function(d) { return d.y; })
+		 //         	.style("fill", function(d) { return (d.color); }) 
+		 // 				
+		 // 			          node.append("svg:circle")
+		 // 					 .attr("stroke", "black")
+		 // 						 .attr("stroke-width", 2)   ;
+		 // 				;//.call(force.drag);
+		 // 			
+		 // 			//vis.selectAll("d.node").append("svg:circle")
+		         
+	}
 	
 	//update network links and other drawing updates. 
 	function update_network(network){
@@ -258,15 +296,15 @@
 	        .links(network.links)
 	        // .gravity(0)
 	        // 	        .charge(-30)
-	        //                .linkStrength(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue=0.9; else returnValue = ((100-link.source.Overall_loss_percent)/100);   return returnValue;  })
+	        //.linkStrength(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue=0.9; else returnValue = ((100-link.source.Overall_loss_percent)/100);   return returnValue;  })
 	        //                   //.friction(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue=0.9; else returnValue = (link.source.Overall_loss_percent/100);  console.log(returnValue); return returnValue;  })
-	        //                    //.linkDistance(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue= 0; else returnValue = (link.source.Overall_loss_percent);  return returnValue;   })              
+	                            .linkDistance(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue= 0; else returnValue = (link.source.Overall_loss_percent);  return returnValue;   })              
 	        //          //.distance(100)
 	        //                   .distance(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue= 0; else returnValue = (link.source.Overall_loss_percent)*10;  return returnValue;   })
 	        //                   .charge(-100)
 	        //                   .size([w, h])
 	        //    	        .start();
-
+			.linkStrength(0)
 		    .gravity(.03)
 		    .size([w, h])
 			.start();
@@ -286,10 +324,28 @@
 	        .enter().append("svg:g")
 	        .attr("class", "node")
 	        .attr("cx", function(d) { return d.x; })
-          .attr("cy", function(d) { return d.y; })
+          	.attr("cy", function(d) { return d.y; })
+         	.style("fill", function(d) { return (d.color); }) 
+			.call(force.drag);
+			
+			//node mouse related events 
+		 node.on("mouseover", function(p, j) {
+			//console.log("Moussed over node "+p + " "+ j );
+			//clear scene
+			vis.selectAll("circle")
+			  .attr("stroke", "white")
+			   .attr("stroke-width", 3);
+			
 
-         .style("fill", function(d) { return (d.color); }) .call(force.drag);
-		 
+
+			var selected = vis.selectAll("circle")
+			.filter(function(d, j	) { return d === p; })
+			.classed("myclass", true)
+			.attr("stroke", "black")
+			.attr("stroke-width",4)
+	
+		});
+		
         //circle
           node.append("svg:circle")
           .attr("stroke", "white")
@@ -303,7 +359,7 @@
                       if (red == -1 || green == -1 ){ red = 50; green = 50; blue = 50;} 
                       var value = "rgba(" + red +","+ green + "," + blue + ",255)"; 
                       //console.log(value); 
-                      return value; })    
+                      return value; })
         //node radious
         .attr("r", function(d) { var returnValue =0; if(d.Overall_loss_percent=="..") returnValue=5; else returnValue = (d.Overall_loss_percent); return  returnValue; });
         //text 
@@ -325,23 +381,21 @@
 	          .attr("y1", function(d) { return d.source.y; })
 	          .attr("x2", function(d) { return d.target.x; })
 	          .attr("y2", function(d) { return d.target.y; });
-			  
-		  // Push different nodes in different directions for clustering.
-		  var k = 4 * e.alpha;
-		  // DEBUG 
-		  //console.log(e.alpha)
-  
-		  network.nodes.forEach(function(o, i) {
-			//console.log(i)
-			
-			o.y += i > (network.nodes.length-1)/2 ? k : -k;
-			//o.y += i & 1 ? k : -k;
-			//o.x += i & 2 ? k : -k;
-		  });
+	          
+			  // Push different nodes in different directions for clustering.
+			  var k = 5 * e.alpha;
+			  // DEBUG 
+	  		  //console.log(e.alpha)
 
+			  network.nodes.forEach(function(o, i) {
+			  	//console.log(i)
+			  	o.y += i > (network.nodes.length-1)/2 ? k : -k;
+				//o.y += i & 1 ? k : -k;
+				//o.x += i & 2 ? k : -k;
+			  });
+
+	
 	      node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
-	      
-	      //console.log(epi_min_max)
 	    });
 	}
 	</script>
