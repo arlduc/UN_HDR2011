@@ -345,7 +345,10 @@
 	
 		});
 		node.on("mouseout", function(p, j) {
+			// vis.selectAll("line")
+			// 			.filter(function(d, j	) { if(d==p) p.remove();	return d === p; });
 			vis.selectAll("line").remove();
+			 update_network(network)
 		});
 		 node.on("mouseover", function(p, j) {
 			//console.log("Moussed over node "+p + " "+ j );
@@ -357,7 +360,7 @@
 			
 	
 		
-			vis.selectAll("line").remove();
+			//vis.selectAll("line").remove();
 			
 			 stat = vis.selectAll("circle")
 						.filter(function(d, j	) { 	return d === p; });
