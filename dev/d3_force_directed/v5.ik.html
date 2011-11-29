@@ -406,9 +406,22 @@
 			.classed("myclass", true)
 			.attr("stroke", "black")
 			.attr("stroke-width",6);
-		
+			
+			var selected = vis.selectAll("text")
+			//selected.append("text")
+			.filter(function(d, j	) {  return d === p; })
+			   	    .attr("class", "nodetext")
+			   			.style("font", "24px sans-serif")
+			   			.style("text-shadow", "#bbb 1px 1px 2px")
+			   	    	 .attr("cx", function(d) { return d.x; })
+				         .attr("cy", function(d) { return d.y; })
+			   	    .text(function(d) { console.log(d.Country); return ("EPI: " +d.Environmental_Performance_Index+"\n"+
+			"IHDI: " +d.IHDI_Inequality_adjusted_HDI_value+"\n"+
+			"GII: " +d.GII_Gender_Inequality_Index_value +"\n>"+
+			"GNI: " +d.GNI_Gross_National_Income+"\n")});
+			
 			//annotate -1 index
-			//if(selected_indices.length>1){
+			if(selected_indices.length>=1){
 			 selected_indices.each(function(index, i){
 			 				 			
 					// console.log(index +" "+ i.id );
@@ -459,16 +472,9 @@
 						.attr("stroke-width",4);
 				 	}
 	 			});
-		//	}
-			// var selected = vis.selectAll("circle")
-			// 					.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByEPI((p.index))})//d === pr; })
-			// 					.attr("stroke", linkcolor(1))
-			// 					.attr("stroke-width",4);
-			// 					//annotate +1 index 
-			// 					var selected = vis.selectAll("circle")
-			// 					.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByEPI((p.index))})//d === pr; })
-			// 					.attr("stroke", linkcolor(1))
-			// 					.attr("stroke-width",4); 
+				}
+
+	
 			});
 		
 
@@ -477,33 +483,26 @@
 			// vis.selectAll("line")
 			// 			.filter(function(d, j	) { if(d==p) p.remove();	return d === p; });
 			vis.selectAll("line").remove();
+				var selected = vis.selectAll("text")
+				//selected.append("text")
+				.filter(function(d, j	) {  return d === p; })
+				   	    .attr("class", "nodetext")
+				   			.style("font", "12px sans-serif")
+				   			.style("text-shadow", "#bbb 1px 1px 2px")
+				   	    	 .attr("cx", function(d) { return d.x; })
+					         .attr("cy", function(d) { return d.y; })
+		   	    .text(function(d) { console.log(d.Country); return d.Country+"\n"});
+				
 			 update_network(network)
 		});
 		 // node.on("mouseover", function(p, j) {
-		 // 			//console.log("Moussed over node "+p + " "+ j );
-		 // 			//////outline node on mouseover. 
-		 // 			//clear scene
+		 // 			 			//clear scene
 		 // 			vis.selectAll("circle")
 		 // 			  .attr("stroke", "white")
 		 // 			   .attr("stroke-width", 3);
-		 // 			
-		 // 	
-		 // 		
-		 // 			//vis.selectAll("line").remove();
-		 // 			
+		 // 			 			
 		 // 			 stat = vis.selectAll("circle")
 		 // 						.filter(function(d, j	) { 	return d === p; });
-		 // 			// 			.classed("myclass", true)
-		 // 			// 			.attr("stroke", "red")
-		 // 			// 			.attr("stroke-width",4);
-		 // 			
-		 // 			stat.append("area")
-		 // 				.attr("class", "area")
-		 // 				.style("font", "10px sans-serif")
-		 // 				.style("text-shadow", "#bbb 1px 1px 2px")
-		 // 				.attr("dx",23)
-		 // 				.attr("dy", ".35em")
-		 // 				.text("hello world")
 		 // 			
 		 // 			stat = vis.selectAll("area")
 		 // 				.data([293], String);
@@ -517,9 +516,14 @@
 		 // 				.attr("x2", function(d) { return p.x+10; })
 		 // 				.attr("y2", function(d) { return p.y+100; })
 		 // 				.attr("stroke", "rgba(230, 230, 230, 0.9)")
-		 // 				.attr("stroke-width", 300);
-		 // 			
-		 // 						
+		 // 				.attr("stroke-width", 300)
+		 // 					stat.enter().append("svg:text")
+		 // 				     	    .attr("class", "nodetext")
+		 // 				     			.style("font", "120px sans-serif")
+		 // 				     			.style("text-shadow", "#bbb 1px 1px 2px")
+		 // 				     	    .attr("dx", 12)
+		 // 				     	    .attr("dy", ".35em")
+		 // 				     	    .text(function(d) { return d.Country });
 		 // 	
 		 // 							
 		 // 		});
