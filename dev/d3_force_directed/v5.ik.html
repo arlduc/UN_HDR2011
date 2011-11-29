@@ -139,8 +139,7 @@
 		update_network(network);
 	});
 
-	
-	
+
 	
 	
 	// Init Variables
@@ -156,8 +155,8 @@
 	/* global variables*/ 
 	
 	// All code here from: http://bl.ocks.org/950642
-	var w = 960,
-	    h = 900;
+	var w = 1920,
+	    h = 1080;
 	var vis;
     var force;
     var link;
@@ -215,6 +214,48 @@
 		
 	});
 	
+	function update_node(d){
+		console.log(d);
+		
+		// var circle = vis.selectAll("node")
+		// 	    //.data());
+		// 	//	circle.enter().append("d:circle")
+		// 		    .attr("cy", 90)
+		// 		    .attr("cx", String)
+		// 		    .attr("r", Math.sqrt);
+	
+		 //vis.select("d.circle")
+			// vis.selectAll("circle")
+			// 		 		//.data(d)
+			// 	//.enter().append("circle")
+			// 		 		.attr("stroke", "black")
+			// 		 		.attr("stroke-width", 2)  
+				// .enter().insert("svg:d")
+				// 			.attr("stroke", "white")
+				// 	 		.attr("stroke-width", 2)
+				// 
+		;// vis.selectAll("circle")
+		// 	.data(edit)
+		// 	//.data(d.id)
+		// 	.attr("stroke", "black")
+		// 	.attr("stroke-width", 2);
+	      
+		 // node =  vis.selectAll("g.node")
+		 // 		        .data(network.nodes)
+		 // 		        //.enter().append("svg:node")
+		 // 		        .attr("class", "node")
+		 // 		        .attr("cx", function(d) { return d.x; })
+		 //          	.attr("cy", function(d) { return d.y; })
+		 //         	.style("fill", function(d) { return (d.color); }) 
+		 // 				
+		 // 			          node.append("svg:circle")
+		 // 					 .attr("stroke", "black")
+		 // 						 .attr("stroke-width", 2)   ;
+		 // 				;//.call(force.drag);
+		 // 			
+		 // 			//vis.selectAll("d.node").append("svg:circle")
+		         
+	}
 	
 	//update network links and other drawing updates. 
 	function update_network(network){
@@ -255,9 +296,9 @@
 	        .links(network.links)
 	        // .gravity(0)
 	        // 	        .charge(-30)
-	        //                .linkStrength(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue=0.9; else returnValue = ((100-link.source.Overall_loss_percent)/100);   return returnValue;  })
+	                        .linkStrength(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue=0.9; else returnValue = ((100-link.source.Overall_loss_percent)/100);   return returnValue;  })
 	        //                   //.friction(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue=0.9; else returnValue = (link.source.Overall_loss_percent/100);  console.log(returnValue); return returnValue;  })
-	        //                    //.linkDistance(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue= 0; else returnValue = (link.source.Overall_loss_percent);  return returnValue;   })              
+	                            .linkDistance(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue= 0; else returnValue = (link.source.Overall_loss_percent);  return returnValue;   })              
 	        //          //.distance(100)
 	        //                   .distance(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue= 0; else returnValue = (link.source.Overall_loss_percent)*10;  return returnValue;   })
 	        //                   .charge(-100)
@@ -283,10 +324,28 @@
 	        .enter().append("svg:g")
 	        .attr("class", "node")
 	        .attr("cx", function(d) { return d.x; })
-          .attr("cy", function(d) { return d.y; })
+          	.attr("cy", function(d) { return d.y; })
+         	.style("fill", function(d) { return (d.color); }) 
+			.call(force.drag);
+			
+			//node mouse related events 
+		 node.on("mouseover", function(p, j) {
+			//console.log("Moussed over node "+p + " "+ j );
+			//clear scene
+			vis.selectAll("circle")
+			  .attr("stroke", "white")
+			   .attr("stroke-width", 3);
+			
 
-         .style("fill", function(d) { return (d.color); }) .call(force.drag);
-		 
+
+			var selected = vis.selectAll("circle")
+			.filter(function(d, j	) { return d === p; })
+			.classed("myclass", true)
+			.attr("stroke", "black")
+			.attr("stroke-width",4)
+	
+		});
+		
         //circle
           node.append("svg:circle")
           .attr("stroke", "white")
@@ -300,7 +359,7 @@
                       if (red == -1 || green == -1 ){ red = 50; green = 50; blue = 50;} 
                       var value = "rgba(" + red +","+ green + "," + blue + ",255)"; 
                       //console.log(value); 
-                      return value; })    
+                      return value; })
         //node radious
         .attr("r", function(d) { var returnValue =0; if(d.Overall_loss_percent=="..") returnValue=5; else returnValue = (d.Overall_loss_percent); return  returnValue; });
         //text 
