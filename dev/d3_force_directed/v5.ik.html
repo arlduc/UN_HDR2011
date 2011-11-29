@@ -60,12 +60,12 @@
 	
 	function SortByEnvironmental_Performance_Index(a,b)
      { return a.Environmental_Performance_Index - b.Environmental_Performance_Index; }
+   	function SortByIHDI_Inequality_adjusted_HDI_value(a,b)
+     { return a.IHDI_Inequality_adjusted_HDI_value - b.IHDI_Inequality_adjusted_HDI_value; }
      function SortByGII_Gender_Inequality_Index_value(a,b)
      { return a.GII_Gender_Inequality_Index_value - b.GII_Gender_Inequality_Index_value; }
-     function SortByGNI_Gross_National_Income(a,b)       
+	function SortByGNI_Gross_National_Income(a,b)       
      { return a.GNI_Gross_National_Income - b.GNI_Gross_National_Income; }
-     function SortByIHDI_Inequality_adjusted_HDI_value(a,b)
-     { return a.IHDI_Inequality_adjusted_HDI_value - b.IHDI_Inequality_adjusted_HDI_value; }
      function SortByOverall_loss_percent(a,b)
      { return a.Overall_loss_percent - b.Overall_loss_percent; }
     
@@ -87,46 +87,48 @@
 					target.sort(SortByEnvironmental_Performance_Index);
 					// console.log(target.length);
 					for(var i = 0; i < target.length-1; i++){
-					var c = linkcolor(0);
+					var c = linkcolor(1);
 					var d = distance(i); // use distance function to map values
 					var link = {"source": target[i], "target": target[i+1], "distance":d, "color":c};
 					links.push(link);
 					}
 					network["links"] = network["links"].concat(links);
 			 }
-			else if(i.id == "IHDI"){
+		 	if(i.id == "IHDI"){
 					links =[];
 					target.sort(SortByIHDI_Inequality_adjusted_HDI_value);
 					// console.log(target.length);
 					for(var i = 0; i < target.length-1; i++){
-					var c = linkcolor(3);
-					var d = distance(3); // use distance function to map values
+					var c = linkcolor(2);
+					var d = distance(i); // use distance function to map values
 					var link = {"source": target[i], "target": target[i+1], "distance":d, "color":c};
 					links.push(link);
 					}
 					network["links"] = network["links"].concat(links);
 			
 			}
-			else if(i.id == "GII"){ 
+		 	if(i.id == "GII"){ 
 					links =[];
 					target = network["nodes"];
 					target.sort(SortByGII_Gender_Inequality_Index_value);
 					// console.log(target.length);
 					for(var i = 0; i < target.length-1; i++){
-					var c = linkcolor(1);
-					var d = distance(1); // use distance function to map values
+					var c = linkcolor(3);
+					var d = distance(i); // use distance function to map values
 					var link = {"source": target[i], "target": target[i+1], "distance":d, "color":c};
 					links.push(link);
 					}
 					network["links"] = network["links"].concat(links); 
 			}
-			else if(i.id == "GNI"){ 
+		 	if(i.id == "GNI"){ 
 					links =[];
+					target = network["nodes"];
 					target.sort(SortByGNI_Gross_National_Income);
-					// console.log(target.length);
+				
 					for(var i = 0; i < target.length-1; i++){
-					var c = linkcolor(2);
-					var d = distance(2); // use distance function to map values
+							 console.log(target[i].GNI_Gross_National_Income);
+					var c = linkcolor(4);
+					var d = distance(i); // use distance function to map values
 					var link = {"source": target[i], "target": target[i+1], "distance":d, "color":c};
 					links.push(link);
 					}
@@ -149,7 +151,7 @@
 		distance = d3.scale.linear().domain([0, 0.5]).range([2, 200]),
 		// Assign each index a different color
 		color = d3.scale.ordinal().domain([1,2,3]).range(["rgba(30, 120, 180, 0.3)", "rgba(255, 127, 14, 0.3)", "rgba(44, 160, 44, 0.3)", "rgba(213, 39, 40, 0.3)"]);
-		linkcolor = d3.scale.ordinal().domain([1,2,3]).range(["rgba(20, 20, 255, 0.3)", "rgba(255, 60, 20, 0.3)", "rgba(20, 255, 20, 0.3)", "rgba(255, 20,20, 0.3)"]);
+		linkcolor = d3.scale.ordinal().domain([1,2,3,4]).range(["rgba(20, 20, 255, 0.3)", "rgba(255, 60, 20, 0.3)", "rgba(20, 255, 20, 0.3)", "rgba(255, 160, 20, 0.3)"]);
 	
 	
 	/* global variables*/ 
@@ -203,7 +205,7 @@
 		all_min_max = [, epi_min_max, ihdi_min_max, gii_min_max, gni_min_max, loss_min_max]
 		
 
-    var countries = network["nodes"]; 
+    	var countries = network["nodes"]; 
   
     	
 		// DEBUG find out how many links there are
@@ -214,48 +216,6 @@
 		
 	});
 	
-	function update_node(d){
-		console.log(d);
-		
-		// var circle = vis.selectAll("node")
-		// 	    //.data());
-		// 	//	circle.enter().append("d:circle")
-		// 		    .attr("cy", 90)
-		// 		    .attr("cx", String)
-		// 		    .attr("r", Math.sqrt);
-	
-		 //vis.select("d.circle")
-			// vis.selectAll("circle")
-			// 		 		//.data(d)
-			// 	//.enter().append("circle")
-			// 		 		.attr("stroke", "black")
-			// 		 		.attr("stroke-width", 2)  
-				// .enter().insert("svg:d")
-				// 			.attr("stroke", "white")
-				// 	 		.attr("stroke-width", 2)
-				// 
-		;// vis.selectAll("circle")
-		// 	.data(edit)
-		// 	//.data(d.id)
-		// 	.attr("stroke", "black")
-		// 	.attr("stroke-width", 2);
-	      
-		 // node =  vis.selectAll("g.node")
-		 // 		        .data(network.nodes)
-		 // 		        //.enter().append("svg:node")
-		 // 		        .attr("class", "node")
-		 // 		        .attr("cx", function(d) { return d.x; })
-		 //          	.attr("cy", function(d) { return d.y; })
-		 //         	.style("fill", function(d) { return (d.color); }) 
-		 // 				
-		 // 			          node.append("svg:circle")
-		 // 					 .attr("stroke", "black")
-		 // 						 .attr("stroke-width", 2)   ;
-		 // 				;//.call(force.drag);
-		 // 			
-		 // 			//vis.selectAll("d.node").append("svg:circle")
-		         
-	}
 	
 	//update network links and other drawing updates. 
 	function update_network(network){
@@ -330,13 +290,10 @@
 			
 			//node mouse related events 
 		 node.on("mouseover", function(p, j) {
-			//console.log("Moussed over node "+p + " "+ j );
-			//////outline node on mouseover. 
 			//clear scene
 			vis.selectAll("circle")
 			  .attr("stroke", "white")
-			   .attr("stroke-width", 3);
-			
+		   .attr("stroke-width", 3);
 			var selected = vis.selectAll("circle")
 			.filter(function(d, j	) {  return d === p; })
 			//.filter(function(d, j	) {  return d === getNetworkNodeWithid((p.index)-1)});//d === pr; })
@@ -354,6 +311,8 @@
 			.attr("stroke", "black")
 			.attr("stroke-width",2);
 		});
+		
+		//return the node based on the index provided.
 		function getNetworkNodeWithindex(id){
 			var obj = network["nodes"] ;
 			for (var i = 0 ; i< obj.length; i++ ){
