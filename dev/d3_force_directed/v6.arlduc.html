@@ -60,13 +60,13 @@
 	
 	function SortByEnvironmental_Performance_Index(a,b)
      { return a.Environmental_Performance_Index - b.Environmental_Performance_Index; }
-     function SortByGII_Gender_Inequality_Index_value(a,b)
+ 	function SortByGII_Gender_Inequality_Index_value(a,b)
      { return a.GII_Gender_Inequality_Index_value - b.GII_Gender_Inequality_Index_value; }
-     function SortByGNI_Gross_National_Income(a,b)       
+    function SortByGNI_Gross_National_Income(a,b)       
      { return a.GNI_Gross_National_Income - b.GNI_Gross_National_Income; }
-     function SortByIHDI_Inequality_adjusted_HDI_value(a,b)
+    function SortByIHDI_Inequality_adjusted_HDI_value(a,b)
      { return a.IHDI_Inequality_adjusted_HDI_value - b.IHDI_Inequality_adjusted_HDI_value; }
-     function SortByOverall_loss_percent(a,b)
+    function SortByOverall_loss_percent(a,b)
      { return a.Overall_loss_percent - b.Overall_loss_percent; }
     
 	
@@ -80,17 +80,17 @@
 	    var selected_indices = $("input:checkbox[name='indices']:checked");
 	    selected_indices.each(function(index, i){
 		
-			// console.log(index +" "+ i.id );
+			console.log(index +" "+ i.id );
 			var target = network["nodes"];
 			if(i.id == "EPI"){ 
 					links =[];
 					target.sort(SortByEnvironmental_Performance_Index);
 					// console.log(target.length);
 					for(var i = 0; i < target.length-1; i++){
-					var c = linkcolor(0);
-					var d = distance(i); // use distance function to map values
-					var link = {"source": target[i], "target": target[i+1], "distance":d, "color":c};
-					links.push(link);
+						var c = linkcolor(0);
+						var d = distance(i); // use distance function to map values
+						var link = {"source": target[i], "target": target[i+1], "distance":d, "color":c};
+						links.push(link);
 					}
 					network["links"] = network["links"].concat(links);
 			 }
@@ -203,6 +203,9 @@
 		// this so the indicies of the arrays line up in the data (column 1 is country name)
 		all_min_max = [, epi_min_max, ihdi_min_max, gii_min_max, gni_min_max, loss_min_max]
 		
+		/*for (var key in all_min_max) {
+			console.log(all_min_max[key])
+		}*/
 
     var countries = network["nodes"]; 
   
@@ -323,19 +326,22 @@
 	          .attr("x2", function(d) { return d.target.x; })
 	          .attr("y2", function(d) { return d.target.y; });
 			  
-			  // Push different nodes in different directions for clustering.
-			  var k = 4 * e.alpha;
-			  // DEBUG 
-			  //console.log(e.alpha)
-	  
-			  network.nodes.forEach(function(o, i) {
-				//console.log(i)
-				o.y += i & 1 ? k : -k;
-				//o.x += i & 2 ? k : -k;
-			  });
+		  // Push different nodes in different directions for clustering.
+		  var k = 4 * e.alpha;
+		  // DEBUG 
+		  //console.log(e.alpha)
+  
+		  network.nodes.forEach(function(o, i) {
+			//console.log(i)
+			
+			o.y += i > (network.nodes.length-1)/2 ? k : -k;
+			//o.y += i & 1 ? k : -k;
+			//o.x += i & 2 ? k : -k;
+		  });
 
-	
 	      node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+	      
+	      //console.log(epi_min_max)
 	    });
 	}
 	</script>
