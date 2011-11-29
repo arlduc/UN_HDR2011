@@ -231,7 +231,7 @@
 					target.sort(SortByGNI_Gross_National_Income);
 				
 					for(var i = 0; i < target.length-1; i++){
-							 console.log(target[i].GNI_Gross_National_Income);
+					// console.log(target[i].GNI_Gross_National_Income);
 					var c = linkcolor(4);
 					var d = distance(i); // use distance function to map values
 					var link = {"source": target[i], "target": target[i+1], "distance":d, "color":c};
@@ -257,7 +257,7 @@
 		// Assign each index a different color
 		color = d3.scale.ordinal().domain([1,2,3]).range(["rgba(30, 120, 180, 0.3)", "rgba(255, 127, 14, 0.3)", "rgba(44, 160, 44, 0.3)", "rgba(213, 39, 40, 0.3)"]);
 		linkcolor = d3.scale.ordinal().domain([1,2,3,4]).range(["rgba(20, 20, 255, 0.3)", "rgba(255, 60, 20, 0.3)", "rgba(20, 255, 20, 0.3)", "rgba(255, 160, 20, 0.3)"]);
-		nodeOutlinecolor = d3.scale.ordinal().domain([1,2,3,4]).range(["rgba(20, 20, 255, 1)", "rgba(255, 60, 20, 1)", "rgba(20, 255, 20, 1)", "rgba(255, 160, 20, 1)"]);
+		nodeOutlinecolor = d3.scale.ordinal().domain([1,2,3,4]).range(["rgba(20, 20, 255, 1)", "rgba(255, 60, 20, 1)", "rgba(20, 160, 20, 1)", "rgba(255, 160, 20, 1)"]);
 	
 	
 	/* global variables*/ 
@@ -339,7 +339,7 @@
 	        .enter().append("svg:line")
 	        .attr("class", "link")
 			.attr("stroke", function(d){ return d.color; })
-	        .style("stroke-width", function(d){ return 5;})
+	        .style("stroke-width", function(d){ return 2;})
 	        .attr("x1", function(d) { return d.source.x; })
 	        .attr("y1", function(d) { return d.source.y; })
 	        .attr("x2", function(d) { return d.target.x; })
@@ -417,7 +417,7 @@
 						var selected = vis.selectAll("circle")
 						.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByEPI(p.index);})//d === pr; })
 						.attr("stroke", nodeOutlinecolor(1))
-						.attr("stroke-width",4)
+						.attr("stroke-width",8)
 						//annotate +1 index 
 						var selected = vis.selectAll("circle")
 						.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByEPI(p.index);})//d === pr; })
@@ -429,7 +429,7 @@
 						var selected = vis.selectAll("circle")
 						.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByIHDI(p.index)})//d === pr; })
 						.attr("stroke", nodeOutlinecolor(2))
-						.attr("stroke-width",4);
+						.attr("stroke-width",8);
 						//annotate +1 index 
 						var selected = vis.selectAll("circle")
 						.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByIHDI(p.index)})//d === pr; })
@@ -440,7 +440,7 @@
 						var selected = vis.selectAll("circle")
 						.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByGII(p.index)})//d === pr; })
 						.attr("stroke", nodeOutlinecolor(3))
-						.attr("stroke-width",4);
+						.attr("stroke-width",8);
 						//annotate +1 index 
 						var selected = vis.selectAll("circle")
 						.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByGII(p.index)})//d === pr; })
@@ -451,7 +451,7 @@
 						var selected = vis.selectAll("circle")
 						.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByGNI(p.index)})//d === pr; })
 						.attr("stroke", nodeOutlinecolor(4))
-						.attr("stroke-width",4);
+						.attr("stroke-width",8);
 						//annotate +1 index 
 						var selected = vis.selectAll("circle")
 						.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByGNI((p.index))})//d === pr; })
