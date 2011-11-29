@@ -302,16 +302,43 @@
 			.attr("stroke-width",6)
 			//annotate -1 index
 			var selected = vis.selectAll("circle")
-			.filter(function(d, j	) {  return d === getNetworkNodeWithindex((p.index)-1)})//d === pr; })
+			.filter(function(d, j	) {  console.log(getPreviousNetworkNodeWithindexAndSortByEPI((p.index)-1)); return d === getPreviousNetworkNodeWithindexAndSortByEPI((p.index))})//d === pr; })
 			.attr("stroke", "black")
 			.attr("stroke-width",2);
 			//annotate +1 index 
 			var selected = vis.selectAll("circle")
-			.filter(function(d, j	) {  return d === getNetworkNodeWithindex((p.index)+1)})//d === pr; })
+			.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByEPI((p.index))})//d === pr; })
 			.attr("stroke", "black")
 			.attr("stroke-width",2);
 		});
 		
+		function getNextNetworkNodeWithindexAndSortByEPI(id){
+			var returnvalue = []; 
+			var obj = network["nodes"] ;
+			obj.sort(SortByEnvironmental_Performance_Index);
+
+			for (var i = 0 ; i< obj.length; i++ ){
+				if (obj[i].index == id) {
+				//returnvalue.push(obj[i-1]);
+				//returnvalue.push(obj[i+1]);
+				return obj[i+1];
+					}
+			}
+		}
+		//return the node based on the index provided.
+		function getPreviousNetworkNodeWithindexAndSortByEPI(id){
+			var returnvalue = []; 
+			var obj = network["nodes"] ;
+			obj.sort(SortByEnvironmental_Performance_Index);
+			
+			for (var i = 0 ; i< obj.length; i++ ){
+				if (obj[i].index == id) {
+				//returnvalue.push(obj[i-1]);
+				//returnvalue.push(obj[i+1]);
+				return obj[i-1];
+					}
+			}
+		}
 		//return the node based on the index provided.
 		function getNetworkNodeWithindex(id){
 			var obj = network["nodes"] ;
@@ -321,6 +348,8 @@
 				}
 			}
 		}
+
+
 		node.on("mouseout", function(p, j) {
 			// vis.selectAll("line")
 			// 			.filter(function(d, j	) { if(d==p) p.remove();	return d === p; });
