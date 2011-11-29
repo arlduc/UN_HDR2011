@@ -271,6 +271,8 @@
     var node ;
 	var stat; 
 	 
+	//stats window 
+	var country_window = new windowWithObject();
 	// Gets min and max from array of nodes for the given index as key
 	function get_min_max(nodes, key){
 		
@@ -407,18 +409,30 @@
 			.attr("stroke", "black")
 			.attr("stroke-width",6);
 			
-			var selected = vis.selectAll("text")
-			//selected.append("text")
-			.filter(function(d, j	) {  return d === p; })
-			   	    .attr("class", "nodetext")
-			   			.style("font", "24px sans-serif")
-			   			.style("text-shadow", "#bbb 1px 1px 2px")
-			   	    	 .attr("cx", function(d) { return d.x; })
-				         .attr("cy", function(d) { return d.y; })
-			   	    .text(function(d) { console.log(d.Country); return ("EPI: " +d.Environmental_Performance_Index+"\n"+
-			"IHDI: " +d.IHDI_Inequality_adjusted_HDI_value+"\n"+
-			"GII: " +d.GII_Gender_Inequality_Index_value +"\n>"+
-			"GNI: " +d.GNI_Gross_National_Income+"\n")});
+			// //text addition with the information for each country. 
+			// 	var selected = vis.selectAll("text")
+			// 	.filter(function(d, j	) {  return d === p; })
+			// 	.attr("class", "nodetext")
+			// 	.style("font", "12px sans-serif")
+			// 	.style("text-shadow", "#bbb 1px 1px 2px")
+			// 	.attr("cx", function(d) { return d.x; })
+			// 	.attr("cy", function(d) { return d.y; })
+			// 	.text(function(d) { return (d.Country)});
+			// 	
+			// 	 selected = vis.selectAll("g.node")	
+			// 	.filter(function(d, j	) {  return d === p; })		
+			// 	selected.append("svg:text")
+			// 	.attr("class", "nodetext")
+			// 	.style("font", "24px sans-serif")
+			// 	.style("text-shadow", "#bbb 1px 1px 2px")
+			// 	.attr("cx", function(d) { return d.x; })
+			// 	.attr("cy", function(d) { return (d.y-200); })
+			// 	.text(function(d) { return ("EPI: " +d.Environmental_Performance_Index+"\n"+
+			// 	"IHDI: " +d.IHDI_Inequality_adjusted_HDI_value+"\n"+
+			// 	"GII: " +d.GII_Gender_Inequality_Index_value +"\n>"+
+			// 	"GNI: " +d.GNI_Gross_National_Income+"\n")});
+			 selected = vis.selectAll("g.node")	
+				.filter(function(d, j	) {  country_window.init(d);	 });
 			
 			//annotate -1 index
 			if(selected_indices.length>=1){
@@ -577,6 +591,47 @@
 	      node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 	    });
 	}
+			// 
+			// epi_min_max = get_min_max(network["nodes"], "Environmental_Performance_Index")
+			// ihdi_min_max = get_min_max(network["nodes"], "IHDI_Inequality_adjusted_HDI_value")
+			// gii_min_max = get_min_max(network["nodes"], "GII_Gender_Inequality_Index_value")
+			// gni_min_max = get_min_max(network["nodes"], "GNI_Gross_National_Income")
+			// loss_min_max = get_min_max(network["nodes"], "Overall_loss_percent")
+			// 	
+
+
+
+	function windowWithObject(){
+		console.log("window Created");
+	
+				
+		this.init = function(o) {
+			var win_node; 
+			console.log("initialized country_window");
+			this.obj = o; 
+			this.country = this.obj.Country; 
+			this.EPI = this.obj.Environmental_Performance_Index;
+			this.IHDI = this.obj.IHDI_Inequality_adjusted_HDI_value;
+			this.GII = this.obj.GII_Gender_Inequality_Index_value;
+			this.GNI = this.obj.GNI_Gross_National_Income;
+			this.OverallLoss = this.obj.Overall_loss_percent;
+			win_node = vis.selectAll("circle")
+			    .data(this.obj)
+				 .attr("stroke", "black")
+				.attr("r", 145	 )
+				.attr("x", function(d) { return 100; })
+				.attr("y", function(d) { return 100; });
+			
+		
+		 };
+		this.update_window = function() {
+
+		};
+	}
+		// windowWithObject.prototype.build_window = function() {
+		// 	      console.log("build_window_called");
+		// 	};
+		//windowWithObject.prototype.initWithObject = function()
 	</script>
 </body>
 </html>
