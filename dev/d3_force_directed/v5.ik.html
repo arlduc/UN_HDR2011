@@ -381,11 +381,11 @@
 				
 			stat.enter().append("svg:line")
 			
-				.attr("x1", function(d) { return p.x;-300 })
-				.attr("y1", function(d) { return p.y; })
-				.attr("x2", function(d) { return p.x; })
+				.attr("x1", function(d) { return p.x -300 })
+				.attr("y1", function(d) { return p.y + 150 ; })
+				.attr("x2", function(d) { return p.x+10; })
 				.attr("y2", function(d) { return p.y+100; })
-				.attr("stroke", "black")
+				.attr("stroke", "rgba(230, 230, 230, 0.9)")
 				.attr("stroke-width", 300);
 			
 						
