@@ -161,7 +161,7 @@
     var force;
     var link;
     var node ;
-	
+	var stat; 
 	 
 	// Gets min and max from array of nodes for the given index as key
 	function get_min_max(nodes, key){
@@ -331,13 +331,12 @@
 			//node mouse related events 
 		 node.on("mouseover", function(p, j) {
 			//console.log("Moussed over node "+p + " "+ j );
+			//////outline node on mouseover. 
 			//clear scene
 			vis.selectAll("circle")
 			  .attr("stroke", "white")
 			   .attr("stroke-width", 3);
 			
-
-
 			var selected = vis.selectAll("circle")
 			.filter(function(d, j	) { return d === p; })
 			.classed("myclass", true)
@@ -345,7 +344,54 @@
 			.attr("stroke-width",4)
 	
 		});
+		node.on("mouseout", function(p, j) {
+			vis.selectAll("line").remove();
+		});
+		 node.on("mouseover", function(p, j) {
+			//console.log("Moussed over node "+p + " "+ j );
+			//////outline node on mouseover. 
+			//clear scene
+			vis.selectAll("circle")
+			  .attr("stroke", "white")
+			   .attr("stroke-width", 3);
+			
+	
 		
+			vis.selectAll("line").remove();
+			
+			 stat = vis.selectAll("circle")
+						.filter(function(d, j	) { 	return d === p; });
+			// 			.classed("myclass", true)
+			// 			.attr("stroke", "red")
+			// 			.attr("stroke-width",4);
+			
+			stat.append("area")
+				.attr("class", "area")
+				.style("font", "10px sans-serif")
+				.style("text-shadow", "#bbb 1px 1px 2px")
+				.attr("dx",23)
+				.attr("dy", ".35em")
+				.text("hello world")
+				// .attr("x1", function(d) { return d.source.x; })
+				// 						        .attr("y1", function(d) { return d.source.y; })
+			stat = vis.selectAll("area")
+				.data([293], String);
+			var w = 20,
+				h = 80;
+				
+			stat.enter().append("svg:line")
+			
+				.attr("x1", function(d) { return p.x;-300 })
+				.attr("y1", function(d) { return p.y; })
+				.attr("x2", function(d) { return p.x; })
+				.attr("y2", function(d) { return p.y+100; })
+				.attr("stroke", "black")
+				.attr("stroke-width", 300);
+			
+						
+	
+							
+		});
         //circle
           node.append("svg:circle")
           .attr("stroke", "white")
