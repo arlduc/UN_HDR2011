@@ -438,18 +438,19 @@
          	.style("fill", function(d) { return (d.color); }) 
 			.call(force.drag);
 			
-		//node mouse related events 
-		 node.on("mouseover", function(p, j) {
-			   force = self.force = d3.layout.force()
-			        .nodes(network.nodes)
+		node.on("click", function(p,j){	   
+			force = self.force = d3.layout.force()
+			        //.nodes(network.nodes)
 			        .links(network.links)
 					.friction(.95)
 					.charge(-100)
 				    .gravity(.065)
 				    .size([w, h])
 					.start();
-					
-					
+		})
+		//node mouse related events 
+		 node.on("mouseover", function(p, j) {
+				
 					
 			//clear scene
 			vis.selectAll("circle")
