@@ -293,8 +293,7 @@
     var force;
     var link;
     var node ;
-	var stat; 
-	 
+	  var details; 
 	//stats window 
 	var country_window = new windowWithObject();
 	// Gets min and max from array of nodes for the given index as key
@@ -538,8 +537,52 @@
 				 	}
 	 			});
 				}
+			
+			details = vis.selectAll("g")
+				//	.data(function(d, j	) {  return d === p; });
+				.filter(function(d, j	) {  return d === p; });
 				
-
+				;console.log(details +" "+ p.Country);
+				   	  details.append("svg:text")
+				    	          .attr("y", 00)
+				    	          .attr("x", 00)
+				    	          //.attr("transform", "rotate(180)")
+				    	          .attr("text-anchor", "middle")
+				    	          .style("fill", "#000")
+				    	          .text(p.Country);
+				//epi
+				  	 details.append("svg:text")
+				    	          .attr("y", 20)
+				    	          .attr("x", 00)
+				    	          //.attr("transform", "rotate(180)")
+				    	          .attr("text-anchor", "middle")
+				    	          .style("fill", "#000")
+				    	          .text(p.Environmental_Performance_Index);
+				//ihdi
+				  	 details.append("svg:text")
+				    	          .attr("y", 40)
+				    	          .attr("x", 00)
+				    	          //.attr("transform", "rotate(180)")
+				    	          .attr("text-anchor", "middle")
+				    	          .style("fill", "#000")
+				    	          .text(function(d) {return "IHDI: "+ d.IHDI_Inequality_adjusted_HDI_value});
+				//GII 
+				  	 details.append("svg:text")
+				    	          .attr("y", 60)
+				    	          .attr("x", 00)
+				    	          //.attr("transform", "rotate(180)")
+				    	          .attr("text-anchor", "middle")
+				    	          .style("fill", "#000")
+				    	          .text(function(d) {return "GII: "+  d.GII_Gender_Inequality_Index_value});
+				//GNI
+					 details.append("svg:text")
+				  	          .attr("y", 80)
+				  	          .attr("x", 00)
+				  	          //.attr("transform", "rotate(180)")
+				  	          .attr("text-anchor", "middle")
+				  	          .style("fill", "#000")
+				  	          .text(function(d) {return "GNI: "+ d.GNI_Gross_National_Income});
+			console.log(details);
 	
 			});
 		
@@ -559,11 +602,21 @@
 				// 	         .attr("cy", function(d) { return d.y; })
 				// 		   	    .text(function(d) { console.log(d.Country); return d.Country+"\n"});
 
-		
+				  var details = vis.selectAll("info.details").remove();
+				 // 				 	//..filter(function(d, j	) {  return d === p; })
+				 // 
+				 // 					   	  details.remove();
+				 // 					//epi
+				 // 					  	 details.remove();
+				 // 					    	        					//ihdi
+				 // 					  	 details.remove();					//GII 
+				 // 					  	 details.remove();
+				 // 					//GNI
+				 // 						 details.remove();
 			update_network(network);
 			
 	 	
-			console.log(detailsText);
+			//console.log(detailsText);
 				
 		});
 	
@@ -600,19 +653,12 @@
      	    .text(function(d) { return d.Country });
 
 ///details 
-	// Add labeled rects for each birthyear.
-    var details = vis.selectAll("g.nodes")
+     details = vis.selectAll("info.details")
         .data(network.nodes)
-      	.enter().append("svg:g")
-        .attr("transform", function(d) { return "translate(" + d.x + ","+d.y+")"; });
-  
-    details.selectAll("rect")
-        .data(network.nodes)
-      	.enter().append("svg:rect")
-        .attr("x", 1)
-        .attr("width", function(d) {return d.Country})
-  //      .attr("height", function(d) {return d.Country});
-  
+      	.enter().append("svg:info")
+		.attr("x" , 100 ) 
+		.attr("y" , 100 );
+  	//	console.log(details);
    	  details.append("svg:text")
     	          .attr("y", 100)
     	          .attr("x", 100)
@@ -652,14 +698,7 @@
   	          .attr("text-anchor", "middle")
   	          .style("fill", "#000")
   	          .text(function(d) {return "GNI: "+ d.GNI_Gross_National_Income});
-    // // Add labels to show the age.
-    //   svg.append("svg:g").selectAll("text")
-    //       .data(d3.range(0, age1 + 5, 5))
-    //     .enter().append("svg:text")
-    //       .attr("text-anchor", "middle")
-    //       .attr("transform", function(d) { return "translate(" + (x(d) + x(5) / 2) + ",-4)scale(-1,-1)"; })
-    //       .attr("dy", ".71em")
-    //      .text(String);
+
 			
 ///// details
 
@@ -710,7 +749,7 @@
 			var win_node; 
 			console.log("initialized country_window");
 			this.obj = o; 
-			this.country = this.obj.Country; 
+			this.Country = this.obj.Country; 
 			this.EPI = this.obj.Environmental_Performance_Index;
 			this.IHDI = this.obj.IHDI_Inequality_adjusted_HDI_value;
 			this.GII = this.obj.GII_Gender_Inequality_Index_value;
@@ -725,6 +764,9 @@
 			
 		
 		 };
+		this.Country = function(){
+			return this.country; 
+		}
 		this.update_window = function() {
 
 		};
