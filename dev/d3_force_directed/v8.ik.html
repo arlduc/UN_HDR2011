@@ -538,46 +538,51 @@
 	 			});
 				}
 			
-			details = vis.selectAll("g")
-				//	.data(function(d, j	) {  return d === p; });
-				.filter(function(d, j	) {  return d === p; });
-				
-				;console.log(details +" "+ p.Country);
+			details = vis.selectAll("details")
+				.data(network.nodes)
+				.enter().append("g")
+					.filter(function(d, j	) {  return d === p; });
+			
+
+			//	console.log("details"+ details);	
+					 // details = vis.selectAll("text")
+					 // 					 	.filter(function(d, j	) {  return d === p; });
+					 // 			
 				   	  details.append("svg:text")
-				    	          .attr("y", 00)
-				    	          .attr("x", 00)
+				    	          .attr("y", 100)
+				    	          .attr("x", 100)
 				    	          //.attr("transform", "rotate(180)")
 				    	          .attr("text-anchor", "middle")
 				    	          .style("fill", "#000")
 				    	          .text(p.Country);
 				//epi
-				  	 details.append("svg:text")
-				    	          .attr("y", 20)
-				    	          .attr("x", 00)
+				  	 details.insert("svg:text")
+				    	          .attr("y", 120)
+				    	          .attr("x", 100)
 				    	          //.attr("transform", "rotate(180)")
 				    	          .attr("text-anchor", "middle")
 				    	          .style("fill", "#000")
 				    	          .text(p.Environmental_Performance_Index);
 				//ihdi
-				  	 details.append("svg:text")
-				    	          .attr("y", 40)
-				    	          .attr("x", 00)
+				  	 details.insert("svg:text")
+				    	          .attr("y", 140)
+				    	          .attr("x", 100)
 				    	          //.attr("transform", "rotate(180)")
 				    	          .attr("text-anchor", "middle")
 				    	          .style("fill", "#000")
 				    	          .text(function(d) {return "IHDI: "+ d.IHDI_Inequality_adjusted_HDI_value});
 				//GII 
-				  	 details.append("svg:text")
-				    	          .attr("y", 60)
-				    	          .attr("x", 00)
+				  	 details.insert("svg:text")
+				    	          .attr("y", 160)
+				    	          .attr("x", 100)
 				    	          //.attr("transform", "rotate(180)")
 				    	          .attr("text-anchor", "middle")
 				    	          .style("fill", "#000")
 				    	          .text(function(d) {return "GII: "+  d.GII_Gender_Inequality_Index_value});
 				//GNI
-					 details.append("svg:text")
-				  	          .attr("y", 80)
-				  	          .attr("x", 00)
+					 details.insert("svg:text")
+				  	          .attr("y", 180)
+				  	          .attr("x", 100)
 				  	          //.attr("transform", "rotate(180)")
 				  	          .attr("text-anchor", "middle")
 				  	          .style("fill", "#000")
@@ -602,7 +607,7 @@
 				// 	         .attr("cy", function(d) { return d.y; })
 				// 		   	    .text(function(d) { console.log(d.Country); return d.Country+"\n"});
 
-				  var details = vis.selectAll("info.details").remove();
+				  	details.remove();
 				 // 				 	//..filter(function(d, j	) {  return d === p; })
 				 // 
 				 // 					   	  details.remove();
@@ -653,51 +658,51 @@
      	    .text(function(d) { return d.Country });
 
 ///details 
-     details = vis.selectAll("info.details")
-        .data(network.nodes)
-      	.enter().append("svg:info")
-		.attr("x" , 100 ) 
-		.attr("y" , 100 );
-  	//	console.log(details);
-   	  details.append("svg:text")
-    	          .attr("y", 100)
-    	          .attr("x", 100)
-    	          //.attr("transform", "rotate(180)")
-    	          .attr("text-anchor", "middle")
-    	          .style("fill", "#000")
-    	          .text(function(d) {return d.Country});
-//epi
-  	 details.append("svg:text")
-    	          .attr("y", 120)
-    	          .attr("x", 100)
-    	          //.attr("transform", "rotate(180)")
-    	          .attr("text-anchor", "middle")
-    	          .style("fill", "#000")
-    	          .text(function(d) {return "EPI: " +d.Environmental_Performance_Index});
-//ihdi
-  	 details.append("svg:text")
-    	          .attr("y", 140)
-    	          .attr("x", 100)
-    	          //.attr("transform", "rotate(180)")
-    	          .attr("text-anchor", "middle")
-    	          .style("fill", "#000")
-    	          .text(function(d) {return "IHDI: "+ d.IHDI_Inequality_adjusted_HDI_value});
-//GII 
-  	 details.append("svg:text")
-    	          .attr("y", 160)
-    	          .attr("x", 100)
-    	          //.attr("transform", "rotate(180)")
-    	          .attr("text-anchor", "middle")
-    	          .style("fill", "#000")
-    	          .text(function(d) {return "GII: "+  d.GII_Gender_Inequality_Index_value});
-//GNI
-	 details.append("svg:text")
-  	          .attr("y", 180)
-  	          .attr("x", 100)
-  	          //.attr("transform", "rotate(180)")
-  	          .attr("text-anchor", "middle")
-  	          .style("fill", "#000")
-  	          .text(function(d) {return "GNI: "+ d.GNI_Gross_National_Income});
+   //   details = vis.selectAll("g.nodes")
+   //         .data(network.nodes)
+   //       	.enter().append("svg:info")
+   // 		.attr("x" , 100 ) 
+   // 		.attr("y" , 100 );
+   //   	//	console.log(details);
+   //    	  details.append("svg:text")
+   //     	          .attr("y", 100)
+   //     	          .attr("x", 100)
+   //     	          //.attr("transform", "rotate(180)")
+   //     	          .attr("text-anchor", "middle")
+   //     	          .style("fill", "#000")
+   //     	          .text(function(d) {return d.Country});
+   // //epi
+   //   	 details.append("svg:text")
+   //     	          .attr("y", 120)
+   //     	          .attr("x", 100)
+   //     	          //.attr("transform", "rotate(180)")
+   //     	          .attr("text-anchor", "middle")
+   //     	          .style("fill", "#000")
+   //     	          .text(function(d) {return "EPI: " +d.Environmental_Performance_Index});
+   // //ihdi
+   //   	 details.append("svg:text")
+   //     	          .attr("y", 140)
+   //     	          .attr("x", 100)
+   //     	          //.attr("transform", "rotate(180)")
+   //     	          .attr("text-anchor", "middle")
+   //     	          .style("fill", "#000")
+   //     	          .text(function(d) {return "IHDI: "+ d.IHDI_Inequality_adjusted_HDI_value});
+   // //GII 
+   //   	 details.append("svg:text")
+   //     	          .attr("y", 160)
+   //     	          .attr("x", 100)
+   //     	          //.attr("transform", "rotate(180)")
+   //     	          .attr("text-anchor", "middle")
+   //     	          .style("fill", "#000")
+   //     	          .text(function(d) {return "GII: "+  d.GII_Gender_Inequality_Index_value});
+   // //GNI
+   // 	 details.append("svg:text")
+   //   	          .attr("y", 180)
+   //   	          .attr("x", 100)
+   //   	          //.attr("transform", "rotate(180)")
+   //   	          .attr("text-anchor", "middle")
+   //   	          .style("fill", "#000")
+   //   	          .text(function(d) {return "GNI: "+ d.GNI_Gross_National_Income});
 
 			
 ///// details
