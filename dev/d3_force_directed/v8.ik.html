@@ -636,12 +636,12 @@
 								links =[];
 									target = network["nodes"];	
 								target.sort(SortByEnvironmental_Performance_Index);
-								  network.nodes.forEach(function(o, i) {
+								 target.forEach(function(o, i) {
 									 var xVal;
-								  	if (i > ((network.nodes.length-1)/3)*2 )
+								  	if (i > ((target.length-1)/3)*2 )
 								  	{	xVal = k;
 										yVal = -k;
-								  	}else if (i > (network.nodes.length-1)/3)
+								  	}else if (i > (target.length-1)/3)
 								  	{	xVal = 0;
 								  	}else 
 								  	{	xVal = -k;
@@ -656,12 +656,12 @@
 									links =[];
 										target = network["nodes"];	
 									target.sort(SortByIHDI_Inequality_adjusted_HDI_value);
-									  network.nodes.forEach(function(o, i) {
+									  target.forEach(function(o, i) {
 										 var xVal;
-									  	if (i > ((network.nodes.length-1)/3)*2 )
+									  	if (i > ((target.length-1)/3)*2 )
 									  	{	xVal = k;
 											yVal = -k;
-									  	}else if (i > (network.nodes.length-1)/3)
+									  	}else if (i > (target.length-1)/3)
 									  	{	xVal = 0;
 									  	}else 
 									  	{	xVal = -k;
@@ -676,12 +676,12 @@
 									links =[];
 										target = network["nodes"];	
 									target.sort(SortByGII_Gender_Inequality_Index_value);
-									  network.nodes.forEach(function(o, i) {
+									  target.forEach(function(o, i) {
 										 var xVal;
-									  	if (i > ((network.nodes.length-1)/3)*2 )
+									  	if (i > ((target.length-1)/3)*2 )
 									  	{	xVal = k;
 											yVal = -k;
-									  	}else if (i > (network.nodes.length-1)/3)
+									  	}else if (i > (target.length-1)/3)
 									  	{	xVal = 0;
 									  	}else 
 									  	{	xVal = -k;
@@ -696,12 +696,12 @@
 									links =[];
 										target = network["nodes"];	
 									target.sort(SortByGNI_Gross_National_Income);
-									  network.nodes.forEach(function(o, i) {
+									  target.forEach(function(o, i) {
 										 var xVal;
-									  	if (i > ((network.nodes.length-1)/3)*2 )
+									  	if (i > ((target.length-1)/3)*2 )
 									  	{	xVal = k;
 											yVal = -k;
-									  	}else if (i > (network.nodes.length-1)/3)
+									  	}else if (i > (target.length-1)/3)
 									  	{	xVal = 0;
 									  	}else 
 									  	{	xVal = -k;
