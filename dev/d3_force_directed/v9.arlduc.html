@@ -23,11 +23,17 @@
 	#network {
 		box-shadow: 0 0 5px #888;
 		float: left;
+		page-break-after:always
 	}
+
 	</style>
 </head>
 <body leftmargin="30">
-	<object data="../../drafts/Header02.svg" width="1200" height="120" type="image/svg+xml"></object>
+	<script type="text/javascript" src="../fonts/Petita_500-Petita_500.font.js"></script>
+	<script type="text/javascript">
+	    Cufon.replace('h3', { fontFamily: 'Petita' });
+	</script>
+	<h3><object data="../../drafts/Header03.svg" width="1200" height="100" type="image/svg+xml"></object></h3><br>
 
 	<input padding="5" type="checkbox" name="indices" id="EPI" value="Environmental_Performance_Index" onClick="">Environmental Performance Index 
     <input margin="5" type="checkbox" name="indices" id="IHDI" value="IHDI: Inequality-adjusted HDI value">IHDI: Inequality-adjusted HDI 
@@ -689,7 +695,8 @@
 
 	
 	</script>
+
+	<h3><object data="../../drafts/Footer01.svg" width="1200" height="300" type="image/svg+xml"></object></h3>
 	
-	<object data="../../drafts/Footer01.svg" width="1200" height="300" type="image/svg+xml"></object>
 </body>
 </html>
