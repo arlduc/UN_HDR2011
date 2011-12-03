@@ -442,18 +442,18 @@
 			
 		node.on("click", function(p,j){		
 			  
-				force = self.force = d3.layout.force()
-					//	.nodes(network.nodes)
-				        .links(network.links)
-						//.linkDistance(function(links){ console.log(links); var value= (links.source.index-links.target.index)*3+150; return (value); })
-						.linkDistance(50)
-						.theta(0.01)
-						//.linkStrength(.6) 
-						.friction(0)
-						.charge(-1000)
-					    .gravity(.065)
-					    .size([w, h])
-						.start()
+				// force = self.force = d3.layout.force()
+				// 	//	.nodes(network.nodes)
+				//         .links(network.links)
+				// 		//.linkDistance(function(links){ console.log(links); var value= (links.source.index-links.target.index)*3+150; return (value); })
+				// 		.linkDistance(200)
+				// 		.theta(0.01)
+				// 		//.linkStrength(.6) 
+				// 		.friction(0)
+				// 		.charge(-1000)
+				// 	    .gravity(.065)
+				// 	    .size([w, h])
+				// 		.start()
 						//.call(force.drag);
 			// force = self.force = d3.layout.force()
 			// 	//	.data(network.nodes)
@@ -653,30 +653,139 @@
 			
 
 			    force.on("tick", function(e) {
-			      link.attr("x1", function(d) { return d.source.x; })
-			          .attr("y1", function(d) { return d.source.y; })
-			          .attr("x2", function(d) { return d.target.x; })
-			          .attr("y2", function(d) { return d.target.y; });
+			  	      link.attr("x1", function(d) { return d.source.x; })
+				          .attr("y1", function(d) { return d.source.y; })
+				          .attr("x2", function(d) { return d.target.x; })
+				          .attr("y2", function(d) { return d.target.y; });
 
-					  // Push different nodes in different directions for clustering.
-					  var k = 5.5 * e.alpha;
-					  // DEBUG 
-			  		  //console.log(e.alpha)
+						  // Push different nodes in different directions for clustering.
+						  var k = 5.5 * e.alpha;
+						  // DEBUG 
+				  		  //console.log(e.alpha)
+							 // network.nodes.forEach(function(o, i) {
+							 //  	// three foci
+							 //  	var yVal;
+							 //  	if (i > ((network.nodes.length-1)/3)*2 )
+							 //  		yVal = k;
+							 //  	else if (i > (network.nodes.length-1)/3)
+							 //  		yVal = 0;
+							 //  	else 
+							 //  		yVal = -k;
+							 // 
+							 //  	o.y += yVal;
+							 //  });
+					//sort target by Epi. 
+						var target = [];
+										links =[];
+											target = network["nodes"];	
+										target.sort(SortByOverall_loss_percent);
+										 target.forEach(function(o, i) {
+											 var xVal;
+										  	if (i > ((target.length-1)/3)*2 )
+										  	{//	xVal = k;
+												yVal = -k-(i%10/100);
+										  	}else if (i > (target.length-1)/3)
+										  	{
+												//	xVal = 0;
+												yVal = 0; 
+										  	}else 
+										  	{//	xVal = -k;
+												yVal = k+(i%10/100);
+											}
+										//	o.x +=xVal; 
+											o.y +=yVal; 
+										  });
 
-					  network.nodes.forEach(function(o, i) {
-					  	//console.log(i)
 
-					  	// three foci
-					  	var yVal;
-					  	if (i > ((network.nodes.length-1)/3)*2 )
-					  		yVal = k;
-					  	else if (i > (network.nodes.length-1)/3)
-					  		yVal = 0;
-					  	else 
-					  		yVal = -k;
-					  	o.y += yVal;
-					  });
 
+
+								if(selected_indices.length>=1){
+								 selected_indices.each(function(index, i){
+
+										// console.log(index +" "+ i.id );
+										var target = network["nodes"];
+										if(i.id == "EPI"){ 
+											var target = [];
+											links =[];
+												target = network["nodes"];	
+											target.sort(SortByEnvironmental_Performance_Index);
+											 target.forEach(function(o, i) {
+												 var xVal;
+											  	if (i > ((target.length-1)/3)*2 )
+											  	{	xVal = k;
+													yVal = -k;
+											  	}else if (i > (target.length-1)/3)
+											  	{	xVal = 0;
+											  	}else 
+											  	{	xVal = -k;
+													yVal = k;
+												}
+												o.x +=xVal; 
+												o.y +=yVal; 
+											  });
+										}
+										if(i.id == "IHDI"){
+												var target = [];
+												links =[];
+													target = network["nodes"];	
+												target.sort(SortByIHDI_Inequality_adjusted_HDI_value);
+												  target.forEach(function(o, i) {
+													 var xVal;
+												  	if (i > ((target.length-1)/3)*2 )
+												  	{	xVal = k;
+														yVal = -k;
+												  	}else if (i > (target.length-1)/3)
+												  	{	xVal = 0;
+												  	}else 
+												  	{	xVal = -k;
+														yVal = k;
+													}
+													o.x +=xVal; 
+													o.y +=yVal; 
+												  });
+										}
+								 		if(i.id == "GII"){ 
+												var target = [];
+												links =[];
+													target = network["nodes"];	
+												target.sort(SortByGII_Gender_Inequality_Index_value);
+												  target.forEach(function(o, i) {
+													 var xVal;
+												  	if (i > ((target.length-1)/3)*2 )
+												  	{	xVal = k;
+														yVal = -k;
+												  	}else if (i > (target.length-1)/3)
+												  	{	xVal = 0;
+												  	}else 
+												  	{	xVal = -k;
+														yVal = k;
+													}
+													o.x +=xVal; 
+													o.y +=yVal; 
+												  });
+										}
+									 	if(i.id == "GNI"){ 
+												var target = [];
+												links =[];
+													target = network["nodes"];	
+												target.sort(SortByGNI_Gross_National_Income);
+												  target.forEach(function(o, i) {
+													 var xVal;
+												  	if (i > ((target.length-1)/3)*2 )
+												  	{	xVal = k;
+														yVal = -k;
+												  	}else if (i > (target.length-1)/3)
+												  	{	xVal = 0;
+												  	}else 
+												  	{	xVal = -k;
+														yVal = k;
+													}
+													o.x +=xVal; 
+													o.y +=yVal; 
+												  });
+									 	}
+						 			});
+						}
 
 			      node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 			    });
