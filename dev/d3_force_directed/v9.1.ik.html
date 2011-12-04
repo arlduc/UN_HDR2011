@@ -335,6 +335,7 @@
 		gni_min_max = get_min_max(network["nodes"], "GNI_Gross_National_Income")
 		loss_min_max = get_min_max(network["nodes"], "Overall_loss_percent")
 		sum_min_max  = get_min_max(network["nodes"], "SUM");
+		
 		// WARNING: 0 index of this array intentionally left undefined,
 		// this so the indicies of the arrays line up in the data (column 1 is country name)
 		all_min_max = [, epi_min_max, ihdi_min_max, gii_min_max, gni_min_max, loss_min_max]
@@ -434,11 +435,11 @@
 					  	// three foci
 					  	var yVal;
 					  	if (i > ((network.nodes.length-1)/3)*2 )
-					  		yVal = k;
+					  		yVal = -k;
 					  	else if (i > (network.nodes.length-1)/3)
 					  		yVal = 0;
 					  	else 
-					  		yVal = -k;
+					  		yVal = +k;
 					  	o.y += yVal;
 					  });
 			      node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
@@ -712,11 +713,11 @@
 									  	// three foci
 									  	var yVal;
 									  	if (i > ((network.nodes.length-1)/3)*2 )
-									  		yVal = k;
+									  		yVal = -k;
 									  	else if (i > (network.nodes.length-1)/3)
 									  		yVal = 0;
 									  	else 
-									  		yVal = -k;
+									  		yVal = k;
 									  	o.y += yVal;
 									  });
 							      node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
@@ -748,11 +749,11 @@
 							  	// three foci
 							  	var yVal;
 							  	if (i > ((network.nodes.length-1)/3)*2 )
-							  		yVal = k;
+							  		yVal = -k;
 							  	else if (i > (network.nodes.length-1)/3)
 							  		yVal = 0;
 							  	else 
-							  		yVal = -k;
+							  		yVal = k;
 							  	o.y += yVal;
 							  });
 					      node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
@@ -784,11 +785,11 @@
 							  	// three foci
 							  	var yVal;
 							  	if (i > ((network.nodes.length-1)/3)*2 )
-							  		yVal = k;
+							  		yVal = -k;
 							  	else if (i > (network.nodes.length-1)/3)
 							  		yVal = 0;
 							  	else 
-							  		yVal = -k;
+							  		yVal = k;
 							  	o.y += yVal;
 							  });
 					      node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
@@ -844,11 +845,11 @@
 									  	// three foci
 									  	var yVal;
 									  	if (i > ((network.nodes.length-1)/3)*2 )
-									  		yVal = k;
+									  		yVal = -k;
 									  	else if (i > (network.nodes.length-1)/3)
 									  		yVal = 0;
 									  	else 
-									  		yVal = -k;
+									  		yVal = +k;
 									  	o.y += yVal;
 									  });
 							      node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
