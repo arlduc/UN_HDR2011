@@ -364,7 +364,6 @@
 			
 			
 			vis.selectAll("line").remove();
-
 			link = vis.selectAll("line")
 		        .data(network.links)
 		        .enter().append("svg:line")
@@ -541,7 +540,14 @@
 								.start();
 		 	}
 			else {};
-			
+			force.nodes(network.nodes)
+				.theta(1)
+				.linkStrength(0.33) 
+				.friction(.5)
+				.charge(-600)
+			    .gravity(.1)
+			    .size([w, h])
+				.start();
 	        
 	}
 	// init
@@ -631,7 +637,7 @@
 		// })
 		//node mouse related events 
 		 node.on("mouseover", function(p, j) {
-				update_force();
+			//update_force();
 			//clear scene
 			vis.selectAll("circle")
 			  .attr("stroke", "white")
@@ -716,7 +722,9 @@
 				 	}
 	 			});
 				}
-			
+				
+				
+
 			details = vis.selectAll("details")
 				.data(network.nodes)
 				.enter().append("g")
