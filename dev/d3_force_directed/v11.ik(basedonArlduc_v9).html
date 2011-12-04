@@ -361,35 +361,38 @@
 			// 	    .gravity(.001)
 			// 	    .size([w, h])
 			// 		.start();
-		node.selectAll("circle").remove();
-		   // node = vis.selectAll("g.node")
-		   // 		        .data(network.nodes)
-		   // 		        .enter().append("svg:g")
-		   // 		        .attr("class", "node")
-		   // 		        .attr("cx", function(d) { return d.x})
-		   //        	.attr("cy", function(d) { return d.y; })
-		   //       	.style("fill", function(d) { return (d.color); })
-		  node.append("svg:circle")
-          .attr("stroke", "white")
-          .attr("stroke-width", 1)   
-          .style("fill", function(d) {return node_colors(d["continent_region"])
-        })
-        //node radious
-        .attr("r", function(d) { var returnValue =0; if(d.Overall_loss_percent=="..") returnValue=5; else returnValue = (d.Overall_loss_percent); return  returnValue; });
+			
+			
+			vis.selectAll("line").remove();
 
+			link = vis.selectAll("line")
+		        .data(network.links)
+		        .enter().append("svg:line")
+		        .attr("class", "link")
+				.attr("stroke", function(d){ return d.color; })
+		        .style("stroke-width", function(d){ return 2;})
+		        .attr("x1", function(d) { return d.source.x; })
+		        .attr("y1", function(d) { return d.source.y; })
+		        .attr("x2", function(d) { return d.target.x; })
+		        .attr("y2", function(d) { return d.target.y; });
+			
+					node.selectAll("circle").remove();
+					   // node = vis.selectAll("g.node")
+					   // 		        .data(network.nodes)
+					   // 		        .enter().append("svg:g")
+					   // 		        .attr("class", "node")
+					   // 		        .attr("cx", function(d) { return d.x})
+					   //        	.attr("cy", function(d) { return d.y; })
+					   //       	.style("fill", function(d) { return (d.color); })
+					  node.append("svg:circle")
+			          .attr("stroke", "white")
+			          .attr("stroke-width", 1)   
+			          .style("fill", function(d) {return node_colors(d["continent_region"])
+			        })
+			        //node radious
+			        .attr("r", function(d) { var returnValue =0; if(d.Overall_loss_percent=="..") returnValue=5; else returnValue = (d.Overall_loss_percent); return  returnValue/2; });
+	
 		// When we redraw, have to remember to clear all previous links
-		vis.selectAll("line").remove();
-		
-		link = vis.selectAll("line")
-	        .data(network.links)
-	        .enter().append("svg:line")
-	        .attr("class", "link")
-			.attr("stroke", function(d){ return d.color; })
-	        .style("stroke-width", function(d){ return 2;})
-	        .attr("x1", function(d) { return d.source.x; })
-	        .attr("y1", function(d) { return d.source.y; })
-	        .attr("x2", function(d) { return d.target.x; })
-	        .attr("y2", function(d) { return d.target.y; });
 		        
 	    //attempt to arrange nodes' x-position    
 		for (var i = 0 ; i< network.nodes.length; i++ ){
@@ -407,16 +410,35 @@
 		console.log("selected_indices.length"+ selected_indices.length);
 	 
 	
-		
+		var linkDistanceVar = 0; 
 			if(selected_indices.length == 1){ 
 						force = self.force = d3.layout.force()
-								//.nodes(network.nodes)
 						        .links(network.links)
-								.linkDistance(70)
+						
+								.linkDistance(function(d){ //console.log(d); 	
+										var linkDistanceVar = 0; 
+								 		selected_indices.each(function(index, i){
+												if(i.id == "EPI"){ 
+													linkDistanceVar +=Number(100 - d.source.Environmental_Performance_Index); 
+												 }
+											 	if(i.id == "IHDI"){
+														linkDistanceVar += Number(100-d.source.IHDI_Inequality_adjusted_HDI_value*100);
+												}
+											 	if(i.id == "GII"){ 
+														linkDistanceVar += Number(d.source.GII_Gender_Inequality_Index_value);
+												}
+											 	if(i.id == "GNI"){ 
+														linkDistanceVar += Number(d.source.GNI_Gross_National_Income/100);
+											 	}
+												else {}; 
+											})
+										
+									//	console.log(linkDistanceVar)
+										return linkDistanceVar;})
 								.theta(1)
-								.linkStrength(1) 
+								.linkStrength(0.33) 
 								.friction(1)
-								.charge(-100)
+								.charge(-1000)
 							    .gravity(.9)
 							    .size([w, h])
 								.start();
@@ -424,41 +446,97 @@
 			 }
 		 	if(selected_indices.length == 2 ){
 						force = self.force = d3.layout.force()
-								//.nodes(network.nodes)
 						        .links(network.links)
-								.linkDistance(150)
+								.linkDistance(function(d){ //console.log(d); 	
+										var linkDistanceVar = 0; 
+								 		selected_indices.each(function(index, i){
+											if(i.id == "EPI"){ 
+												linkDistanceVar +=Number(100 - d.source.Environmental_Performance_Index); 
+											 }
+										 	if(i.id == "IHDI"){
+													linkDistanceVar += Number(100-d.source.IHDI_Inequality_adjusted_HDI_value*100);
+											}
+										 	if(i.id == "GII"){ 
+													linkDistanceVar += Number(d.source.GII_Gender_Inequality_Index_value);
+											}
+										 	if(i.id == "GNI"){ 
+													linkDistanceVar += Number(d.source.GNI_Gross_National_Income/100);
+										 	}
+											else {}; 
+
+											})
+										
+										//	console.log(linkDistanceVar)
+										return linkDistanceVar;})
 								.theta(1)
-								.linkStrength(1) 
+								.linkStrength(0.33) 
 								.friction(1)
 								.charge(-100)
-							    .gravity(.001)
+							    .gravity(.9)
 							    .size([w, h])
 								.start();
 			}
 		 	if(selected_indices.length== 3){ 
 						force = self.force = d3.layout.force()
-								//.nodes(network.nodes)
 						        .links(network.links)
-								.linkDistance(200)
+								.linkDistance(function(d){ //console.log(d); 	
+										var linkDistanceVar = 0; 
+								 		selected_indices.each(function(index, i){
+											if(i.id == "EPI"){ 
+												linkDistanceVar +=Number(300 - d.source.Environmental_Performance_Index); 
+											 }
+										 	if(i.id == "IHDI"){
+													linkDistanceVar += Number(100-d.source.IHDI_Inequality_adjusted_HDI_value*100);
+											}
+										 	if(i.id == "GII"){ 
+													linkDistanceVar += Number(d.source.GII_Gender_Inequality_Index_value);
+											}
+										 	if(i.id == "GNI"){ 
+													linkDistanceVar += Number(d.source.GNI_Gross_National_Income/100);
+										 	}
+											else {}; 
+
+											})
+										
+										//	console.log(linkDistanceVar)
+										return linkDistanceVar;})
 								.theta(1)
-								.linkStrength(1) 
+								.linkStrength(0.33) 
 								.friction(1)
 								.charge(-100)
-							    .gravity(.5)
+							    .gravity(.9)
 							    .size([w, h])
 								.start();
 
 			}
 		 	if(selected_indices.length== 4){
 						force = self.force = d3.layout.force()
-								//.nodes(network.nodes)
 						        .links(network.links)
-								.linkDistance(300)
+								.linkDistance(function(d){ //console.log(d); 	
+										var linkDistanceVar = 0; 
+								 		selected_indices.each(function(index, i){
+											if(i.id == "EPI"){ 
+												linkDistanceVar +=Number(200 - d.source.Environmental_Performance_Index); 
+											 }
+										 	if(i.id == "IHDI"){
+													linkDistanceVar += Number(100-d.source.IHDI_Inequality_adjusted_HDI_value*100);
+											}
+										 	if(i.id == "GII"){ 
+													linkDistanceVar += Number(d.source.GII_Gender_Inequality_Index_value);
+											}
+										 	if(i.id == "GNI"){ 
+													linkDistanceVar += Number(d.source.GNI_Gross_National_Income/100);
+										 	}
+											else {}; 
+											})
+										
+										//	console.log(linkDistanceVar)
+										return linkDistanceVar;})
 								.theta(1)
-								.linkStrength(1) 
+								.linkStrength(0.33) 
 								.friction(1)
 								.charge(-100)
-							    .gravity(.5)
+							    .gravity(.9)
 							    .size([w, h])
 								.start();
 		 	}
@@ -725,7 +803,7 @@
                       return node_colors(d["continent_region"])
         })
         //node radious
-        .attr("r", function(d) { var returnValue =0; if(d.Overall_loss_percent=="..") returnValue=5; else returnValue = (d.Overall_loss_percent); return  returnValue; });
+        .attr("r", function(d) { var returnValue =0; if(d.Overall_loss_percent=="..") returnValue=5; else returnValue = (d.Overall_loss_percent); return  returnValue/10; });
         //.attr("r", 10); 
       
   	    
