@@ -270,8 +270,9 @@
 			
 	
 	    });
+		update_force();
 		update_network(network);
-			update_force();
+	
 		});
 
 
@@ -297,7 +298,7 @@
     var force;
     var link;
     var node ;
-	  var details; 
+	var details; 
 
 	// Gets min and max from array of nodes for the given index as key
 	function get_min_max(nodes, key){
@@ -347,18 +348,13 @@
 		
 		// Now pass the network JSON object to a function that will build it via SVG
 		build_network(network);
-		
+		update_force();
 	});
 	
 	
 	//update network links and other drawing updates. 
 	function update_network(network){
-		//remove links 
-		//link = [];
- 		// .data(network.links);
- 		// 	link.exit().remove();
- 		// 	//update links 
-		
+
 		// When we redraw, have to remember to clear all previous links
 		vis.selectAll("line").remove();
 		
@@ -391,37 +387,64 @@
 		    .attr("width", w)
 		    .attr("height", h);
 
-	    force = self.force = d3.layout.force()
-	        .nodes(network.nodes)
-	        .links(network.links)
-	        // .gravity(0)
-	        // .charge(-30)
-	        //.linkStrength(10)
-			//.distance(1)
-			//.linkStrength(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue=0.9; else returnValue = ((100-link.source.Overall_loss_percent)/100);   return returnValue;  })
-	        /*.linkStrength(function(link){ 
-	        				var returnValue; 
-	        				if(link.source.Overall_loss_percent=="..") returnValue=0.9; 
-	        				else returnValue = ((100-link.source.Overall_loss_percent)/100);   
-	        				return returnValue;  })
-	        .distance(function(link){ 
-	        			var returnValue; 
-	        			if(link.source.Overall_loss_percent=="..") returnValue= 0; 
-	        			else returnValue = (100-link.source.Overall_loss_percent)*2;  
-	        			return returnValue;   })
-	        */
-	        // friction(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue=0.9; else returnValue = (link.source.Overall_loss_percent/100);  console.log(returnValue); return returnValue;  })
-	        //.linkDistance(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue= 0; else returnValue = (link.source.Overall_loss_percent);  return returnValue;   })              
-			// 	        .distance(function(link){
-			// 	return link.distance;
-			// })
-	        //.distance(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue= 0; else returnValue = (link.source.Overall_loss_percent)*10;  return returnValue;   })
-			.friction(.95)
-			.charge(-100)
-		    .gravity(.065)
-		    .size([w, h])
-			.start();
-			
+		    force = self.force = d3.layout.force()
+		        .nodes(network.nodes)
+		        .links(network.links)
+		        // .gravity(0)
+		        // .charge(-30)
+		        //.linkStrength(10)
+				//.distance(1)
+				//.linkStrength(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue=0.9; else returnValue = ((100-link.source.Overall_loss_percent)/100);   return returnValue;  })
+		        /*.linkStrength(function(link){ 
+		        				var returnValue; 
+		        				if(link.source.Overall_loss_percent=="..") returnValue=0.9; 
+		        				else returnValue = ((100-link.source.Overall_loss_percent)/100);   
+		        				return returnValue;  })
+		        .distance(function(link){ 
+		        			var returnValue; 
+		        			if(link.source.Overall_loss_percent=="..") returnValue= 0; 
+		        			else returnValue = (100-link.source.Overall_loss_percent)*2;  
+		        			return returnValue;   })
+		        */
+		        // friction(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue=0.9; else returnValue = (link.source.Overall_loss_percent/100);  console.log(returnValue); return returnValue;  })
+		        //.linkDistance(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue= 0; else returnValue = (link.source.Overall_loss_percent);  return returnValue;   })              
+				// 	        .distance(function(link){
+				// 	return link.distance;
+				// })
+		        //.distance(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue= 0; else returnValue = (link.source.Overall_loss_percent)*10;  return returnValue;   })
+				.friction(.95)
+				.charge(-100)
+			    .gravity(.10)
+			    .size([w, h])
+				.on("tick", function(e) {
+			      link.attr("x1", function(d) { return d.source.x; })
+			          .attr("y1", function(d) { return d.source.y; })
+			          .attr("x2", function(d) { return d.target.x; })
+			          .attr("y2", function(d) { return d.target.y; });
+
+					  // Push different nodes in different directions for clustering.
+					  var k = 5.5 * e.alpha;
+					  // DEBUG 
+			  		  //console.log(e.alpha)
+					  var target = network.nodes 
+						target.sort(SortBySUM);
+					  target.forEach(function(o, i) {
+					  	//console.log(i)
+
+					  	// three foci
+					  	var yVal;
+					  	if (i > ((network.nodes.length-1)/3)*2 )
+					  		yVal = k;
+					  	else if (i > (network.nodes.length-1)/3)
+					  		yVal = 0;
+					  	else 
+					  		yVal = -k;
+					  	o.y += yVal;
+					  });
+			      node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+			    });
+
+						
 	    link = vis.selectAll("line.link")
 	        .data(network.links)
 	        .enter().append("svg:line")
@@ -441,7 +464,7 @@
           	.attr("cy", function(d) { return d.y; })
          	.style("fill", function(d) { return (d.color); }) 
 			.call(force.drag);
-			
+
 		// node.on("click", function(p,j){		
 		// 	  
 		// 		// force = self.force = d3.layout.force()
@@ -468,7 +491,7 @@
 		// })
 		//node mouse related events 
 		 node.on("mouseover", function(p, j) {
-			force.start();
+		//	force.start();
 			//clear scene
 			vis.selectAll("circle")
 			  .attr("stroke", "white")
@@ -614,8 +637,9 @@
 			vis.selectAll("line").remove();
 			
 			details.remove();
+			update_force();
 			update_network(network);
-			
+		
 	 	
 			//console.log(detailsText);
 				
@@ -654,144 +678,126 @@
      	    .text(function(d) { return d.Country });
 			
 
-			    force.on("tick", function(e) {
-			      link.attr("x1", function(d) { return d.source.x; })
-			          .attr("y1", function(d) { return d.source.y; })
-			          .attr("x2", function(d) { return d.target.x; })
-			          .attr("y2", function(d) { return d.target.y; });
-
-					  // Push different nodes in different directions for clustering.
-					  var k = 5.5 * e.alpha;
-					  // DEBUG 
-			  		  //console.log(e.alpha)
-					  var target = network.nodes 
-						target.sort(SortBySUM);
-					  target.forEach(function(o, i) {
-					  	//console.log(i)
-
-					  	// three foci
-					  	var yVal;
-					  	if (i > ((network.nodes.length-1)/3)*2 )
-					  		yVal = k;
-					  	else if (i > (network.nodes.length-1)/3)
-					  		yVal = 0;
-					  	else 
-					  		yVal = -k;
-					  	o.y += yVal;
-					  });
-
-
-			      node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
-			    });
-
-	}
+}
 	
 	function update_force(){
 		selected_indices = $("input:checkbox[name='indices']:checked");
 		console.log("selected_indices.length"+ selected_indices.length);
-	 
 	
+		//force =0 ; 
 		var linkDistanceVar = 0; 
 			if(selected_indices.length == 1){ 
-						force = self.force = d3.layout.force()
+						force //= self.force = d3.layout.force()
 						        .links(network.links)
-						
-								.linkDistance(function(d){ //console.log(d); 	
-										var linkDistanceVar = 0; 
-								 		selected_indices.each(function(index, i){
-												if(i.id == "EPI"){ 
-													linkDistanceVar +=Number(100 - d.source.Environmental_Performance_Index); 
-												 }
-											 	if(i.id == "IHDI"){
-														linkDistanceVar += Number(100-d.source.IHDI_Inequality_adjusted_HDI_value*100);
-												}
-											 	if(i.id == "GII"){ 
-														linkDistanceVar += Number(d.source.GII_Gender_Inequality_Index_value);
-												}
-											 	if(i.id == "GNI"){ 
-														linkDistanceVar += Number(d.source.GNI_Gross_National_Income/100);
-											 	}
-												else {}; 
-											})
-										
-									//	console.log(linkDistanceVar)
-										return linkDistanceVar;})
-								.theta(1)
 								.linkStrength(0.10) 
-								.friction(1)
-								.charge(-1000)
-							    .gravity(.9)
+							 	.charge(-100)
+								.gravity(.1)
 							    .size([w, h])
-								.start();
-								
+								.nodes(network.nodes)
+								.on("tick", function(e) {
+							      link.attr("x1", function(d) { return d.source.x; })
+							          .attr("y1", function(d) { return d.source.y; })
+							          .attr("x2", function(d) { return d.target.x; })
+							          .attr("y2", function(d) { return d.target.y; });
+
+									  // Push different nodes in different directions for clustering.
+									  var k = 5.5 * e.alpha;
+									  // DEBUG 
+							  		  //console.log(e.alpha)
+									  var target = network.nodes 
+										target.sort(SortBySUM);
+									  target.forEach(function(o, i) {
+									  	//console.log(i)
+
+									  	// three foci
+									  	var yVal;
+									  	if (i > ((network.nodes.length-1)/3)*2 )
+									  		yVal = k;
+									  	else if (i > (network.nodes.length-1)/3)
+									  		yVal = 0;
+									  	else 
+									  		yVal = -k;
+									  	o.y += yVal;
+									  });
+							      node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+							    });
 			 }
 		 	if(selected_indices.length == 2 ){
-						force = self.force = d3.layout.force()
-						        .links(network.links)
-								.linkDistance(function(d){ //console.log(d); 	
-										var linkDistanceVar = 0; 
-								 		selected_indices.each(function(index, i){
-											if(i.id == "EPI"){ 
-												linkDistanceVar +=Number(100 - d.source.Environmental_Performance_Index); 
-											 }
-										 	if(i.id == "IHDI"){
-													linkDistanceVar += Number(100-d.source.IHDI_Inequality_adjusted_HDI_value*100);
-											}
-										 	if(i.id == "GII"){ 
-													linkDistanceVar += Number(d.source.GII_Gender_Inequality_Index_value);
-											}
-										 	if(i.id == "GNI"){ 
-													linkDistanceVar += Number(d.source.GNI_Gross_National_Income/100);
-										 	}
-											else {}; 
+						force //= self.force = d3.layout.force()
+				        .links(network.links)
+						.linkStrength(0.10) 
+					 	.charge(-100)
+						.gravity(.1)
+					    .size([w, h])
+						.nodes(network.nodes)
+						.on("tick", function(e) {
+					      link.attr("x1", function(d) { return d.source.x; })
+					          .attr("y1", function(d) { return d.source.y; })
+					          .attr("x2", function(d) { return d.target.x; })
+					          .attr("y2", function(d) { return d.target.y; });
 
-											})
-										
-										//	console.log(linkDistanceVar)
-										return linkDistanceVar;})
-								.theta(1)
-								.linkStrength(0.10) 
-								.friction(1)
-								.charge(-100)
-							    .gravity(.9)
-							    .size([w, h])
-								.start();
+							  // Push different nodes in different directions for clustering.
+							  var k = 5.5 * e.alpha;
+							  // DEBUG 
+					  		  //console.log(e.alpha)
+							  var target = network.nodes 
+								target.sort(SortBySUM);
+							  target.forEach(function(o, i) {
+							  	//console.log(i)
+
+							  	// three foci
+							  	var yVal;
+							  	if (i > ((network.nodes.length-1)/3)*2 )
+							  		yVal = k;
+							  	else if (i > (network.nodes.length-1)/3)
+							  		yVal = 0;
+							  	else 
+							  		yVal = -k;
+							  	o.y += yVal;
+							  });
+					      node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+					    });
 			}
 		 	if(selected_indices.length== 3){ 
-						force = self.force = d3.layout.force()
-						        .links(network.links)
-								.linkDistance(function(d){ //console.log(d); 	
-										var linkDistanceVar = 0; 
-								 		selected_indices.each(function(index, i){
-											if(i.id == "EPI"){ 
-												linkDistanceVar +=Number(300 - d.source.Environmental_Performance_Index); 
-											 }
-										 	if(i.id == "IHDI"){
-													linkDistanceVar += Number(100-d.source.IHDI_Inequality_adjusted_HDI_value*100);
-											}
-										 	if(i.id == "GII"){ 
-													linkDistanceVar += Number(d.source.GII_Gender_Inequality_Index_value);
-											}
-										 	if(i.id == "GNI"){ 
-													linkDistanceVar += Number(d.source.GNI_Gross_National_Income/100);
-										 	}
-											else {}; 
+						force //= self.force = d3.layout.force()
+				        .links(network.links)
+						.linkStrength(0.10) 
+					 	.charge(-100)
+						.gravity(.1)
+					    .size([w, h])
+						.nodes(network.nodes)
+						.on("tick", function(e) {
+					      link.attr("x1", function(d) { return d.source.x; })
+					          .attr("y1", function(d) { return d.source.y; })
+					          .attr("x2", function(d) { return d.target.x; })
+					          .attr("y2", function(d) { return d.target.y; });
 
-											})
-										
-										//	console.log(linkDistanceVar)
-										return linkDistanceVar;})
-								.theta(1)
-								.linkStrength(0.10) 
-								.friction(1)
-								.charge(-100)
-							    .gravity(.9)
-							    .size([w, h])
-								.start();
+							  // Push different nodes in different directions for clustering.
+							  var k = 5.5 * e.alpha;
+							  // DEBUG 
+					  		  //console.log(e.alpha)
+							  var target = network.nodes 
+								target.sort(SortBySUM);
+							  target.forEach(function(o, i) {
+							  	//console.log(i)
+
+							  	// three foci
+							  	var yVal;
+							  	if (i > ((network.nodes.length-1)/3)*2 )
+							  		yVal = k;
+							  	else if (i > (network.nodes.length-1)/3)
+							  		yVal = 0;
+							  	else 
+							  		yVal = -k;
+							  	o.y += yVal;
+							  });
+					      node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+					    });
+
 
 			}
 		 	if(selected_indices.length== 4){
-						force = self.force = d3.layout.force()
+						force //= self.force = d3.layout.force()
 						        .links(network.links)
 								.linkDistance(function(d){ //console.log(d); 	
 										var linkDistanceVar = 0; 
@@ -813,23 +819,85 @@
 										
 										//	console.log(linkDistanceVar)
 										return linkDistanceVar;})
-								.theta(1)
-								.linkStrength(0.1) 
-								.friction(1)
-								.charge(-100)
-							    .gravity(.9)
+//								.theta(1)
+								.linkStrength(0.01) 
+								// .friction(0)
+								// .charge(-100)
+								// 							    .gravity(.1)
 							    .size([w, h])
-								.start();
+								.nodes(network.nodes)
+								.on("tick", function(e) {
+							      link.attr("x1", function(d) { return d.source.x; })
+							          .attr("y1", function(d) { return d.source.y; })
+							          .attr("x2", function(d) { return d.target.x; })
+							          .attr("y2", function(d) { return d.target.y; });
+
+									  // Push different nodes in different directions for clustering.
+									  var k = 5.5 * e.alpha;
+									  // DEBUG 
+							  		  //console.log(e.alpha)
+									  var target = network.nodes 
+										target.sort(SortBySUM);
+									  target.forEach(function(o, i) {
+									  	//console.log(i)
+
+									  	// three foci
+									  	var yVal;
+									  	if (i > ((network.nodes.length-1)/3)*2 )
+									  		yVal = k;
+									  	else if (i > (network.nodes.length-1)/3)
+									  		yVal = 0;
+									  	else 
+									  		yVal = -k;
+									  	o.y += yVal;
+									  });
+							      node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+							    });
+						
 		 	}
-			else {};
-			// force.nodes(network.nodes)
-			// 			.theta(1)
-			// 			.linkStrength(0.33) 
-			// 			.friction(.5)
-			// 			.charge(-600)
-			// 		    .gravity(.1)
-			// 		    .size([w, h])
-			// 			.start();
+			if(selected_indices.length== 0){
+					console.log("no indices selected");
+											// force 
+											//         .links(network.links)
+											// 		.linkStrength(.10) 
+											// 		 .friction(1)
+											// 		 .charge(-100)
+											// 					 							    .gravity(.1)
+											// 	    .size([w, h])
+											// 	//	.nodes(network.nodes)
+											// 		.on("tick", function(e) {
+											// 	      link.attr("x1", function(d) { return d.source.x; })
+											// 	          .attr("y1", function(d) { return d.source.y; })
+											// 	          .attr("x2", function(d) { return d.target.x; })
+											// 	          .attr("y2", function(d) { return d.target.y; });
+											// 
+											// 			  // Push different nodes in different directions for clustering.
+											// 			  var k = 5.5 * e.alpha;
+											// 			  // DEBUG 
+											// 	  		  //console.log(e.alpha)
+											// 			  var target = network.nodes 
+											// 				target.sort(SortBySUM);
+											// 			  target.forEach(function(o, i) {
+											// 			  	//console.log(i)
+											// 
+											// 			  	// three foci
+											// 			  	var yVal;
+											// 			  	if (i > ((network.nodes.length-1)/3)*2 )
+											// 			  		yVal = k;
+											// 			  	else if (i > (network.nodes.length-1)/3)
+											// 			  		yVal = 0;
+											// 			  	else 
+											// 			  		yVal = -k;
+											// 			  	o.y += yVal;
+											// 			  });
+											// 	      node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+											// 	    });
+				
+			}
+			force
+			      .nodes(network.nodes)
+			      .links(network.links)
+			      .start();
 	        
 	}
 	// function SortByEnvironmental_Performance_Index(a,b)
