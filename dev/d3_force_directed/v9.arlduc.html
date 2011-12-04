@@ -558,42 +558,42 @@
 					.filter(function(d, j	) {  return d === p; });
 						
 				   	  details.append("svg:text")
-				    	          .attr("y", 100)
-				    	          .attr("x", 100)
+				    	          .attr("y", 40)
+				    	          .attr("x", 840)
 									.style("font", "24px sans-serif")
-				    	          .attr("text-anchor", "left")
+				    	          .attr("text-anchor", "right")
 				    	          .style("fill", "#000")
 				    	          .text(p.Country);
 				//epi
 				  	 details.insert("svg:text")
-				    	          .attr("y", 130)
-				    	          .attr("x", 100)
+				    	          .attr("y", 70)
+				    	          .attr("x", 20)
 				    	          	.style("font", "20px sans-serif")
-				    	          .attr("text-anchor", "left")
+				    	          .attr("text-anchor", "right")
 				    	          .style("fill", "#000")
-				    	          .text(function(d) {return "Environmental Performance Index: "+ d.Environmental_Performance_Index});
+				    	          .text(function(d) {return "EPI: "+ d.Environmental_Performance_Index});
 				//ihdi
 				  	 details.insert("svg:text")
-				    	          .attr("y", 160)
-				    	          .attr("x", 100)
+				    	          .attr("y", 100)
+				    	          .attr("x", 20)
 				    	          .style("font", "20px sans-serif")
-				    	          .attr("text-anchor", "left")
+				    	          .attr("text-anchor", "right")
 				    	          .style("fill", "#000")
 				    	          .text(function(d) {return "IHDI: "+ d.IHDI_Inequality_adjusted_HDI_value});
 				//GII 
 				  	 details.insert("svg:text")
-				    	          .attr("y", 190)
-				    	          .attr("x", 100)
+				    	          .attr("y", 130)
+				    	          .attr("x", 20)
 				    	          .style("font", "20px sans-serif")
-				    	          .attr("text-anchor", "left")
+				    	          .attr("text-anchor", "right")
 				    	          .style("fill", "#000")
 				    	          .text(function(d) {return "GII: "+  d.GII_Gender_Inequality_Index_value});
 				//GNI
 					 details.insert("svg:text")
-				  	          .attr("y", 220)
-				  	          .attr("x", 100)
+				  	          .attr("y", 160)
+				  	          .attr("x", 20)
 				  	          .style("font", "20px sans-serif")
-				  	          .attr("text-anchor", "left")
+				  	          .attr("text-anchor", "right")
 				  	          .style("fill", "#000")
 				  	          .text(function(d) {return "GNI: "+ d.GNI_Gross_National_Income});
 			//console.log(details);
