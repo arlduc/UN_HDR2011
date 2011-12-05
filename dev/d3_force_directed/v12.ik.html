@@ -507,7 +507,7 @@
 			//.filter(function(d, j	) {  return d === getNetworkNodeWithid((p.index)-1)});//d === pr; })
 			.classed("myclass", true)
 			.attr("stroke", "black")
-			.attr("stroke-width",6)
+ .attr("stroke-width", function(d) { var returnValue =0; returnValue = ( (100-Number(d.Overall_loss_percent))%10); return  returnValue; })
 			.attr("stroke-opacity", 1)
 				.transition().duration(500)
 					.style("fill", function(d){return node_colors(d["continent_region"])});
@@ -637,7 +637,7 @@
 				// .attr("stroke", "white")
 				// .style("fill", function(d){return node_colors(d["continent_region"])})
 		          .attr("stroke", "black")
-				.attr("stroke-opacity", 1)
+				  .attr("stroke-opacity", 1)
 		          .attr("stroke-width", function(d) { var returnValue =0; returnValue = ( (100-Number(d.Overall_loss_percent))%10); return  returnValue; })   
 		          .style("fill", function(d) { 
 		                      return node_colors(d["continent_region"])
