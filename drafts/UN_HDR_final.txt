@@ -1,0 +1,23 @@
+Some of the world's most pressing problems can be traced to inequity between people, both in the present and over time. Long periods of inequity can lead to both social and environmental degradation. In its 2011 Human Development Report (HDR), the United Nations incisively examines some of the complex relationships between socioeconomic equity and environmental sustainability. This visualization, by members of the MIT Media Lab and The DuKode Studio, organizes some of the HDR’s summative indicators into network graphs to show how nations are multi-dimensionally linked.
+
+Node Size: 
+Inequality-Adjusted Human Development Index (inner circle) 
+Human Development Index (outer circle)
+
+Link Color: 
+2011 Inequality-Adjusted Human Development Index (IHDI)
+2010 Environmental Performance Index (EPI)
+2011 Gender Inequality Index (GII)
+2011 Gross National Income (GNI)
+ 
+Node Color: 
+Americas | Europe | Asia | Africa | Australia
+
+Node arrangement: based on the sum of checked indicators. 
+
+Rollovers: A Nation-Node's neighbors are shown for checked indicators. 
+
+Thick outlines = smaller larger value
+Thin outlines = next larger value
+
+DATA NOTE: countries with 1 or fewer data values are not visualized.
