@@ -27,20 +27,26 @@
 
 	</style>
 </head>
-<body leftmargin="30">
+<body leftmargin="20">
 	<script type="text/javascript" src="../fonts/cufon_ie9.js"></script>
 	<script type="text/javascript" src="../fonts/Petita_500-Petita_500.font.js"></script>
 	<script type="text/javascript">
 	    Cufon.replace('body', { fontFamily: 'Petita' });
 	</script>
-	<object data="../../drafts/Header03.svg" width="1200" height="70" type="image/svg+xml"></object><br>
 	
-	<input padding="5" type="checkbox" name="indices" id="EPI" value="Environmental_Performance_Index" onClick="">Environmental Performance Index <br>
-    <input margin="5" type="checkbox" name="indices" id="IHDI" value="IHDI: Inequality-adjusted HDI value">Inequality-adjusted Human Development Index <br> 
-    <input margin="5" type="checkbox" name="indices" id="GII" value="GII: Gender Inequality Index, value">Gender Inequality Index <br>
-    <input margin="5" type="checkbox" name="indices" id="GNI" value="GNI: Gross National Income">Gross National Income<br>  	
+	<table border="0" width="960px">
+	<tr><object data="../../drafts/Header03.svg" width="1200" height="85" type="image/svg+xml"></object><br></tr>
 	
+	<tr>
+	<td><input type="checkbox" name="indices" id="EPI" value="Environmental_Performance_Index" onClick=""/>Environmental Performance Index (EPI)</td>
+    <td><input type="checkbox" name="indices" id="IHDI" value="IHDI: Inequality-adjusted HDI value"/>Inequality-adjusted Human Development Index (IHDI) </td> 
+    <td><input type="checkbox" name="indices" id="GII" value="GII: Gender Inequality Index, value"/>Gender Inequality Index (GII)</td>
+   	<td><input type="checkbox" name="indices" id="GNI" value="GNI: Gross National Income"/>Gross National Income	(GNI)</td>
+	</tr>
+	</table><br>
 	
+	<table>
+	<tr>
 	<div id="network"></div>
 	<script type="text/javascript" src="../jquery/jquery-1.7.1.js"></script>
 	<script type="text/javascript" src="../d3/d3.js"></script>
@@ -957,6 +963,8 @@
 	
 	</script>
 	
-	<object data="../../drafts/Footer01.svg" width="1200" height="300" type="image/svg+xml"></object>
+	</tr>
+	<tr><object data="../../drafts/Footer01.svg" width="1200" height="300" type="image/svg+xml"></object></tr>
+	</table>
 </body>
 </html>
