@@ -4,7 +4,7 @@
 	<title>UN HDR Challenge :: Network V12 </title>
 	<style>
 	*, body {
-		font: 10px sans-serif;
+		font: 12px sans-serif;
 	}
 	p {
 		margin: 0;
@@ -22,23 +22,23 @@
 	#network {
 		box-shadow: 0 0 5px #888;
 		float: left;
+		page-break-after:always
 	}
+
 	</style>
 </head>
-<body>
-	<div id="key">
-		<h1>KEY</h1>
-		<h2>Links</h2>
-		<p><span style="color:rgba(30, 120, 180, 0.8)">Blue</span>: Environmental Performance Index</p>
-		<p><span style="color:rgba(255, 127, 14, 0.8)">Orange</span>: IHDI: Inequality-adjusted HDI value</p>
-		<p><span style="color:rgba(44, 160, 44, 0.8)">Green</span>: GII: Gender Inequality Index, value</p>
-		<p><span style="color:rgba(213, 39, 40, 0.8)">Red</span>: GNI: Gross National Income</p>
-	</div>
+<body leftmargin="30">
+	<script type="text/javascript" src="../fonts/cufon_ie9.js"></script>
+	<script type="text/javascript" src="../fonts/Petita_500-Petita_500.font.js"></script>
+	<script type="text/javascript">
+	    Cufon.replace('body', { fontFamily: 'Petita' });
+	</script>
+	<object data="../../drafts/Header03.svg" width="1200" height="70" type="image/svg+xml"></object><br>
 	
-	<input type="checkbox" name="indices" id="EPI" value="Environmental_Performance_Index" onClick="">Environmental Performance Index</p>
-    <input type="checkbox" name="indices" id="IHDI" value="IHDI: Inequality-adjusted HDI value">IHDI: Inequality-adjusted HDI value</p>
-    <input type="checkbox" name="indices" id="GII" value="GII: Gender Inequality Index, value">GII: Gender Inequality Index, value</p>
-    <input type="checkbox" name="indices" id="GNI" value="GNI: Gross National Income">GNI: Gross National Income</p>  	
+	<input padding="5" type="checkbox" name="indices" id="EPI" value="Environmental_Performance_Index" onClick="">Environmental Performance Index <br>
+    <input margin="5" type="checkbox" name="indices" id="IHDI" value="IHDI: Inequality-adjusted HDI value">Inequality-adjusted Human Development Index <br> 
+    <input margin="5" type="checkbox" name="indices" id="GII" value="GII: Gender Inequality Index, value">Gender Inequality Index <br>
+    <input margin="5" type="checkbox" name="indices" id="GNI" value="GNI: Gross National Income">Gross National Income<br>  	
 	
 	
 	<div id="network"></div>
@@ -177,7 +177,7 @@
      { return a.SUM - b.SUM; } 
 	var selected_indices = [];
 	var links =[];
-	var node_colors = d3.scale.ordinal().domain(["Africa","Americas","Asia","Europe","Oceania"]).range(["skyblue", "darkseagreen", "crimson", "gainsboro", "honeydew"]);
+	var node_colors = d3.scale.ordinal().domain(["Africa","Americas","Asia","Europe","Oceania"]).range(["salmon", "orange", "yellow", "tan", "honeydew"]);
 	var $checkboxes = $('input:checkbox[name=indices]');
 	$checkboxes.change(function(){
 		
@@ -595,43 +595,87 @@
 					.filter(function(d, j	) {  return d === p; });
 						
 				   	  details.append("svg:text")
-				    	          .attr("y", 100)
-				    	          .attr("x", 100)
-									.style("font", "24px sans-serif")
-				    	          .attr("text-anchor", "left")
-				    	          .style("fill", "#000")
+				    	          .attr("y", 30)
+				    	          .attr("x", 983)
+									.style("font", "20px sans-serif")
+									.attr("text-anchor", "end")
+				    	          .style("fill", "#555s")
 				    	          .text(p.Country);
 				//epi
 				  	 details.insert("svg:text")
-				    	          .attr("y", 130)
-				    	          .attr("x", 100)
-				    	          	.style("font", "20px sans-serif")
-				    	          .attr("text-anchor", "left")
-				    	          .style("fill", "#000")
-				    	          .text(function(d) {return "Environmental Performance Index: "+ d.Environmental_Performance_Index});
+				    	          .attr("y", 55)
+				    	          .attr("x", 983)
+									.style("font", "10px sans-serif")
+									.attr("text-anchor", "end")
+				    	          .style("fill", "#555s")
+				    	          .text(function(d) {return "EPI: "+ d.Environmental_Performance_Index});
 				//ihdi
 				  	 details.insert("svg:text")
-				    	          .attr("y", 160)
-				    	          .attr("x", 100)
-				    	          .style("font", "20px sans-serif")
-				    	          .attr("text-anchor", "left")
+				    	          .attr("y", 70)
+				    	          .attr("x", 983)
+									.style("font", "10px sans-serif")
+									.attr("text-anchor", "end")
+				    	          .style("fill", "#555s")
 				    	          .style("fill", "#000")
 				    	          .text(function(d) {return "IHDI: "+ d.IHDI_Inequality_adjusted_HDI_value});
 				//GII 
 				  	 details.insert("svg:text")
-				    	          .attr("y", 190)
-				    	          .attr("x", 100)
-				    	          .style("font", "20px sans-serif")
-				    	          .attr("text-anchor", "left")
-				    	          .style("fill", "#000")
+				    	          .attr("y", 85)
+				    	          .attr("x", 983)
+									.style("font", "10px sans-serif")
+									.attr("text-anchor", "end")
+				    	          .style("fill", "#555s")
 				    	          .text(function(d) {return "GII: "+  d.GII_Gender_Inequality_Index_value});
 				//GNI
 					 details.insert("svg:text")
-				  	          .attr("y", 220)
-				  	          .attr("x", 100)
-				  	          .style("font", "20px sans-serif")
-				  	          .attr("text-anchor", "left")
-				  	          .style("fill", "#000")
+				  	          .attr("y", 100)
+				  	          .attr("x", 983)
+									.style("font", "10	px sans-serif")
+									.attr("text-anchor", "end")
+				    	          .style("fill", "#555s")
+				  	          .text(function(d) {return "GNI: "+ d.GNI_Gross_National_Income});
+			//console.log(details);
+			
+					//lower rollover
+					details.append("svg:text")
+				    	          .attr("y", 1067)
+				    	          .attr("x", 983)
+									.style("font", "20px sans-serif")
+									.attr("text-anchor", "end")
+				    	          .style("fill", "#555s")
+				    	          .text(p.Country);
+				//epi
+				  	 details.insert("svg:text")
+				    	          .attr("y", 1092)
+				    	          .attr("x", 983)
+									.style("font", "10px sans-serif")
+									.attr("text-anchor", "end")
+				    	          .style("fill", "#555s")
+				    	          .text(function(d) {return "EPI: "+ d.Environmental_Performance_Index});
+				//ihdi
+				  	 details.insert("svg:text")
+				    	          .attr("y", 1107)
+				    	          .attr("x", 983)
+									.style("font", "10px sans-serif")
+									.attr("text-anchor", "end")
+				    	          .style("fill", "#555s")
+				    	          .style("fill", "#000")
+				    	          .text(function(d) {return "IHDI: "+ d.IHDI_Inequality_adjusted_HDI_value});
+				//GII 
+				  	 details.insert("svg:text")
+				    	          .attr("y", 1122)
+				    	          .attr("x", 983)
+									.style("font", "10px sans-serif")
+									.attr("text-anchor", "end")
+				    	          .style("fill", "#555s")
+				    	          .text(function(d) {return "GII: "+  d.GII_Gender_Inequality_Index_value});
+				//GNI
+					 details.insert("svg:text")
+				  	          .attr("y", 1137)
+				  	          .attr("x", 983)
+									.style("font", "10	px sans-serif")
+									.attr("text-anchor", "end")
+				    	          .style("fill", "#555s")
 				  	          .text(function(d) {return "GNI: "+ d.GNI_Gross_National_Income});
 			//console.log(details);
 	
@@ -927,5 +971,7 @@
 
 	
 	</script>
+	
+	<object data="../../drafts/Footer01.svg" width="1200" height="300" type="image/svg+xml"></object>
 </body>
 </html>
