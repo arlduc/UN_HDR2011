@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>UN HDR Challenge :: Network V7 </title>
+	<title>UN HDR Challenge :: Network V12 </title>
 	<style>
 	*, body {
 		font: 10px sans-serif;
@@ -323,12 +323,13 @@
   	
     
 	// Convert data CSV to array
-		d3.csv("../../CSV/MIT_DuKode_Dataset06.csv", function(csv){
+		d3.csv("../../CSV/MIT_DuKode_Dataset07.csv", function(csv){
 		
 		// Set networks nodes to CSV returned array
 		network["nodes"] = csv;
 		// console.log(network);
 		// Need to get min and max for normalizing in links function
+		hdi_min_max = get_min_max(network["nodes"], "HDI");
 		epi_min_max = get_min_max(network["nodes"], "Environmental_Performance_Index")
 		ihdi_min_max = get_min_max(network["nodes"], "IHDI_Inequality_adjusted_HDI_value")
 		gii_min_max = get_min_max(network["nodes"], "GII_Gender_Inequality_Index_value")
@@ -643,30 +644,25 @@
 			//console.log(detailsText);
 				
 		});
+
+		node.append("svg:circle")
+          .attr("stroke", "white")
+          .attr("stroke-width", 1)   
+          .style("fill", "black")
+        //node radious
+        .attr("r", function(d) { var returnValue =0; returnValue = ((d.HDI*10)+(Number(d.Overall_loss_percent))); return  returnValue; });
 	
         //circle
           node.append("svg:circle")
           .attr("stroke", "white")
           .attr("stroke-width", 1)   
           .style("fill", function(d) { 
-                      /*
-                      var red; if(d.IHDI_Inequality_adjusted_HDI_value=="..")red = -1; else red = 255-(parseInt(d.IHDI_Inequality_adjusted_HDI_value*100)%255)+0; 
-                      var green; //green = 125;//
-                      if(d.IHDI_Inequality_adjusted_HDI_value=="..")green = -1; else green = 255-(parseInt(d.IHDI_Inequality_adjusted_HDI_value*100)%255)+0; 
-                      var blue = 0; 
-                      var missingdata; 
-                      if (red == -1 || green == -1 ){ red = 50; green = 50; blue = 50;} 
-                      var value = "rgba(" + red +","+ green + "," + blue + ",255)"; 
-                      //console.log(value); 
-                      return value; 
-                      */
                       return node_colors(d["continent_region"])
         })
         //node radious
-        .attr("r", function(d) { var returnValue =0; if(d.Overall_loss_percent=="..") returnValue=5; else returnValue = (d.Overall_loss_percent); return  returnValue; });
-        //.attr("r", 10); 
-      
-  	    
+        .attr("r", function(d) { var returnValue =0; returnValue = (d.HDI*10); return  returnValue; });
+
+	
       
            node.append("svg:text")
      	    .attr("class", "nodetext")
