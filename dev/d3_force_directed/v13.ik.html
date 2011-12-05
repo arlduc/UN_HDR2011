@@ -28,13 +28,11 @@
 	#checkboxes{
 		float:left;
 		 position:relative;
-		 top:-1130px;
-		 left:40px;
-
-
+		 top:100px;
+		 left:0px;
 	}
 	#wrap {
-		width:1200px;
+		width:1300px;
 		margin:0 auto;
 	}
 	#header {
@@ -97,6 +95,15 @@
 	<script type="text/javascript">
 	    Cufon.replace('body', { fontFamily: 'Petita' });
 	</script><br>
+   	<div id="checkboxes">
+	  <input padding="5" type="checkbox" name="indices" id="EPI" value="Environmental_Performance_Index" onClick=""> Environmental Performance Index <br>
+	  <input margin="5" type="checkbox" name="indices" id="IHDI" value="IHDI: Inequality-adjusted HDI value">Inequality-adjusted Human Development Index <br>
+	  <input margin="5" type="checkbox" name="indices" id="GII" value="GII: Gender Inequality Index, value">Gender Inequality Index <br>
+	  <input margin="5" type="checkbox" name="indices" id="GNI" value="GNI: Gross National Income">Gross National Income<br>
+ 	</div>
+
+   </div>
+
 	<div id="network"></div>
 	<script type="text/javascript" src="../jquery/jquery-1.7.1.js"></script>
 	<script type="text/javascript" src="../d3/d3.js"></script>
@@ -348,7 +355,7 @@
 	/* global variables*/ 
 	
 	// All code here from: http://bl.ocks.org/950642
-	var w = 960,
+	var w = 1000,
 	  h = 1150;
 	var vis;
     var force;
@@ -1027,17 +1034,7 @@
 
 	
 	</script>
-	<div id="checkboxes">
-	  <input padding="5" type="checkbox" name="indices" id="EPI" value="Environmental_Performance_Index" onClick="">
-	  Environmental Performance Index <br>
-	  <input margin="5" type="checkbox" name="IHDI" id="IHDI" value="IHDI: Inequality-adjusted HDI value">
-	  Inequality-adjusted Human Development Index <br>
-	  <input margin="5" type="checkbox" name="GII" id="GII" value="GII: Gender Inequality Index, value">
-	  Gender Inequality Index <br>
-	  <input margin="5" type="checkbox" name="GNI" id="GNI" value="GNI: Gross National Income">
-	  Gross National Income<br>
-     </div>
-   </div>
+
    5. <div id="sidebar">
      <p>Some of the world's most pressing problems can be traced to inequity between people, both in the present and over time. Long periods of inequity can lead to both social and environmental degradation. In its 2011 Human Development Report (HDR), the United Nations incisively examines some of the complex relationships between socioeconomic equity and environmental sustainability. This visualization, by members of the MIT Media Lab and The DuKode Studio, organizes some of the HDR’s summative indicators into network graphs to show how nations are multi-dimensionally linked within these relationships. </p>
      <p><br>
