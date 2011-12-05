@@ -222,6 +222,8 @@
 					links.push(link);
 					}
 					network["links"] = network["links"].concat(links);
+		
+	
 			 }
 		 	if(i.id == "IHDI"){
 					links =[];
@@ -438,30 +440,48 @@
          	.style("fill", function(d) { return (d.color); }) 
 			.call(force.drag);
 			
-		node.on("click", function(p,j){	   
-			force = self.force = d3.layout.force()
-			        //.nodes(network.nodes)
-			        .links(network.links)
-					.friction(.95)
-					.charge(-100)
-				    .gravity(.065)
-				    .size([w, h])
-					.start();
+		node.on("click", function(p,j){		
+			  
+				force = self.force = d3.layout.force()
+					//	.nodes(network.nodes)
+				        .links(network.links)
+						//.linkDistance(function(links){ console.log(links); var value= (links.source.index-links.target.index)*3+150; return (value); })
+						.linkDistance(50)
+						.theta(0.01)
+						//.linkStrength(.6) 
+						.friction(0)
+						.charge(-1000)
+					    .gravity(.065)
+					    .size([w, h])
+						.start()
+						//.call(force.drag);
+			// force = self.force = d3.layout.force()
+			// 	//	.data(network.nodes)
+			//         .links(network.links)
+			// 		.friction(.05)
+			// 		.charge(-100)
+			// 	    .gravity(.065)
+			// 	    .size([w, h])
+			// 		.start();
 		})
 		//node mouse related events 
 		 node.on("mouseover", function(p, j) {
 				
-					
 			//clear scene
 			vis.selectAll("circle")
 			  .attr("stroke", "white")
-		   	  .attr("stroke-width", 3);
+		   	  .attr("stroke-width", 3)
+							.transition().duration(500)
+							.style("fill", "lightgrey")
+							
 			var selected = vis.selectAll("circle")
 			.filter(function(d, j	) {  return d === p; })
 			//.filter(function(d, j	) {  return d === getNetworkNodeWithid((p.index)-1)});//d === pr; })
 			.classed("myclass", true)
 			.attr("stroke", "black")
-			.attr("stroke-width",6);
+			.attr("stroke-width",6)
+				.transition().duration(500)
+					.style("fill", function(d){return node_colors(d["continent_region"])});
 						
 			//annotate -1 index
 			if(selected_indices.length>=1){
@@ -474,44 +494,60 @@
 						.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByEPI(p.index);})//d === pr; })
 						.attr("stroke", nodeOutlinecolor(1))
 						.attr("stroke-width",8)
+						.transition().duration(500)
+						.style("fill", function(d){return node_colors(d["continent_region"])})
 						//annotate +1 index 
 						var selected = vis.selectAll("circle")
 						.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByEPI(p.index);})//d === pr; })
 						.attr("stroke", nodeOutlinecolor(1))
 						.attr("stroke-width",4)
+						.transition().duration(500)
+						.style("fill", function(d){return node_colors(d["continent_region"])})
 					}
 					if(i.id == "IHDI"){
 						var selected = vis.selectAll("circle")
 						.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByIHDI(p.index)})//d === pr; })
 						.attr("stroke", nodeOutlinecolor(2))
-						.attr("stroke-width",8);
+						.attr("stroke-width",8)
+						.transition().duration(500)
+						.style("fill", function(d){return node_colors(d["continent_region"])})
 						//annotate +1 index 
 						var selected = vis.selectAll("circle")
 						.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByIHDI(p.index)})//d === pr; })
 						.attr("stroke", nodeOutlinecolor(2))
-						.attr("stroke-width",4);
+						.attr("stroke-width",4)
+						.transition().duration(500)
+						.style("fill", function(d){return node_colors(d["continent_region"])})
 					}
 			 		if(i.id == "GII"){ 
 						var selected = vis.selectAll("circle")
 						.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByGII(p.index)})//d === pr; })
 						.attr("stroke", nodeOutlinecolor(3))
-						.attr("stroke-width",8);
+						.attr("stroke-width",8)
+						.transition().duration(500)
+						.style("fill", function(d){return node_colors(d["continent_region"])})
 						//annotate +1 index 
 						var selected = vis.selectAll("circle")
 						.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByGII(p.index)})//d === pr; })
 						.attr("stroke", nodeOutlinecolor(3))
-						.attr("stroke-width",4);
+						.attr("stroke-width",4)
+						.transition().duration(500)
+						.style("fill", function(d){return node_colors(d["continent_region"])})
 					}
 				 	if(i.id == "GNI"){ 
 						var selected = vis.selectAll("circle")
 						.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByGNI(p.index)})//d === pr; })
 						.attr("stroke", nodeOutlinecolor(4))
-						.attr("stroke-width",8);
+						.attr("stroke-width",8)
+						.transition().duration(500)
+						.style("fill", function(d){return node_colors(d["continent_region"])})
 						//annotate +1 index 
 						var selected = vis.selectAll("circle")
 						.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByGNI((p.index))})//d === pr; })
 						.attr("stroke", nodeOutlinecolor(4))
-						.attr("stroke-width",4);
+						.attr("stroke-width",4)
+						.transition().duration(500)
+						.style("fill", function(d){return node_colors(d["continent_region"])})
 				 	}
 	 			});
 				}
@@ -524,40 +560,40 @@
 				   	  details.append("svg:text")
 				    	          .attr("y", 100)
 				    	          .attr("x", 100)
-				    	          //.attr("transform", "rotate(180)")
-				    	          .attr("text-anchor", "middle")
+									.style("font", "24px sans-serif")
+				    	          .attr("text-anchor", "left")
 				    	          .style("fill", "#000")
 				    	          .text(p.Country);
 				//epi
 				  	 details.insert("svg:text")
-				    	          .attr("y", 120)
+				    	          .attr("y", 130)
 				    	          .attr("x", 100)
-				    	          //.attr("transform", "rotate(180)")
-				    	          .attr("text-anchor", "middle")
+				    	          	.style("font", "20px sans-serif")
+				    	          .attr("text-anchor", "left")
 				    	          .style("fill", "#000")
-				    	          .text(function(d) {return "EPI: "+ d.Environmental_Performance_Index});
+				    	          .text(function(d) {return "Environmental Performance Index: "+ d.Environmental_Performance_Index});
 				//ihdi
 				  	 details.insert("svg:text")
-				    	          .attr("y", 140)
+				    	          .attr("y", 160)
 				    	          .attr("x", 100)
-				    	          //.attr("transform", "rotate(180)")
-				    	          .attr("text-anchor", "middle")
+				    	          .style("font", "20px sans-serif")
+				    	          .attr("text-anchor", "left")
 				    	          .style("fill", "#000")
 				    	          .text(function(d) {return "IHDI: "+ d.IHDI_Inequality_adjusted_HDI_value});
 				//GII 
 				  	 details.insert("svg:text")
-				    	          .attr("y", 160)
+				    	          .attr("y", 190)
 				    	          .attr("x", 100)
-				    	          //.attr("transform", "rotate(180)")
-				    	          .attr("text-anchor", "middle")
+				    	          .style("font", "20px sans-serif")
+				    	          .attr("text-anchor", "left")
 				    	          .style("fill", "#000")
 				    	          .text(function(d) {return "GII: "+  d.GII_Gender_Inequality_Index_value});
 				//GNI
 					 details.insert("svg:text")
-				  	          .attr("y", 180)
+				  	          .attr("y", 220)
 				  	          .attr("x", 100)
-				  	          //.attr("transform", "rotate(180)")
-				  	          .attr("text-anchor", "middle")
+				  	          .style("font", "20px sans-serif")
+				  	          .attr("text-anchor", "left")
 				  	          .style("fill", "#000")
 				  	          .text(function(d) {return "GNI: "+ d.GNI_Gross_National_Income});
 			//console.log(details);
@@ -567,11 +603,14 @@
 
 
 		node.on("mouseout", function(p, j) {
-			// vis.selectAll("line")
-			// 			.filter(function(d, j	) { if(d==p) p.remove();	return d === p; });
+			d3.selectAll("circle")
+				.transition().duration(500)
+				.attr("stroke", "white")
+				.style("fill", function(d){return node_colors(d["continent_region"])})
+				
+				
 			vis.selectAll("line").remove();
-			//var selected = vis.selectAll("text");
-
+			
 			details.remove();
 			update_network(network);
 			
@@ -613,161 +652,35 @@
      	    .text(function(d) { return d.Country });
 			
 
-	    force.on("tick", function(e) {
-	      link.attr("x1", function(d) { return d.source.x; })
-	          .attr("y1", function(d) { return d.source.y; })
-	          .attr("x2", function(d) { return d.target.x; })
-	          .attr("y2", function(d) { return d.target.y; });
-			  
-			  // Push different nodes in different directions for clustering.
-			  var k = .05 * e.alpha;
-			  // DEBUG 
-	  		  //console.log(e.alpha)
-				 // network.nodes.forEach(function(o, i) {
-				 //  	// three foci
-				 //  	var yVal;
-				 //  	if (i > ((network.nodes.length-1)/3)*2 )
-				 //  		yVal = k;
-				 //  	else if (i > (network.nodes.length-1)/3)
-				 //  		yVal = 0;
-				 //  	else 
-				 //  		yVal = -k;
-				 // 
-				 //  	o.y += yVal;
-				 //  });
-		//sort target by Epi. 
-			var target = [];
-							links =[];
-								target = network["nodes"];	
-							target.sort(SortByOverall_loss_percent);
-							 target.forEach(function(o, i) {
-								 var xVal;
-							  	if (i > ((target.length-1)/3)*2 )
-							  	{//	xVal = k;
-									yVal = -k-(i%10/100);
-							  	}else if (i > (target.length-1)/3)
-							  	{
-									//	xVal = 0;
-									yVal = 0; 
-							  	}else 
-							  	{//	xVal = -k;
-									yVal = k+(i%10/100);
-								}
-							//	o.x +=xVal; 
-								o.y +=yVal; 
-							  });
+			    force.on("tick", function(e) {
+			      link.attr("x1", function(d) { return d.source.x; })
+			          .attr("y1", function(d) { return d.source.y; })
+			          .attr("x2", function(d) { return d.target.x; })
+			          .attr("y2", function(d) { return d.target.y; });
+
+					  // Push different nodes in different directions for clustering.
+					  var k = 5.5 * e.alpha;
+					  // DEBUG 
+			  		  //console.log(e.alpha)
+
+					  network.nodes.forEach(function(o, i) {
+					  	//console.log(i)
+
+					  	// three foci
+					  	var yVal;
+					  	if (i > ((network.nodes.length-1)/3)*2 )
+					  		yVal = k;
+					  	else if (i > (network.nodes.length-1)/3)
+					  		yVal = 0;
+					  	else 
+					  		yVal = -k;
+					  	o.y += yVal;
+					  });
 
 
+			      node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+			    });
 
-				
-					if(selected_indices.length>=1){
-					 selected_indices.each(function(index, i){
-
-							// console.log(index +" "+ i.id );
-							var target = network["nodes"];
-							if(i.id == "EPI"){ 
-								var target = [];
-								links =[];
-									target = network["nodes"];	
-								target.sort(SortByEnvironmental_Performance_Index);
-								 target.forEach(function(o, i) {
-									 var xVal;
-								  	if (i > ((target.length-1)/3)*2 )
-								  	{	xVal = k;
-										yVal = -k;
-								  	}else if (i > (target.length-1)/3)
-								  	{	xVal = 0;
-								  	}else 
-								  	{	xVal = -k;
-										yVal = k;
-									}
-									o.x +=xVal; 
-									o.y +=yVal; 
-								  });
-							}
-							if(i.id == "IHDI"){
-									var target = [];
-									links =[];
-										target = network["nodes"];	
-									target.sort(SortByIHDI_Inequality_adjusted_HDI_value);
-									  target.forEach(function(o, i) {
-										 var xVal;
-									  	if (i > ((target.length-1)/3)*2 )
-									  	{	xVal = k;
-											yVal = -k;
-									  	}else if (i > (target.length-1)/3)
-									  	{	xVal = 0;
-									  	}else 
-									  	{	xVal = -k;
-											yVal = k;
-										}
-										o.x +=xVal; 
-										o.y +=yVal; 
-									  });
-							}
-					 		if(i.id == "GII"){ 
-									var target = [];
-									links =[];
-										target = network["nodes"];	
-									target.sort(SortByGII_Gender_Inequality_Index_value);
-									  target.forEach(function(o, i) {
-										 var xVal;
-									  	if (i > ((target.length-1)/3)*2 )
-									  	{	xVal = k;
-											yVal = -k;
-									  	}else if (i > (target.length-1)/3)
-									  	{	xVal = 0;
-									  	}else 
-									  	{	xVal = -k;
-											yVal = k;
-										}
-										o.x +=xVal; 
-										o.y +=yVal; 
-									  });
-							}
-						 	if(i.id == "GNI"){ 
-									var target = [];
-									links =[];
-										target = network["nodes"];	
-									target.sort(SortByGNI_Gross_National_Income);
-									  target.forEach(function(o, i) {
-										 var xVal;
-									  	if (i > ((target.length-1)/3)*2 )
-									  	{	xVal = k;
-											yVal = -k;
-									  	}else if (i > (target.length-1)/3)
-									  	{	xVal = 0;
-									  	}else 
-									  	{	xVal = -k;
-											yVal = k;
-										}
-										o.x +=xVal; 
-										o.y +=yVal; 
-									  });
-						 	}
-			 			});
-			}
-						// var target = [];
-						// 					links =[];
-						// 						target = network["nodes"];	
-						// 					target.sort(SortByOverall_loss_percent);
-						// 					  network.nodes.forEach(function(o, i) {
-						// 						 var xVal;
-						// 					  	if (i > ((network.nodes.length-1)/3)*2 )
-						// 					  	{	xVal = k;
-						// 							yVal = -k;
-						// 					  	}else if (i > (network.nodes.length-1)/3)
-						// 					  	{	xVal = 0;
-						// 					  	}else 
-						// 					  	{	xVal = -k;
-						// 							yVal = k;
-						// 						}
-						// 						o.x +=xVal; 
-						// 						o.y +=yVal; 
-						// 					  });
-						
-	      node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
-	    });
 	}
 	// function SortByEnvironmental_Performance_Index(a,b)
 	//      { return a.Environmental_Performance_Index - b.Environmental_Performance_Index; }
