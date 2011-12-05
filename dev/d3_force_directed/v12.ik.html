@@ -630,10 +630,16 @@
 		node.on("mouseout", function(p, j) {
 			d3.selectAll("circle")
 				.transition().duration(500)
-				.attr("stroke", "white")
-				.style("fill", function(d){return node_colors(d["continent_region"])})
-				
-				
+				// .attr("stroke", "white")
+				// .style("fill", function(d){return node_colors(d["continent_region"])})
+		          .attr("stroke", "black")
+		          .attr("stroke-width", function(d) { var returnValue =0; returnValue = ( (100-Number(d.Overall_loss_percent))%10); return  returnValue; })   
+		          .style("fill", function(d) { 
+		                      return node_colors(d["continent_region"])
+		        })
+		        //node radious
+		        .attr("r", function(d) { var returnValue =0; returnValue = (d.HDI*30); return  returnValue; });
+								
 			vis.selectAll("line").remove();
 			
 			details.remove();
@@ -645,23 +651,23 @@
 				
 		});
 
-		node.append("svg:circle")
-          .attr("stroke", "white")
-          .attr("stroke-width", 1)   
-          .style("fill", "black")
-        //node radious
-        .attr("r", function(d) { var returnValue =0; returnValue = ((d.HDI*10)+(Number(d.Overall_loss_percent))); return  returnValue; });
 	
         //circle
           node.append("svg:circle")
-          .attr("stroke", "white")
-          .attr("stroke-width", 1)   
+          .attr("stroke", "black")
+          .attr("stroke-width", function(d) { var returnValue =0; returnValue = ( (100-Number(d.Overall_loss_percent))%10); return  returnValue; })   
           .style("fill", function(d) { 
                       return node_colors(d["continent_region"])
         })
         //node radious
-        .attr("r", function(d) { var returnValue =0; returnValue = (d.HDI*10); return  returnValue; });
+        .attr("r", function(d) { var returnValue =0; returnValue = (d.HDI*30); return  returnValue; });
 
+		// node.append("svg:circle")
+		//           .attr("stroke", "white")
+		//           .attr("stroke-width", 1)   
+		//           .style("fill", "black")
+		//         //node radious
+		//         .attr("r", function(d) { var returnValue =0; returnValue = ((d.HDI*10)+(Number(d.Overall_loss_percent))); return  returnValue; });
 	
       
            node.append("svg:text")
