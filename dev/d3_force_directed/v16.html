@@ -23,18 +23,11 @@
 		letter-spacing: 3px;
 		text-shadow: 1px 1px 3px rgba(0,0,0, 0.3);
 	}
-	
-	sub{
-			font-size: 13px;
-			font-weight: 100;	
-	}
 	.key{
 		padding:0px 10px 0px 100px; 
 	}
 	#keytext {
-		//	color: #222;
-			font-size: 20px;
-			//font-weight: 100;
+			font-size: 19px;
 			letter-spacing: 3px;
 			text-shadow: 1px 1px 3px rgba(0,0,0, 0.3);
 	}
@@ -224,8 +217,11 @@
 			<h3>Key</h3>
 			<h2>Node Size:</h2> 
 			<div id="keytext">
-			<p>Inequality-Adjusted Human Development Index (inner circle) </p>
-			<p>Human Development Index (outer circle)</p>
+    	        <div id="country_name">
+                <p><img src="../img/innercircle.png" width="30" height="30"/> Inequality-Adjusted Human Development Index (inner circle) </p>
+               	</div>
+				<div>
+        	<p><img src="../img/outercircle.png" width="30" height="30"/> Human Development Index (outer circle)</p>
 			</div>
 			<h2>Link Color: </h2>
 			<div id="keytext">
@@ -241,16 +237,18 @@
 			
 			<p>Node arrangement: based on the sum of checked indicators. 
 
-			Rollovers: A Nation-Node's neighbors are shown for checked indicators. 
+			  <br>
+			  Rollovers: A Nation-Node's neighbors are shown for checked indicators. 
 
-			Thick outlines = smaller larger value
-			Thin outlines = next larger value
+			  <br>
+			  Thick outlines = smaller  value
+			  <br>
+			  Thin outlines =  larger value
 
-			DATA NOTE: countries with 1 or fewer data values are not visualized.
-			</p>
+			  <br>
+			  DATA NOTE: countries with 1 or fewer data values are not visualized. </p>
 		</div>
 		<br class="clear">
-	</footer>
 </div> <!--! end of #container -->
 
 <script type="text/javascript" src="../jquery/jquery-1.7.1.js"></script>
@@ -1181,6 +1179,5 @@ function update_force(){
 	<td align="center"><a href="http://dukode.com" target="_blank"><img src="../../logos/DuKodeLogo.v2.72dpi.small.png"></a></td>
 	<td align="center"><a href="http://media.mit.edu" target="_blank"><img src="../../logos/logoNew.png"></a></td>
 	<td align="center"><a href="http://media.mit.edu" target="_blank"><img src="../../logos/eco_logo.png"></a></td>
-</div>
 </body>
 </html>
