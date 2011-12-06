@@ -55,12 +55,10 @@
 			padding: 0 10px;
 		}
 		#main #buttons {
-/*			box-shadow: 1px 5px 5px #888;*/
 			background: rgba(255, 255, 255, 0.5);
 			width: 100%;
 		}
 		#main button {
-/*			border: solid 1px green;*/
 			font-size: 10px;
 			margin: 0;
 			text-align: left;
@@ -68,36 +66,38 @@
 		}
 		#main button:hover,
 		#main button.active { 
-			color: white;
+			color: white !important;
 			-moz-box-shadow:inset 0 0 10px #000000;
 			-webkit-box-shadow:inset 0 0 10px #000000;
 			box-shadow:inset 0 0 10px #000000;
 		}
-			#main .epi{
+			#main #EPI{
 				color: #232B59;
 				border-color: #232B59;
 			}
-			#main .epi:hover, #main .epi.active{ background-color: #232B59; }
-			#main .ihdi{
+			#main #EPI:hover { background-color: rgba(35,43,89, 0.75) !important;}
+			#main #EPI.active{ background-color: rgba(35,43,89, 1); }
+			#main #IHDI{
 				color: #93A608;
 				border-color: #93A608;
 			}
-			#main .ihdi:hover, #main .ihdi.active{ background-color: #93A608; }
-			#main .gii{
+			#main #IHDI:hover { background-color: rgba(147,166,8, 0.75) !important; }
+			#main #IHDI.active{ background-color: rgba(147,166,8, 1); }
+			#main #GII{
 				color: #B08402;
 				border-color: #B08402;
 			}
-			#main .gii:hover, #main .gii.active{ background-color: #B08402; }
-			#main .gni{
+			#main #GII:hover { background-color: rgba(176,132,2, 0.75) !important; }
+			#main #GII.active{ background-color: rgba(176,132,2, 1); }
+			#main #GNI{
 				color: #A63005;
 				border-color: #A63005;
 			}
-			#main .gni:hover, #main .gni.active{ background-color: #A63005; }
+			#main #GNI:hover { background-color: rgba(166,48,5, 0.75) !important; }
+			#main #GNI.active{ background-color: rgba(166,48,5, 1); }
 		#main #buttons p{
-/*			background: white;*/
 			font-size: 30px;
 			margin: 0;
-/*			text-align: center;*/
 		}
 		#main #network {
 			-moz-box-shadow:inset 0 0 10px #000000;
@@ -126,28 +126,14 @@
 	
 	button {
 		background-color: #efefef;
-/*		background-image: -moz-linear-gradient(top, rgba(255,255,255,.25), rgba(255,255,255,.11));
-		background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, rgba(255,255,255,.25)),color-stop(1, rgba(255,255,255,.11)));
-		background-image: -webkit-linear-gradient(rgba(255,255,255,.25), rgba(255,255,255,.11));
-*/		color: #fff;
+		color: #fff;
 		cursor: pointer;
 		text-rendering: optimizeLegibility;
 		text-shadow: 0 -1px 1px #555;
 		padding: 6px 10px 6px 10px;
 		border: 0;
 		border-radius: 0;
-/*		border-bottom: 1px solid #222;*/
 		margin: 0;
-/*		-moz-box-shadow: 0 1px 3px #999;*/
-/*		-webkit-box-shadow: 0 1px 3px #999;*/
-	}
-	button.first {
-/*		border-top-left-radius: 5px;*/
-/*		border-bottom-left-radius: 5px;*/
-	}
-	button.last {
-/*		border-top-right-radius: 5px;*/
-/*		border-bottom-right-radius: 5px;*/
 	}
 	</style>
 	
@@ -165,7 +151,7 @@
 			<h2>United States of America</h2>
 		</div>
 		<div id="buttons">
-			<button class="first epi">Environmental Performance Index<p>&nbsp;</p></button><button class="ihdi">Inequality-adjusted Human Development Index<p>&nbsp;</p></button><button class="gii">Gender Inequality Index<p>&nbsp;</p></button><button class="last gni">Gross National Income<p>&nbsp;</p></button>
+			<button id="EPI">Environmental Performance Index<p>&nbsp;</p></button><button id="IHDI">Inequality-adjusted Human Development Index<p>&nbsp;</p></button><button id="GII">Gender Inequality Index<p>&nbsp;</p></button><button id="GNI">Gross National Income<p>&nbsp;</p></button>
 		</div>
 		<div id="network"></div>
 	</div>
@@ -333,8 +319,9 @@ function SortByGNI_Gross_National_Income(a,b)
 var selected_indices = [];
 var links =[];
 var node_colors = d3.scale.ordinal().domain(["Africa","Americas","Asia","Europe","Oceania"]).range(["salmon", "orange", "yellow", "tan", "honeydew"]);
-var $checkboxes = $('input:checkbox[name=indices]');
-$checkboxes.change(function(){
+var checkboxes = $('#buttons button');
+checkboxes.click(function(){
+	
 	
 	/*d3.selectAll("circle").attr("r", function(d){
 		var this_val = 0;
@@ -362,10 +349,10 @@ $checkboxes.change(function(){
 	// Need to clear links array to empty
 	network["links"] = [];
 			
-    selected_indices = $("input:checkbox[name='indices']:checked");
+    selected_indices = $('#buttons button.active');
     selected_indices.each(function(index, i){
 	
-		// console.log(index +" "+ i.id );
+		console.log(index +": "+ i.id );
 		var target = network["nodes"];
 		if(i.id == "EPI"){ 
 				links =[];
@@ -802,10 +789,10 @@ function build_network(network){
 		
 		d3.select("#country_name h2").text(p.Country)
 		d3.select("#country_name img").attr("src", "../img/flags/flag_"+p.abbrv.toLowerCase()+".png")
-		d3.select("#buttons .epi p").text(p.Environmental_Performance_Index)
-		d3.select("#buttons .ihdi p").text(p.IHDI_Inequality_adjusted_HDI_value)
-		d3.select("#buttons .gii p").text(p.GII_Gender_Inequality_Index_value)
-		d3.select("#buttons .gni p").text("$"+d3.format(",")(p.GNI_Gross_National_Income))
+		d3.select("#buttons #EPI p").text(p.Environmental_Performance_Index)
+		d3.select("#buttons #IHDI p").text(p.IHDI_Inequality_adjusted_HDI_value)
+		d3.select("#buttons #GII p").text(p.GII_Gender_Inequality_Index_value)
+		d3.select("#buttons #GNI p").text("$"+d3.format(",")(p.GNI_Gross_National_Income))
 		
 
 	});
@@ -841,7 +828,7 @@ function build_network(network){
 
 function update_force(){
 	selected_indices = $("input:checkbox[name='indices']:checked");
-	console.log("selected_indices.length"+ selected_indices.length);
+	// console.log("selected_indices.length"+ selected_indices.length);
 
 	//force =0 ; 
 	var linkDistanceVar = 0; 
@@ -1015,7 +1002,7 @@ function update_force(){
 					
 	 	}
 		if(selected_indices.length== 0){
-				console.log("no indices selected");
+				// console.log("no indices selected");
 										// force 
 										//         .links(network.links)
 										// 		.linkStrength(.10) 
