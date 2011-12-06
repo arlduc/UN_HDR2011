@@ -8,7 +8,7 @@ Link Color:
 2011 Inequality-Adjusted Human Development Index (IHDI)
 2010 Environmental Performance Index (EPI)
 2011 Gender Inequality Index (GII)
-2011 Gross National Income (GNI)
+2011 Gross National Income (GNI) per capita
  
 Node Color: 
 Americas | Europe | Asia | Africa | Australia

@@ -1,0 +1,1081 @@
+<!doctype html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>Networks in Equity and Sustainability</title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link href='http://fonts.googleapis.com/css?family=Vidaloka' rel='stylesheet' type='text/css'>
+	<style>
+	body{
+		background:#efefef;
+		font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	}
+	.clear {
+		clear: both;
+	}
+	h1, h2, h3, h4 {
+		color: #222;
+		font-weight: 100;
+		letter-spacing: 3px;
+		text-shadow: 1px 1px 3px rgba(0,0,0, 0.3);
+	}
+
+	#container {
+		margin: 0 auto 80px auto;
+		width: 1100px;
+	}
+	header h1 {
+		font-size: 50px;
+		font-weight: 100;
+	}
+	header p,
+	footer p {
+		font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+		font-size: 13px;
+		letter-spacing: 0px;
+		font-weight:50px;
+		line-height:1.5em;
+	}
+	#main {
+		background: #efefef;
+/*		border: solid 2px black;*/
+	}
+		#main #country_name {
+			padding: 5px;
+		}
+		#main #country_name img{
+/*			float: left;*/
+			vertical-align: top;
+			width: 45px;
+		}
+		#main #country_name h2{
+			display: inline;
+			font-size: 24px;
+			line-height: 48px;
+			padding: 0 5px;
+		}
+		#main #buttons {
+/*			box-shadow: 1px 5px 5px #888;*/
+			background: rgba(255, 255, 255, 0.5);
+			width: 100%;
+		}
+		#main button {
+/*			border: solid 1px green;*/
+			font-size: 10px;
+			margin: 0;
+			text-align: left;
+			width: 25%;
+		}
+		#main button:hover,
+		#main button.active { 
+			color: white !important;
+			-moz-box-shadow:inset 0 0 10px #000000;
+			-webkit-box-shadow:inset 0 0 10px #000000;
+			box-shadow:inset 0 0 10px #000000;
+		}
+			#main #EPI{
+				color: #232B59;
+				border-color: #232B59;
+			}
+			#main #EPI:hover { background-color: rgba(35,43,89, 0.75) !important;}
+			#main #EPI.active{ background-color: rgba(35,43,89, 1); }
+			#main #IHDI{
+				color: #93A608;
+				border-color: #93A608;
+			}
+			#main #IHDI:hover { background-color: rgba(147,166,8, 0.75) !important; }
+			#main #IHDI.active{ background-color: rgba(147,166,8, 1); }
+			#main #GII{
+				color: #8301b0;
+				border-color: #8301b0;
+			}
+			#main #GII:hover { background-color: rgba(131,1,176, 0.75) !important; }
+			#main #GII.active{ background-color: rgba(131,1,176, 1); }
+			#main #GNI{
+				color: #6091a2;
+				border-color: #6091a2;
+			}
+			#main #GNI:hover { background-color: rgba(96,145,162, 0.75) !important; }
+			#main #GNI.active{ background-color: rgba(96,145,162, 1); }
+		#main #buttons p{
+			font-size: 20px;
+			margin: 0;
+		}
+		#main #network {
+			-moz-box-shadow:inset 0 0 10px #000000;
+			-webkit-box-shadow:inset 0 0 10px #000000;
+			box-shadow:inset 0 0 10px #000000;
+		}
+	footer h3 {
+		font-size: 28px;
+		margin: 20px 0 0 0;
+	}
+	footer p {
+		font-size: 14px;
+		line-height: 18px;
+	}
+	footer .desc {
+		float: left;
+		width: 45%;
+	}
+	footer .key {
+		float: left;
+		width: 45%;
+	}
+	
+	
+	
+	
+	button {
+		background-color: #efefef;
+		color: #fff;
+		cursor: pointer;
+		text-rendering: optimizeLegibility;
+		text-shadow: 0 -1px 1px #555;
+		padding: 6px 10px 6px 10px;
+		border: 0;
+		border-radius: 0;
+		margin: 0;
+	}
+	</style>
+	
+</head>
+<body>
+
+<div id="container">
+	<header>
+		<h1>Networks in Equity and Sustainability</h1>
+		<p>Some of the world's most pressing problems can be traced to inequity between people, both in the present and over time. Long periods of inequity can lead to both social and environmental degradation. In its 2011 Human Development Report (HDR), the United Nations incisively examines some of the complex relationships between socioeconomic equity and environmental sustainability. This visualization, by members of the MIT Media Lab and The DuKode Studio, organizes some of the HDR’s summative indicators into network graphs to show how nations are multi-dimensionally linked.
+</p>
+	</header>
+	<div id="main" role="main">
+		<div id="country_name">
+			<img src="../img/magnifying.png" />
+			<h2>Select A Country Below</h2>
+		</div>
+		<div id="buttons">
+			<button id="EPI">Environmental Performance Index<p>&nbsp;</p></button><button id="IHDI">Inequality-adjusted Human Development Index<p>&nbsp;</p></button><button id="GII">Gender Inequality Index<p>&nbsp;</p></button><button id="GNI">Gross National Income<p>&nbsp;</p></button>
+		</div>
+		<div id="network"></div>
+	</div>
+	<footer>
+		<div class="desc">
+			<h3>Description</h3>
+			<p>Some of the world's most pressing problems can be traced to inequity between people, both in the present and over time. Long periods of inequity can lead to both social and environmental degradation. In its 2011 Human Development Report (HDR), the United Nations incisively examines some of the complex relationships between socioeconomic equity and environmental sustainability. This visualization, by members of the MIT Media Lab and The DuKode Studio, organizes some of the HDR’s summative indicators into network graphs to show how nations are multi-dimensionally linked within these relationships.</p>
+		</div>
+		<div class="key">
+			<h3>Key</h3>
+		</div>
+		<br class="clear">
+	</footer>
+</div> <!--! end of #container -->
+
+<script type="text/javascript" src="../jquery/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="../d3/d3.js"></script>
+<script type="text/javascript" src="../d3/d3.csv.js"></script>
+<script type="text/javascript" src="../d3/d3.layout.js"></script>
+<script type="text/javascript" src="../d3/d3.geom.js"></script>
+<script>
+	var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']]; // Change UA-XXXXX-X to be your site's ID
+	(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+	g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+	s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+<script>
+
+$("button").toggle(
+	function(){
+		$(this).addClass("active");
+	},
+	function(){
+		$(this).removeClass("active");
+	}
+)
+
+
+// If using the chrome browser you will not be able to see the network 
+// since it is very strict about bringing in local files external to this 
+// one. If you have Python installed, navigate to the UN_HDR2011 root
+// folder and run this command from the terminal:
+//     python -m SimpleHTTPServer 8000
+// Then type the following into your browser:
+//     http://localhost:8000/dev/d3_force_directed/v2.html
+// fires when someone selects or deselects a checkbox
+function getNextNetworkNodeWithindexAndSortByGNI(id){
+	var returnvalue = []; 
+	var obj = network["nodes"] ;
+	obj.sort(SortByGNI_Gross_National_Income);
+
+	for (var i = 0 ; i< obj.length; i++ ){
+		if (obj[i].index == id) {
+			return obj[i+1];
+		}
+	}
+}
+//return the node based on the index provided.
+function getPreviousNetworkNodeWithindexAndSortByGNI(id){
+	var returnvalue = []; 
+	var obj = network["nodes"] ;
+	obj.sort(SortByGNI_Gross_National_Income);
+
+	for (var i = 0 ; i< obj.length; i++ ){
+		if (obj[i].index == id) {
+		return obj[i-1];
+			}
+	}
+}
+function getNextNetworkNodeWithindexAndSortByGII(id){
+	var returnvalue = []; 
+	var obj = network["nodes"] ;
+	obj.sort(SortByGII_Gender_Inequality_Index_value);
+
+	for (var i = 0 ; i< obj.length; i++ ){
+		if (obj[i].index == id) {
+		return obj[i+1];
+			}
+	}
+}
+//return the node based on the index provided.
+function getPreviousNetworkNodeWithindexAndSortByGII(id){
+	var returnvalue = []; 
+	var obj = network["nodes"] ;
+	obj.sort(SortByGII_Gender_Inequality_Index_value);
+
+	for (var i = 0 ; i< obj.length; i++ ){
+		if (obj[i].index == id) {
+		return obj[i-1];
+			}
+	}
+}
+	function getNextNetworkNodeWithindexAndSortByIHDI(id){
+		var returnvalue = []; 
+		var obj = network["nodes"] ;
+		obj.sort(SortByIHDI_Inequality_adjusted_HDI_value);
+
+		for (var i = 0 ; i< obj.length; i++ ){
+			if (obj[i].index == id) {
+			return obj[i+1];
+				}
+		}
+	}
+	//return the node based on the index provided.
+	function getPreviousNetworkNodeWithindexAndSortByIHDI(id){
+		var returnvalue = []; 
+		var obj = network["nodes"] ;
+		obj.sort(SortByIHDI_Inequality_adjusted_HDI_value);
+
+		for (var i = 0 ; i< obj.length; i++ ){
+			if (obj[i].index == id) {
+			return obj[i-1];
+				}
+		}
+	}
+function getNextNetworkNodeWithindexAndSortByEPI(id){
+	var returnvalue = []; 
+	var obj = network["nodes"] ;
+	obj.sort(SortByEnvironmental_Performance_Index);
+
+	for (var i = 0 ; i< obj.length; i++ ){
+		if (obj[i].index == id) {
+		//returnvalue.push(obj[i-1]);
+		//returnvalue.push(obj[i+1]);
+		return obj[i+1];
+			}
+	}
+}
+//return the node based on the index provided.
+function getPreviousNetworkNodeWithindexAndSortByEPI(id){
+	var returnvalue = []; 
+	var obj = network["nodes"] ;
+	obj.sort(SortByEnvironmental_Performance_Index);
+	
+	for (var i = 0 ; i< obj.length; i++ ){
+		if (obj[i].index == id) {
+		//returnvalue.push(obj[i-1]);
+		//returnvalue.push(obj[i+1]);
+		return obj[i-1];
+			}
+	}
+}
+//return the node based on the index provided.
+function getNetworkNodeWithindex(id){
+	var obj = network["nodes"] ;
+	for (var i = 0 ; i< obj.length; i++ ){
+		if (obj[i].index == id) {
+		return obj[i];
+		}
+	}
+}
+
+function SortByEnvironmental_Performance_Index(a,b)
+ { return a.Environmental_Performance_Index - b.Environmental_Performance_Index; }
+function SortByIHDI_Inequality_adjusted_HDI_value(a,b)
+ { return a.IHDI_Inequality_adjusted_HDI_value - b.IHDI_Inequality_adjusted_HDI_value; }
+ function SortByGII_Gender_Inequality_Index_value(a,b)
+ { return a.GII_Gender_Inequality_Index_value - b.GII_Gender_Inequality_Index_value; }
+function SortByGNI_Gross_National_Income(a,b)       
+ { return a.GNI_Gross_National_Income - b.GNI_Gross_National_Income; }
+ function SortByOverall_loss_percent(a,b)
+ { return a.Overall_loss_percent - b.Overall_loss_percent; }
+ function SortBySUM(a,b)
+ { return a.SUM - b.SUM; } 
+var selected_indices = [];
+var links =[];
+var node_colors = d3.scale.ordinal().domain(["Africa","Americas","Asia","Europe","Oceania"]).range(["rgb(255, 180, 0)", "rgb(255, 128, 114)", "rgb(255, 225, 0)", "rgb(234, 164, 96)", "rgb(243,253,242)"]);
+var checkboxes = $('#buttons button');
+checkboxes.click(function(){
+	
+	
+	/*d3.selectAll("circle").attr("r", function(d){
+		var this_val = 0;
+		var selected_checkboxes = $('input[name=indices]:checked');
+
+		selected_checkboxes.each(function(i, index){
+		
+			if(d[$(index).val()] != ".."){
+				var normalize = d3.scale.linear().domain(all_min_max[$(index).val()]).range([0, 100])
+				var index_val = parseFloat(d[$(index).val()].replace(/,/g, ''))
+				// console.log($(index).val())
+				this_val += normalize(index_val);
+			}
+		})
+		
+		var node_size = d3.scale.linear().domain([0, (100*selected_checkboxes.length)]).range([10, 35])
+		
+		return node_size(this_val)
+		// var size_val = 0;
+		// console.log(checkboxes.val())
+		// console.log(d["Environmental_Performance_Index"])
+	})
+	*/
+	
+	// Need to clear links array to empty
+	network["links"] = [];
+			
+    selected_indices = $('#buttons button.active');
+    selected_indices.each(function(index, i){
+	
+		console.log(index +": "+ i.id );
+		var target = network["nodes"];
+		if(i.id == "EPI"){ 
+				links =[];
+				target.sort(SortByEnvironmental_Performance_Index);
+				// console.log(target.length);
+				for(var i = 0; i < target.length-1; i++){
+				var c = linkcolor(1);
+				var d = distance(i); // use distance function to map values
+				var link = {"source": target[i], "target": target[i+1], "distance":d, "color":c};
+				links.push(link);
+				}
+				network["links"] = network["links"].concat(links);
+	
+
+		 }
+	 	if(i.id == "IHDI"){
+				links =[];
+				target.sort(SortByIHDI_Inequality_adjusted_HDI_value);
+				// console.log(target.length);
+				for(var i = 0; i < target.length-1; i++){
+				var c = linkcolor(2);
+				var d = distance(i); // use distance function to map values
+				var link = {"source": target[i], "target": target[i+1], "distance":d, "color":c};
+				links.push(link);
+				}
+				network["links"] = network["links"].concat(links);
+		
+		}
+	 	if(i.id == "GII"){ 
+				links =[];
+				target = network["nodes"];
+				target.sort(SortByGII_Gender_Inequality_Index_value);
+				// console.log(target.length);
+				for(var i = 0; i < target.length-1; i++){
+				var c = linkcolor(3);
+				var d = distance(i); // use distance function to map values
+				var link = {"source": target[i], "target": target[i+1], "distance":d, "color":c};
+				links.push(link);
+				}
+				network["links"] = network["links"].concat(links); 
+		}
+	 	if(i.id == "GNI"){ 
+				links =[];
+				target = network["nodes"];
+				target.sort(SortByGNI_Gross_National_Income);
+			
+				for(var i = 0; i < target.length-1; i++){
+				// console.log(target[i].GNI_Gross_National_Income);
+				var c = linkcolor(4);
+				var d = distance(i); // use distance function to map values
+				var link = {"source": target[i], "target": target[i+1], "distance":d, "color":c};
+				links.push(link);
+				}
+				network["links"] = network["links"].concat(links);
+	 	}
+		else {};
+		
+
+    });
+	update_force();
+	update_network(network);
+
+	});
+
+
+
+
+// Init Variables
+var network ={"nodes":[], "links":[], },
+	// distance = d3.scale.log(10).domain([1e-6, 0.005]).range([10, 350]), // Uses log scaling
+	// Normalize function for distances
+	distance = d3.scale.linear().domain([0, 0.5]).range([2, 200]),
+	// Assign each index a different color
+	color = d3.scale.ordinal().domain([1,2,3]).range(["rgba(30, 120, 180, 0.3)", "rgba(255, 127, 14, 0.3)", "rgba(44, 160, 44, 0.3)", "rgba(213, 39, 40, 0.3)"]);
+	// old link colors
+	// linkcolor = d3.scale.ordinal().domain([1,2,3,4]).range(["rgba(20, 20, 255, 0.3)", "rgba(255, 60, 20, 0.3)", "rgba(20, 255, 20, 0.3)", "rgba(255, 160, 20, 0.3)"]);
+	// new link colors based on button colors
+	linkcolor = d3.scale.ordinal().domain([1,2,3,4]).range(["rgba(35,43,89, 0.75)", "rgba(147,166,8, 0.75)", "rgba(131,1,176, 0.75)", "rgba(96,145,162, 0.75)"]);
+	nodeOutlinecolor = d3.scale.ordinal().domain([1,2,3,4]).range(["rgba(20, 20, 255, 1)", "rgba(255, 60, 20, 1)", "rgba(20, 160, 20, 1)", "rgba(255, 160, 20, 1)"]);
+
+
+/* global variables*/ 
+
+// All code here from: http://bl.ocks.org/950642
+var w = 1100,
+	h = 850;
+var vis;
+var force;
+var link;
+var node ;
+var details; 
+
+// Gets min and max from array of nodes for the given index as key
+function get_min_max(nodes, key){
+	
+	var min = d3.min(nodes, function(item){
+		// Dont't want any null values
+		if(item[key] != ".."){
+			return parseFloat(item[key].replace(/,/g, '')) // Need to remove ',' from numbers
+		}
+	})
+	
+	var max = d3.max(nodes, function(item){
+		if(item[key] != ".."){
+			return parseFloat(item[key].replace(/,/g, ''))
+		}
+	})
+	return [min, max]
+}
+
+
+
+
+
+// Convert data CSV to array
+	d3.csv("../../CSV/MIT_DuKode_Dataset08.csv", function(csv){
+	
+	// Set networks nodes to CSV returned array
+	network["nodes"] = csv;
+	// console.log(network);
+	// Need to get min and max for normalizing in links function
+	hdi_min_max = get_min_max(network["nodes"], "HDI");
+	epi_min_max = get_min_max(network["nodes"], "Environmental_Performance_Index")
+	ihdi_min_max = get_min_max(network["nodes"], "IHDI_Inequality_adjusted_HDI_value")
+	gii_min_max = get_min_max(network["nodes"], "GII_Gender_Inequality_Index_value")
+	gni_min_max = get_min_max(network["nodes"], "GNI_Gross_National_Income")
+	loss_min_max = get_min_max(network["nodes"], "Overall_loss_percent")
+	sum_min_max  = get_min_max(network["nodes"], "SUM");
+	
+	// WARNING: 0 index of this array intentionally left undefined,
+	// this so the indicies of the arrays line up in the data (column 1 is country name)
+	all_min_max = [, epi_min_max, ihdi_min_max, gii_min_max, gni_min_max, loss_min_max]
+	
+
+	var countries = network["nodes"]; 
+
+	
+	// DEBUG find out how many links there are
+	// console.log(network["links"].length)
+	
+	// Now pass the network JSON object to a function that will build it via SVG
+	build_network(network);
+	update_force();
+});
+
+
+//update network links and other drawing updates. 
+function update_network(network){
+
+	// When we redraw, have to remember to clear all previous links (and nodes so they can be drawn on top)
+	vis.selectAll("line").remove();
+	//vis.selectAll("g.node").remove();
+	
+	link = vis.selectAll("line")
+        .data(network.links)
+        .enter().append("svg:line")
+        .attr("class", "link")
+		.attr("stroke", function(d){ return d.color; })
+        .style("stroke-width", function(d){ return 0.5;})
+        .attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; })
+        .attr("z", 10);
+
+        
+    /*
+    node = vis.selectAll("g.node")
+        .data(network.nodes)
+        .enter().append("svg:g")
+        .attr("class", "node")
+        .attr("cx", function(d) { return d.x})
+      	.attr("cy", function(d) { return d.y; })
+     	.style("fill", function(d) { return (d.color); }) 
+		.call(force.drag);
+		
+		 //circle
+      node.append("svg:circle")
+      .attr("stroke", "white")
+      .attr("stroke-width", function(d) { var returnValue =0; returnValue = ( (100-Number(d.Overall_loss_percent))%10); return  returnValue; })   
+      .style("fill", function(d) { 
+                  return node_colors(d["continent_region"])
+    })
+    //node radious
+    .attr("r", function(d) { var returnValue =0; returnValue = (d.HDI*30); return  returnValue; });
+
+       node.append("svg:text")
+ 	    .attr("class", "nodetext")
+ 			.style("font", "9px sans-serif")
+ 			.attr("text-anchor", "middle")
+ 			.style("text-shadow", "#bbb 1px 1px 2px")
+ 	    //.attr("dx", 12)
+ 	    .attr("dy", ".35em")
+ 	    .text(function(d) { return d.Country });
+        */
+	        
+}
+// init
+function build_network(network){
+	
+	// All code here from: http://bl.ocks.org/950642
+
+ 	vis = d3.select("#network").append("svg:svg")
+	    .attr("width", w)
+	    .attr("height", h);
+
+	var force = self.force = d3.layout.force()
+	        .nodes(network.nodes)
+	        .links(network.links)
+	        // .gravity(0)
+	        // .charge(-30)
+	        //.linkStrength(10)
+			//.distance(1)
+			//.linkStrength(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue=0.9; else returnValue = ((100-link.source.Overall_loss_percent)/100);   return returnValue;  })
+	        /*.linkStrength(function(link){ 
+	        				var returnValue; 
+	        				if(link.source.Overall_loss_percent=="..") returnValue=0.9; 
+	        				else returnValue = ((100-link.source.Overall_loss_percent)/100);   
+	        				return returnValue;  })
+	        .distance(function(link){ 
+	        			var returnValue; 
+	        			if(link.source.Overall_loss_percent=="..") returnValue= 0; 
+	        			else returnValue = (100-link.source.Overall_loss_percent)*2;  
+	        			return returnValue;   })
+	        */
+	        // friction(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue=0.9; else returnValue = (link.source.Overall_loss_percent/100);  console.log(returnValue); return returnValue;  })
+	        //.linkDistance(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue= 0; else returnValue = (link.source.Overall_loss_percent);  return returnValue;   })              
+			// 	        .distance(function(link){
+			// 	return link.distance;
+			// })
+	        //.distance(function(link){ var returnValue; if(link.source.Overall_loss_percent=="..") returnValue= 0; else returnValue = (link.source.Overall_loss_percent)*10;  return returnValue;   })
+			.friction(.95)
+			.charge(-170)
+		    .gravity(.10)
+		    .size([w-100, h-100])
+			.on("tick", function(e) {
+		      link.attr("x1", function(d) { return d.source.x; })
+		          .attr("y1", function(d) { return d.source.y; })
+		          .attr("x2", function(d) { return d.target.x; })
+		          .attr("y2", function(d) { return d.target.y; });
+
+				  // Push different nodes in different directions for clustering.
+				  var k = 5.5 * e.alpha;
+				  // DEBUG 
+		  		  //console.log(e.alpha)
+				  var target = network.nodes 
+					target.sort(SortBySUM);
+				  target.forEach(function(o, i) {
+				  	//console.log(i)
+
+				  	// three foci
+				  	var yVal;
+				  	if (i > ((network.nodes.length-1)/3)*2 )
+				  		yVal = -k;
+				  	else if (i > (network.nodes.length-1)/3)
+				  		yVal = 0;
+				  	else 
+				  		yVal = +k;
+				  	o.y += yVal;
+				  });
+		      node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+		    });
+
+
+    node = vis.selectAll("g.node")
+        .data(network.nodes)
+        .enter().append("svg:g")
+        .attr("class", "node")
+        .attr("cx", function(d) { return d.x})
+      	.attr("cy", function(d) { return d.y; })
+     	.style("fill", function(d) { return (d.color); }) 
+		.call(force.drag);
+		
+		 //circle
+      node.append("svg:circle")
+      .attr("stroke", "white")
+      .attr("stroke-width", function(d) { var returnValue =0; returnValue = ( (100-Number(d.Overall_loss_percent))%10); return  returnValue; })   
+      .style("fill", function(d) { 
+                  return node_colors(d["continent_region"])
+    })
+    //node radious
+    .attr("r", function(d) { var returnValue =0; returnValue = (d.HDI*30); return  returnValue; });
+
+	// node.append("svg:circle")
+	//           .attr("stroke", "white")
+	//           .attr("stroke-width", 1)   
+	//           .style("fill", "black")
+	//         //node radious
+	//         .attr("r", function(d) { var returnValue =0; returnValue = ((d.HDI*10)+(Number(d.Overall_loss_percent))); return  returnValue; });
+
+  
+       node.append("svg:text")
+ 	    .attr("class", "nodetext")
+ 			.style("font", "9px sans-serif")
+ 			.attr("text-anchor", "middle")
+ 			.style("text-shadow", "#bbb 1px 1px 2px")
+ 	    //.attr("dx", 12)
+ 	    .attr("dy", ".35em")
+ 	    .text(function(d) { return d.Country });
+					
+    link = vis.selectAll("line.link")
+        .data(network.links)
+        .enter().append("svg:line")
+        .attr("class", "link")
+		.attr("stroke", function(d){ return d.color; })
+        .style("stroke-width", function(d){ return 0.5;})
+        .attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+
+
+
+	// node.on("click", function(p,j){		
+	// 	  
+	// 		// force = self.force = d3.layout.force()
+	// 		// 	//	.nodes(network.nodes)
+	// 		//         .links(network.links)
+	// 		// 		//.linkDistance(function(links){ console.log(links); var value= (links.source.index-links.target.index)*3+150; return (value); })
+	// 		// 		.linkDistance(50)
+	// 		// 		.theta(0.01)
+	// 		// 		//.linkStrength(.6) 
+	// 		// 		.friction(0)
+	// 		// 		.charge(-1000)
+	// 		// 	    .gravity(.065)
+	// 		// 	    .size([w, h])
+	// 		// 		.start()
+	// 				//.call(force.drag);
+	// 	// force = self.force = d3.layout.force()
+	// 	// 	//	.data(network.nodes)
+	// 	//         .links(network.links)
+	// 	// 		.friction(.05)
+	// 	// 		.charge(-100)
+	// 	// 	    .gravity(.065)
+	// 	// 	    .size([w, h])
+	// 	// 		.start();
+	// })
+	//node mouse related events 
+	 node.on("mouseover", function(p, j) {
+	//	force.start();
+		//clear scene
+		vis.selectAll("circle")
+		  // .attr("stroke", "white")
+		  // 		   	  .attr("stroke-width", 3)
+		    .attr("stroke", "white")
+			.attr("stroke-opacity", 1)
+	          .attr("stroke-width", function(d) { var returnValue =0; returnValue = ( (100-Number(d.Overall_loss_percent))%10); return  returnValue; })
+						.transition().duration(500)
+						.style("fill", "white")
+						
+		var selected = vis.selectAll("circle")
+		.filter(function(d, j	) {  return d === p; })
+		//.filter(function(d, j	) {  return d === getNetworkNodeWithid((p.index)-1)});//d === pr; })
+		.classed("myclass", true)
+		.attr("stroke", "grey")
+		.attr("stroke-width", function(d) { var returnValue =0; returnValue = ( (100-Number(d.Overall_loss_percent))%10); return  returnValue; })
+		.attr("stroke-opacity", 1)
+			.transition().duration(500)
+				.style("fill", function(d){return node_colors(d["continent_region"])});
+					
+		//annotate -1 index
+		if(selected_indices.length>=1){
+		 selected_indices.each(function(index, i){
+		 				 			
+				// console.log(index +" "+ i.id );
+				var target = network["nodes"];
+				if(i.id == "EPI"){ 
+					var selected = vis.selectAll("circle")
+					.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByEPI(p.index);})//d === pr; })
+					.attr("stroke", nodeOutlinecolor(1))
+					.attr("stroke-width",8)
+						.attr("stroke-opacity", 1)
+					.transition().duration(500)
+					.style("fill", function(d){return node_colors(d["continent_region"])})
+					//annotate +1 index 
+					var selected = vis.selectAll("circle")
+					.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByEPI(p.index);})//d === pr; })
+					.attr("stroke", nodeOutlinecolor(1))
+					.attr("stroke-width",4)
+						.attr("stroke-opacity", 1)
+					.transition().duration(500)
+					.style("fill", function(d){return node_colors(d["continent_region"])})
+				}
+				if(i.id == "IHDI"){
+					var selected = vis.selectAll("circle")
+					.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByIHDI(p.index)})//d === pr; })
+					.attr("stroke", nodeOutlinecolor(2))
+					.attr("stroke-width",8)
+						.attr("stroke-opacity", 1)
+					.transition().duration(500)
+					.style("fill", function(d){return node_colors(d["continent_region"])})
+					//annotate +1 index 
+					var selected = vis.selectAll("circle")
+					.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByIHDI(p.index)})//d === pr; })
+					.attr("stroke", nodeOutlinecolor(2))
+					.attr("stroke-width",4)
+						.attr("stroke-opacity", 1)
+					.transition().duration(500)
+					.style("fill", function(d){return node_colors(d["continent_region"])})
+				}
+		 		if(i.id == "GII"){ 
+					var selected = vis.selectAll("circle")
+					.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByGII(p.index)})//d === pr; })
+					.attr("stroke", nodeOutlinecolor(3))
+					.attr("stroke-width",8)
+						.attr("stroke-opacity", 1)
+					.transition().duration(500)
+					.style("fill", function(d){return node_colors(d["continent_region"])})
+					//annotate +1 index 
+					var selected = vis.selectAll("circle")
+					.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByGII(p.index)})//d === pr; })
+					.attr("stroke", nodeOutlinecolor(3))
+					.attr("stroke-width",4)
+						.attr("stroke-opacity", 1)
+					.transition().duration(500)
+					.style("fill", function(d){return node_colors(d["continent_region"])})
+				}
+			 	if(i.id == "GNI"){ 
+					var selected = vis.selectAll("circle")
+					.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByGNI(p.index)})//d === pr; })
+					.attr("stroke", nodeOutlinecolor(4))
+					.attr("stroke-width",8)
+						.attr("stroke-opacity", 1)
+					.transition().duration(500)
+					.style("fill", function(d){return node_colors(d["continent_region"])})
+					//annotate +1 index 
+					var selected = vis.selectAll("circle")
+					.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByGNI((p.index))})//d === pr; })
+					.attr("stroke", nodeOutlinecolor(4))
+					.attr("stroke-width",4)
+						.attr("stroke-opacity", 1)
+					.transition().duration(500)
+					.style("fill", function(d){return node_colors(d["continent_region"])})
+			 	}
+ 			});
+			}
+		
+		d3.select("#country_name h2").text(p.Country)
+		d3.select("#country_name img").attr("src", "../img/flags/flag_"+p.abbrv.toLowerCase()+".png")
+		d3.select("#buttons #EPI p").text(p.Environmental_Performance_Index)
+		d3.select("#buttons #IHDI p").text(p.IHDI_Inequality_adjusted_HDI_value)
+		d3.select("#buttons #GII p").text(p.GII_Gender_Inequality_Index_value)
+		d3.select("#buttons #GNI p").text("$"+d3.format(",")(p.GNI_Gross_National_Income))
+		
+
+	});
+	
+
+
+	node.on("mouseout", function(p, j) {
+		d3.selectAll("circle")
+			.transition().duration(500)
+			// .attr("stroke", "white")
+			// .style("fill", function(d){return node_colors(d["continent_region"])})
+	          .attr("stroke", "white")
+			  .attr("stroke-opacity", 1)
+	          .attr("stroke-width", function(d) { var returnValue =0; returnValue = ( (100-Number(d.Overall_loss_percent))%10); return  returnValue; })   
+	          .style("fill", function(d) { 
+	                      return node_colors(d["continent_region"])
+	        })
+	        //node radious
+	        .attr("r", function(d) { var returnValue =0; returnValue = (d.HDI*30); return  returnValue; });
+							
+		vis.selectAll("line").remove();
+		
+		update_force();
+		update_network(network);
+			
+	});
+
+
+   
+		
+
+}
+
+function update_force(){
+	//selected_indices = $("input:checkbox[name='indices']:checked");
+	 console.log("selected_indices.length "+ selected_indices.length);
+
+	//force =0 ; 
+	var linkDistanceVar = 0; 
+		if(selected_indices.length == 1){ 
+					force //= self.force = d3.layout.force()
+					        .links(network.links)
+							.linkStrength(0.10) 
+						 	.charge(-110)
+							.gravity(.1)
+						    .size([w, h])
+							.nodes(network.nodes)
+							.on("tick", function(e) {
+						      link.attr("x1", function(d) { return d.source.x; })
+						          .attr("y1", function(d) { return d.source.y; })
+						          .attr("x2", function(d) { return d.target.x; })
+						          .attr("y2", function(d) { return d.target.y; });
+
+								  // Push different nodes in different directions for clustering.
+								  var k = 5.5 * e.alpha;
+								  // DEBUG 
+						  		  //console.log(e.alpha)
+								  var target = network.nodes 
+									target.sort(SortBySUM);
+								  target.forEach(function(o, i) {
+								  	//console.log(i)
+
+								  	// three foci
+								  	var yVal;
+								  	if (i > ((network.nodes.length-1)/3)*2 )
+								  		yVal = -k;
+								  	else if (i > (network.nodes.length-1)/3)
+								  		yVal = 0;
+								  	else 
+								  		yVal = k;
+								  	o.y += yVal;
+								  });
+						      node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+						    });
+		 }
+	 	if(selected_indices.length == 2 ){
+					force //= self.force = d3.layout.force()
+			        .links(network.links)
+					.linkStrength(0.10) 
+				 	.charge(-100)
+					.gravity(.1)
+				    .size([w, h])
+					.nodes(network.nodes)
+					.on("tick", function(e) {
+				      link.attr("x1", function(d) { return d.source.x; })
+				          .attr("y1", function(d) { return d.source.y; })
+				          .attr("x2", function(d) { return d.target.x; })
+				          .attr("y2", function(d) { return d.target.y; });
+
+						  // Push different nodes in different directions for clustering.
+						  var k = 5.5 * e.alpha;
+						  // DEBUG 
+				  		  //console.log(e.alpha)
+						  var target = network.nodes 
+							target.sort(SortBySUM);
+						  target.forEach(function(o, i) {
+						  	//console.log(i)
+
+						  	// three foci
+						  	var yVal;
+						  	if (i > ((network.nodes.length-1)/3)*2 )
+						  		yVal = -k;
+						  	else if (i > (network.nodes.length-1)/3)
+						  		yVal = 0;
+						  	else 
+						  		yVal = k;
+						  	o.y += yVal;
+						  });
+				      node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+				    });
+		}
+	 	if(selected_indices.length== 3){ 
+					force //= self.force = d3.layout.force()
+			        .links(network.links)
+					.linkStrength(0.10) 
+				 	.charge(-100)
+					.gravity(.1)
+				    .size([w, h])
+					.nodes(network.nodes)
+					.on("tick", function(e) {
+				      link.attr("x1", function(d) { return d.source.x; })
+				          .attr("y1", function(d) { return d.source.y; })
+				          .attr("x2", function(d) { return d.target.x; })
+				          .attr("y2", function(d) { return d.target.y; });
+
+						  // Push different nodes in different directions for clustering.
+						  var k = 5.5 * e.alpha;
+						  // DEBUG 
+				  		  //console.log(e.alpha)
+						  var target = network.nodes 
+							target.sort(SortBySUM);
+						  target.forEach(function(o, i) {
+						  	//console.log(i)
+
+						  	// three foci
+						  	var yVal;
+						  	if (i > ((network.nodes.length-1)/3)*2 )
+						  		yVal = -k;
+						  	else if (i > (network.nodes.length-1)/3)
+						  		yVal = 0;
+						  	else 
+						  		yVal = k;
+						  	o.y += yVal;
+						  });
+				      node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+				    });
+
+
+		}
+	 	if(selected_indices.length== 4){
+					force //= self.force = d3.layout.force()
+					        .links(network.links)
+							.linkDistance(function(d){ //console.log(d); 	
+									var linkDistanceVar = 0; 
+							 		selected_indices.each(function(index, i){
+										if(i.id == "EPI"){ 
+											linkDistanceVar +=Number(200 - d.source.Environmental_Performance_Index); 
+										 }
+									 	if(i.id == "IHDI"){
+												linkDistanceVar += Number(100-d.source.IHDI_Inequality_adjusted_HDI_value*100);
+										}
+									 	if(i.id == "GII"){ 
+												linkDistanceVar += Number(d.source.GII_Gender_Inequality_Index_value);
+										}
+									 	if(i.id == "GNI"){ 
+												linkDistanceVar += Number(d.source.GNI_Gross_National_Income/100);
+									 	}
+										else {}; 
+										})
+									
+									//	console.log(linkDistanceVar)
+									return linkDistanceVar;})
+//								.theta(1)
+							.linkStrength(0.01) 
+							// .friction(0)
+							// .charge(-100)
+							// 							    .gravity(.1)
+						    .size([w, h])
+							.nodes(network.nodes)
+							.on("tick", function(e) {
+						      link.attr("x1", function(d) { return d.source.x; })
+						          .attr("y1", function(d) { return d.source.y; })
+						          .attr("x2", function(d) { return d.target.x; })
+						          .attr("y2", function(d) { return d.target.y; });
+
+								  // Push different nodes in different directions for clustering.
+								  var k = 5.5 * e.alpha;
+								  // DEBUG 
+						  		  //console.log(e.alpha)
+								  var target = network.nodes 
+									target.sort(SortBySUM);
+								  target.forEach(function(o, i) {
+								  	//console.log(i)
+
+								  	// three foci
+								  	var yVal;
+								  	if (i > ((network.nodes.length-1)/3)*2 )
+								  		yVal = -k;
+								  	else if (i > (network.nodes.length-1)/3)
+								  		yVal = 0;
+								  	else 
+								  		yVal = +k;
+								  	o.y += yVal;
+								  });
+						      node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+						    });
+					
+	 	}
+		if(selected_indices.length== 0){
+				// console.log("no indices selected");
+										// force 
+										//         .links(network.links)
+										// 		.linkStrength(.10) 
+										// 		 .friction(1)
+										// 		 .charge(-100)
+										// 					 							    .gravity(.1)
+										// 	    .size([w, h])
+										// 	//	.nodes(network.nodes)
+										// 		.on("tick", function(e) {
+										// 	      link.attr("x1", function(d) { return d.source.x; })
+										// 	          .attr("y1", function(d) { return d.source.y; })
+										// 	          .attr("x2", function(d) { return d.target.x; })
+										// 	          .attr("y2", function(d) { return d.target.y; });
+										// 
+										// 			  // Push different nodes in different directions for clustering.
+										// 			  var k = 5.5 * e.alpha;
+										// 			  // DEBUG 
+										// 	  		  //console.log(e.alpha)
+										// 			  var target = network.nodes 
+										// 				target.sort(SortBySUM);
+										// 			  target.forEach(function(o, i) {
+										// 			  	//console.log(i)
+										// 
+										// 			  	// three foci
+										// 			  	var yVal;
+										// 			  	if (i > ((network.nodes.length-1)/3)*2 )
+										// 			  		yVal = k;
+										// 			  	else if (i > (network.nodes.length-1)/3)
+										// 			  		yVal = 0;
+										// 			  	else 
+										// 			  		yVal = -k;
+										// 			  	o.y += yVal;
+										// 			  });
+										// 	      node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+										// 	    });
+			
+		}
+		force
+		      .nodes(network.nodes)
+		      .links(network.links)
+		      .start();
+        
+}
+// function SortByEnvironmental_Performance_Index(a,b)
+//      { return a.Environmental_Performance_Index - b.Environmental_Performance_Index; }
+//    	function SortByIHDI_Inequality_adjusted_HDI_value(a,b)
+//      { return a.IHDI_Inequality_adjusted_HDI_value - b.IHDI_Inequality_adjusted_HDI_value; }
+//      function SortByGII_Gender_Inequality_Index_value(a,b)
+//      { return a.GII_Gender_Inequality_Index_value - b.GII_Gender_Inequality_Index_value; }
+// function SortByGNI_Gross_National_Income(a,b)       
+//      { return a.GNI_Gross_National_Income - b.GNI_Gross_National_Income; }
+//      function SortByOverall_loss_percent(a,b)
+//      { return a.Overall_loss_percent - b.Overall_loss_percent; }
+
+</script>
+<div id="container">
+	<hr size="1" noshade>
+	<table width = "100%" border = "0">
+	<tr>
+	<td align="center"><a href="http://media.mit.edu" target="_blank"><img src="../../logos/ML-text-logo.small.png"></a></td>
+	<td align="center"><a href="http://dukode.com" target="_blank"><img src="../../logos/DuKodeLogo.v2.72dpi.small.png"></a></td>
+	<td align="center"><a href="http://media.mit.edu" target="_blank"><img src="../../logos/logoNew.png"></a></td>
+	<td align="center"><a href="http://media.mit.edu" target="_blank"><img src="../../logos/eco_logo.png"></a></td>
+</div>
+</body>
+</html>
