@@ -402,7 +402,7 @@ function SortByGNI_Gross_National_Income(a,b)
  { return a.SUM - b.SUM; } 
 var selected_indices = [];
 var links =[];
-var node_colors = d3.scale.ordinal().domain(["Africa","Americas","Asia","Europe","Oceania"]).range(["rgb(237,228,180)", "rgb(227,140,80)", "rgb(235,134,120)", "rgb(249,209,89)", "rgb(243,253,242)"]);
+var node_colors = d3.scale.ordinal().domain(["Africa","Americas","Asia","Europe","Oceania"]).range(["rgb(255, 180, 0)", "rgb(255, 128, 114)", "rgb(255, 225, 0)", "rgb(234, 164, 96)", "rgb(243,253,242)"]);
 
 var checkboxes = $('#buttons button');
 checkboxes.click(function(){
@@ -515,7 +515,7 @@ var network ={"nodes":[], "links":[], },
 	// old link colors
 	// linkcolor = d3.scale.ordinal().domain([1,2,3,4]).range(["rgba(20, 20, 255, 0.3)", "rgba(255, 60, 20, 0.3)", "rgba(20, 255, 20, 0.3)", "rgba(255, 160, 20, 0.3)"]);
 	// new link colors based on button colors
-	linkcolor = d3.scale.ordinal().domain([1,2,3,4]).range(["rgba(35,43,89, 0.59)", "rgba(147,166,8, 0.59)", "rgba(176,132,2, 0.59)", "rgba(166,48,5, 0.59)"]);
+	linkcolor = d3.scale.ordinal().domain([1,2,3,4]).range(["rgba(35,43,89, 0.75)", "rgba(147,166,8, 0.75)", "rgba(131,1,176, 0.75)", "rgba(96,145,162, 0.75)"]);
 	nodeOutlinecolor =  d3.scale.ordinal().domain([1,2,3,4]).range(["rgba(35,43,89, 0.75)", "rgba(147,166,8, 0.75)", "rgba(176,132,2, 0.75)", "rgba(166,48,5, 0.75)"]);
 
 
