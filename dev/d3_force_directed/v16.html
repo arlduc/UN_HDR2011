@@ -325,7 +325,8 @@ function SortByGNI_Gross_National_Income(a,b)
  { return a.SUM - b.SUM; } 
 var selected_indices = [];
 var links =[];
-var node_colors = d3.scale.ordinal().domain(["Africa","Americas","Asia","Europe","Oceania"]).range(["rgb(255, 180, 0)", "rgb(255, 128, 114)", "rgb(255, 225, 0)", "rgb(234, 164, 96)", "rgb(243,253,242)"]);
+var node_colors = d3.scale.ordinal().domain(["Africa","Americas","Asia","Europe","Oceania"]).range(["rgb(237,228,180)", "rgb(237,228,180)", "rgb(235,134,120)", "rgb(249,209,89)", "rgb(243,253,242)"]);
+
 var checkboxes = $('#buttons button');
 checkboxes.click(function(){
 	
