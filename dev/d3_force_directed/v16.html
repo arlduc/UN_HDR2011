@@ -1039,41 +1039,41 @@ function update_force(){
 	 	}
 		if(selected_indices.length== 0){
 				// console.log("no indices selected");
-										// force 
-										//         .links(network.links)
-										// 		.linkStrength(.10) 
-										// 		 .friction(1)
-										// 		 .charge(-100)
-										// 					 							    .gravity(.1)
-										// 	    .size([w, h])
-										// 	//	.nodes(network.nodes)
-										// 		.on("tick", function(e) {
-										// 	      link.attr("x1", function(d) { return d.source.x; })
-										// 	          .attr("y1", function(d) { return d.source.y; })
-										// 	          .attr("x2", function(d) { return d.target.x; })
-										// 	          .attr("y2", function(d) { return d.target.y; });
-										// 
-										// 			  // Push different nodes in different directions for clustering.
-										// 			  var k = 5.5 * e.alpha;
-										// 			  // DEBUG 
-										// 	  		  //console.log(e.alpha)
-										// 			  var target = network.nodes 
-										// 				target.sort(SortBySUM);
-										// 			  target.forEach(function(o, i) {
-										// 			  	//console.log(i)
-										// 
-										// 			  	// three foci
-										// 			  	var yVal;
-										// 			  	if (i > ((network.nodes.length-1)/3)*2 )
-										// 			  		yVal = k;
-										// 			  	else if (i > (network.nodes.length-1)/3)
-										// 			  		yVal = 0;
-										// 			  	else 
-										// 			  		yVal = -k;
-										// 			  	o.y += yVal;
-										// 			  });
-										// 	      node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
-										// 	    });
+										force 
+										        .links(network.links)
+												.linkStrength(.0) 
+												 //.friction(1)
+												 .charge(-40)
+												 .gravity(.05)
+											    .size([w, h])
+											//	.nodes(network.nodes)
+												.on("tick", function(e) {
+											      link.attr("x1", function(d) { return d.source.x; })
+											          .attr("y1", function(d) { return d.source.y; })
+											          .attr("x2", function(d) { return d.target.x; })
+											          .attr("y2", function(d) { return d.target.y; });
+										
+													  // Push different nodes in different directions for clustering.
+													  var k = 5.5 * e.alpha;
+													  // DEBUG 
+											  		  //console.log(e.alpha)
+													  var target = network.nodes 
+														target.sort(SortBySUM);
+													  target.forEach(function(o, i) {
+													  	//console.log(i)
+										
+													  	// three foci
+													  	var yVal;
+													  	if (i > ((network.nodes.length-1)/3)*2 )
+													  		yVal = -k;
+													  	else if (i > (network.nodes.length-1)/3)
+													  		yVal = 0;
+													  	else 
+													  		yVal = +k;
+													  	o.y += yVal;
+													  });
+											      node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+											    });
 			
 		}
 		force
