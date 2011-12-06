@@ -19,29 +19,33 @@
 	}
 	h1, h2, h3, h4 {
 		color: #222;
-		font-weight: 400;
-		letter-spacing: -1px;
+		font-weight: 100;
+		letter-spacing: 3px;
 		text-shadow: 1px 1px 3px rgba(0,0,0, 0.3);
 	}
+
 	#container {
 		margin: 0 auto 80px auto;
 		width: 1100px;
 	}
 	header h1 {
-		font-size: 40px;
-		font-weight: 200;
+		font-size: 50px;
+		font-weight: 100;
 	}
 	header p,
 	footer p {
-		font-family: 'Vidaloka', serif;
-		font-size: 18px;
+		font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+		font-size: 13px;
+		letter-spacing: 0px;
+		font-weight:50px;
+		line-height:1.5em;
 	}
 	#main {
 		background: #efefef;
 /*		border: solid 2px black;*/
 	}
 		#main #country_name {
-			padding: 10px;
+			padding: 5px;
 		}
 		#main #country_name img{
 /*			float: left;*/
@@ -50,15 +54,17 @@
 		}
 		#main #country_name h2{
 			display: inline;
-			font-size: 36px;
+			font-size: 24px;
 			line-height: 48px;
-			padding: 0 10px;
+			padding: 0 5px;
 		}
 		#main #buttons {
+/*			box-shadow: 1px 5px 5px #888;*/
 			background: rgba(255, 255, 255, 0.5);
 			width: 100%;
 		}
 		#main button {
+/*			border: solid 1px green;*/
 			font-size: 10px;
 			margin: 0;
 			text-align: left;
@@ -96,7 +102,7 @@
 			#main #GNI:hover { background-color: rgba(166,48,5, 0.75) !important; }
 			#main #GNI.active{ background-color: rgba(166,48,5, 1); }
 		#main #buttons p{
-			font-size: 30px;
+			font-size: 20px;
 			margin: 0;
 		}
 		#main #network {
@@ -658,7 +664,7 @@ function build_network(network){
         .enter().append("svg:line")
         .attr("class", "link")
 		.attr("stroke", function(d){ return d.color; })
-        .style("stroke-width", function(d){ return 5;})
+        .style("stroke-width", function(d){ return 2;})
         .attr("x1", function(d) { return d.source.x; })
         .attr("y1", function(d) { return d.source.y; })
         .attr("x2", function(d) { return d.target.x; })
@@ -1061,5 +1067,14 @@ function update_force(){
 //      { return a.Overall_loss_percent - b.Overall_loss_percent; }
 
 </script>
+<div id="container">
+	<hr size="1" noshade>
+	<table width = "100%" border = "0">
+	<tr>
+	<td align="center"><a href="http://media.mit.edu" target="_blank"><img src="../../logos/ML-text-logo.small.png"></a></td>
+	<td align="center"><a href="http://dukode.com" target="_blank"><img src="../../logos/DuKodeLogo.v2.72dpi.small.png"></a></td>
+	<td align="center"><a href="http://media.mit.edu" target="_blank"><img src="../../logos/logoNew.png"></a></td>
+	<td align="center"><a href="http://media.mit.edu" target="_blank"><img src="../../logos/eco_logo.png"></a></td>
+</div>
 </body>
 </html>

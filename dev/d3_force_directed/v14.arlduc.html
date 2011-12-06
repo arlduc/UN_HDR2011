@@ -672,7 +672,7 @@ function build_network(network){
         .enter().append("svg:line")
         .attr("class", "link")
 		.attr("stroke", function(d){ return d.color; })
-        .style("stroke-width", function(d){ return 5;})
+        .style("stroke-width", function(d){ return 2;})
         .attr("x1", function(d) { return d.source.x; })
         .attr("y1", function(d) { return d.source.y; })
         .attr("x2", function(d) { return d.target.x; })
