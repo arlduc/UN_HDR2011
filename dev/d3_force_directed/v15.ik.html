@@ -436,7 +436,7 @@ var network ={"nodes":[], "links":[], },
 	// old link colors
 	// linkcolor = d3.scale.ordinal().domain([1,2,3,4]).range(["rgba(20, 20, 255, 0.3)", "rgba(255, 60, 20, 0.3)", "rgba(20, 255, 20, 0.3)", "rgba(255, 160, 20, 0.3)"]);
 	// new link colors based on button colors
-	linkcolor = d3.scale.ordinal().domain([1,2,3,4]).range(["rgba(35,43,89, 0.75)", "rgba(147,166,8, 0.75)", "rgba(176,132,2, 0.75)", "rgba(166,48,5, 0.75)"]);
+	linkcolor = d3.scale.ordinal().domain([1,2,3,4]).range(["rgba(35,43,89, 0.59)", "rgba(147,166,8, 0.59)", "rgba(176,132,2, 0.59)", "rgba(166,48,5, 0.59)"]);
 	nodeOutlinecolor =  d3.scale.ordinal().domain([1,2,3,4]).range(["rgba(35,43,89, 0.75)", "rgba(147,166,8, 0.75)", "rgba(176,132,2, 0.75)", "rgba(166,48,5, 0.75)"]);
 
 
@@ -716,6 +716,7 @@ function build_network(network){
 		.attr("stroke", "grey")
 		.attr("stroke-width", function(d) { var returnValue =0; returnValue = ( (100-Number(d.Overall_loss_percent))%10); return  returnValue; })
 		.attr("stroke-opacity", 1)
+			.attr("z-index", 10)
 			.transition().duration(500)
 				.style("fill", function(d){return node_colors(d["continent_region"])});
 		 
@@ -854,7 +855,7 @@ function build_network(network){
 	        //node radious
 	        .attr("r", function(d) { var returnValue =0; returnValue = (d.HDI*30); return  returnValue; });
 							
-		vis.selectAll("line").remove();
+	//	vis.selectAll("line").remove();
 		
 		update_force();
 		update_network(network);
