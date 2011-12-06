@@ -23,7 +23,60 @@
 		letter-spacing: 3px;
 		text-shadow: 1px 1px 3px rgba(0,0,0, 0.3);
 	}
+	
+	sub{
+			font-size: 13px;
+			font-weight: 100;	
+	}
+	.key{
+		padding:0px 10px 0px 100px; 
+	}
+	#keytext {
+		//	color: #222;
+			font-size: 20px;
+			//font-weight: 100;
+			letter-spacing: 3px;
+			text-shadow: 1px 1px 3px rgba(0,0,0, 0.3);
+	}
 
+	#IHDI{
+		color: #93A608;
+		border-color: #93A608;
+	}
+	#EPI{
+		color: #232B59;
+		border-color: #232B59;
+	}
+	#GII{
+			color: #8301b0;
+			border-color: #8301b0;
+	}
+	#GNI{
+		color: #6091a2;
+		border-color: #6091a2;
+	}
+	
+	#america{
+		color:rgb(237,228,180);	
+		text-shadow: 1px 1px 3px rgba(0,0,0, 0.3);
+	}
+	#europe{
+			color:rgb(249,209,89);
+		text-shadow: 1px 1px 3px rgba(0,0,0, 0.3);	
+	}
+	#asia{
+		color:rgb(235,134,120);
+		text-shadow: 1px 1px 3px rgba(0,0,0, 0.3);	
+	} 
+	#africa{		
+		color:rgb(237,228,180);
+		text-shadow: 1px 1px 3px rgba(0,0,0, 0.3);	
+	} 
+	#australia{			
+		color:rgb(243,253,242);
+		text-shadow: 1px 1px 3px rgba(0,0,0, 0.3);	
+	}
+	
 	#container {
 		margin: 0 auto 80px auto;
 		width: 1100px;
@@ -169,6 +222,32 @@
 		</div>
 		<div class="key">
 			<h3>Key</h3>
+			<h2>Node Size:</h2> 
+			<div id="keytext">
+			<p>Inequality-Adjusted Human Development Index (inner circle) </p>
+			<p>Human Development Index (outer circle)</p>
+			</div>
+			<h2>Link Color: </h2>
+			<div id="keytext">
+			<p id="IHDI">2011 Inequality-Adjusted Human Development Index (IHDI) </p>
+			<p id="EPI">2010 Environmental Performance Index (EPI)</p>
+			<p id="GII">2011 Gender Inequality Index (GII)</p>
+			<p id="GNI">2011 Gross National Income (GNI) per capita</p>
+			</div>
+
+			<h2>Node Color:</h2> 
+			<div class="keytext"><span id="america">Americas</span> | <span id="europe">Europe</span> | <span id="asia">Asia</span> | <span id="africa">Africa</span> | <span id="australia">Australia</span></div>
+
+			
+			<p>Node arrangement: based on the sum of checked indicators. 
+
+			Rollovers: A Nation-Node's neighbors are shown for checked indicators. 
+
+			Thick outlines = smaller larger value
+			Thin outlines = next larger value
+
+			DATA NOTE: countries with 1 or fewer data values are not visualized.
+			</p>
 		</div>
 		<br class="clear">
 	</footer>
