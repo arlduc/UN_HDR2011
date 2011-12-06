@@ -147,8 +147,8 @@
 	</header>
 	<div id="main" role="main">
 		<div id="country_name">
-			<img src="../img/flags/flag_usa.png" />
-			<h2>United States of America</h2>
+			<img src="../img/magnifying.png" />
+			<h2>Select A Country Below</h2>
 		</div>
 		<div id="buttons">
 			<button id="EPI">Environmental Performance Index<p>&nbsp;</p></button><button id="IHDI">Inequality-adjusted Human Development Index<p>&nbsp;</p></button><button id="GII">Gender Inequality Index<p>&nbsp;</p></button><button id="GNI">Gross National Income<p>&nbsp;</p></button>
@@ -318,7 +318,7 @@ function SortByGNI_Gross_National_Income(a,b)
  { return a.SUM - b.SUM; } 
 var selected_indices = [];
 var links =[];
-var node_colors = d3.scale.ordinal().domain(["Africa","Americas","Asia","Europe","Oceania"]).range(["salmon", "orange", "yellow", "tan", "honeydew"]);
+var node_colors = d3.scale.ordinal().domain(["Africa","Americas","Asia","Europe","Oceania"]).range(["rgb(237,228,180)", "rgb(237,228,180)", "rgb(235,134,120)", "rgb(249,209,89)", "rgb(243,253,242)"]);
 var checkboxes = $('#buttons button');
 checkboxes.click(function(){
 	
@@ -427,7 +427,10 @@ var network ={"nodes":[], "links":[], },
 	distance = d3.scale.linear().domain([0, 0.5]).range([2, 200]),
 	// Assign each index a different color
 	color = d3.scale.ordinal().domain([1,2,3]).range(["rgba(30, 120, 180, 0.3)", "rgba(255, 127, 14, 0.3)", "rgba(44, 160, 44, 0.3)", "rgba(213, 39, 40, 0.3)"]);
-	linkcolor = d3.scale.ordinal().domain([1,2,3,4]).range(["rgba(20, 20, 255, 0.3)", "rgba(255, 60, 20, 0.3)", "rgba(20, 255, 20, 0.3)", "rgba(255, 160, 20, 0.3)"]);
+	// old link colors
+	// linkcolor = d3.scale.ordinal().domain([1,2,3,4]).range(["rgba(20, 20, 255, 0.3)", "rgba(255, 60, 20, 0.3)", "rgba(20, 255, 20, 0.3)", "rgba(255, 160, 20, 0.3)"]);
+	// new link colors based on button colors
+	linkcolor = d3.scale.ordinal().domain([1,2,3,4]).range(["rgba(35,43,89, 0.75)", "rgba(147,166,8, 0.75)", "rgba(176,132,2, 0.75)", "rgba(166,48,5, 0.75)"]);
 	nodeOutlinecolor = d3.scale.ordinal().domain([1,2,3,4]).range(["rgba(20, 20, 255, 1)", "rgba(255, 60, 20, 1)", "rgba(20, 160, 20, 1)", "rgba(255, 160, 20, 1)"]);
 
 
