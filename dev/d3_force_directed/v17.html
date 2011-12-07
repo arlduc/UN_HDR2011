@@ -24,11 +24,12 @@
 		text-shadow: 1px 1px 3px rgba(0,0,0, 0.3);
 	}
 	.key{
-		padding:0px 10px 0px 100px; 
+		padding:0px 0px 0px 0px; 
 	}
 	#keytext {
-			font-size: 19px;
+			font-size: 14px;
 			letter-spacing: 3px;
+			padding:0px 0px 0px 0px; 
 			text-shadow: 1px 1px 3px rgba(0,0,0, 0.3);
 	}
 
@@ -158,7 +159,11 @@
 		}
 	footer h3 {
 		font-size: 28px;
-		margin: 20px 0 0 0;
+		margin: 5px 0 0 0;
+	}
+	footer h2 {
+		font-size: 20px;
+		margin: 5px 0 0 0;
 	}
 	footer p {
 		font-size: 14px;
@@ -195,7 +200,11 @@
 <div id="container">
 	<header>
 		<h1>Networks in Equity and Sustainability</h1>
-		<p>Some of the world's most pressing problems can be traced to inequity between people, both in the present and over time. Long periods of inequity can lead to both social and environmental degradation. In its 2011 Human Development Report (HDR), the United Nations incisively examines some of the complex relationships between socioeconomic equity and environmental sustainability. This visualization, by members of the MIT Media Lab and The DuKode Studio, organizes some of the HDR’s summative indicators into network graphs to show how nations are multi-dimensionally linked.
+		<p>Some of the world's most pressing problems can be traced to inequity between people, both in the present and over time. Long periods of inequity can lead to both social and environmental degradation. 
+		In its <a href="http://hdr.undp.org/en/reports/global/hdr2011/">2011 Human Development Report (HDR)</a>, the United Nations incisively examines some of the complex relationships 
+		between socioeconomic equity and environmental sustainability. This visualization, by members of the <a href="http://media.mit.edu">MIT Media Lab</a> and <a href="http://dukode.com">
+		The DuKode Studio</a>, organizes some of the HDR’s summative 
+		indicators into network graphs to show how nations are multi-dimensionally linked.
 </p>
 	</header>
 	<div id="main" role="main">
@@ -204,53 +213,49 @@
 			<h2>Select A Country Below</h2>
 		</div>
 		<div id="buttons">
-			<button id="EPI">Environmental Performance Index<p>&nbsp;</p></button><button id="IHDI">Inequality-adjusted Human Development Index<p>&nbsp;</p></button><button id="GII">Gender Inequality Index<p>&nbsp;</p></button><button id="GNI">Gross National Income<p>&nbsp;</p></button>
+			<button id="EPI">Environmental Performance Index<p>&nbsp;</p></button><button id="IHDI">Inequality-adjusted Human Development Index<p>&nbsp;</p></button><button id="GII">Gender Inequality Index<p>&nbsp;</p></button><button id="GNI">Gross National Income (per capita)<p>&nbsp;</p></button>
 		</div>
 		<div id="network"></div>
 	</div>
 	<footer>
-		<div class="desc">
-			<h3>Description</h3>
-			<p>Some of the world's most pressing problems can be traced to inequity between people, both in the present and over time. Long periods of inequity can lead to both social and environmental degradation. In its 2011 Human Development Report (HDR), the United Nations incisively examines some of the complex relationships between socioeconomic equity and environmental sustainability. This visualization, by members of the MIT Media Lab and The DuKode Studio, organizes some of the HDR’s summative indicators into network graphs to show how nations are multi-dimensionally linked within these relationships.</p>
-		</div>
 		<div class="key">
-			<h3>Key</h3>
+			<h3>Key*</h3><br>
 			<h2>Node Size:</h2> 
 			<div id="keytext">
     	        <div id="country_name">
                 <p><img src="../img/innercircle.png" width="30" height="30"/> Human Development Index (inner circle) </p>
                	</div>
 				<div>
-        	<p><img src="../img/outercircle.png" width="30" height="30"/> Inequality-Adjusted Human Development Index (outer circle)</p>
-			</div>
+        	<p><img src="../img/outercircle.png" width="30" height="30"/> Overall Loss of Human Potential** (outer circle)</p>
+			</div><br>
 			<h2>Link Color: </h2>
 			<div id="keytext">
 			<p id="IHDI">2011 Inequality-Adjusted Human Development Index (IHDI) </p>
 			<p id="EPI">2010 Environmental Performance Index (EPI)</p>
 			<p id="GII">2011 Gender Inequality Index (GII)</p>
 			<p id="GNI">2011 Gross National Income (GNI) per capita</p>
-			</div>
+			</div><br>
 
 			<h2>Node Color:</h2> 
 			<div class="keytext"><span id="america">Americas</span> | <span id="europe">Europe</span> | <span id="asia">Asia</span> | <span id="africa">Africa</span> | <span id="australia">Australia</span></div>
-
+			<br>
 			
 			<p>Node arrangement: based on the sum of checked indicators. 
 
 			  <br>
-			  Rollovers: A Nation-Node's neighbors are shown for checked indicators. 
+			  Rollovers: A node's neighbors are shown for checked indicators. 
+				<ul>
+				<li>Thick outlines = smaller  value</li>
+			  	<li>Thin outlines =  larger value </li>
+			  	</ul>
 
-			  <br>
-			  Thick outlines = smaller  value
-			  <br>
-			  Thin outlines =  larger value
-
-			  <br>
-			  DATA NOTE: countries with 1 or fewer data values are not visualized. </p>
+			  <br><br>
+			  <p>*	Countries with 1 or fewer data values are not visualized. </p>
+			  <p>** (Normalized value) The percent difference between the Human Development Index (HDI) and Inequality-Adjusted Human Development Index (IHDI). See UN HDR 2011, p. 138.</p>
 		</div>
-		<br class="clear">
+		
 </div> <!--! end of #container -->
-
+<br class="clear">
 <script type="text/javascript" src="../jquery/jquery-1.7.1.js"></script>
 <script type="text/javascript" src="../d3/d3.js"></script>
 <script type="text/javascript" src="../d3/d3.csv.js"></script>
