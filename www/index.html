@@ -255,7 +255,7 @@
 	</header>
 	<div id="main" role="main">
 		<div id="country_name">
-			<img src="../img/magnifying.png" />
+			<img src="/img/magnifying.png" />
 			<h2>Select A Country Below</h2>
 		</div>
 		<div id="buttons">
@@ -280,8 +280,8 @@
 			
 			<div class="key_section" id="node_size">
 				<h2>Node Size:</h2> 
-                <p><img src="../img/innercircle.png" width="30" height="30"/> Human Development Index (inner circle) </p>
-        		<p><img src="../img/outercircle.png" width="30" height="30"/> Overall Loss of Human Potential** (outer circle)</p>
+                <p><img src="/img/innercircle.png" width="30" height="30"/> Human Development Index (inner circle) </p>
+        		<p><img src="/img/outercircle.png" width="30" height="30"/> Overall Loss of Human Potential** (outer circle)</p>
 			</div>
 			
 			<div class="key_section" id="link_color">
@@ -319,10 +319,10 @@
 	<hr size="1" noshade>
 	<table width="100%" border="0">
 		<tr>
-			<td align="center"><a href="http://media.mit.edu" target="_blank"><img src="../../logos/ML-text-logo.small.png"></a></td>
-			<td align="center"><a href="http://dukode.com" target="_blank"><img src="../../logos/DuKodeLogo.v2.72dpi.small.png"></a></td>
-			<td align="center"><a href="http://macroconnections.media.mit.edu" target="_blank"><img src="../../logos/logoNew.png"></a></td>
-			<td align="center"><a href="http://media.mit.edu" target="_blank"><img src="../../logos/eco_logo.png"></a></td>
+			<td align="center"><a href="http://media.mit.edu" target="_blank"><img src="/img/logos/ML-text-logo.small.png"></a></td>
+			<td align="center"><a href="http://dukode.com" target="_blank"><img src="/img/logos/DuKodeLogo.v2.72dpi.small.png"></a></td>
+			<td align="center"><a href="http://macroconnections.media.mit.edu" target="_blank"><img src="/img/logos/logoNew.png"></a></td>
+			<td align="center"><a href="http://media.mit.edu" target="_blank"><img src="/img/logos/eco_logo.png"></a></td>
 		</tr>
 	</table>
 </div> <!--! end of #container -->
@@ -331,16 +331,24 @@
 
 
 <!-- Beginning of JS !-->
-<script type="text/javascript" src="../jquery/jquery-1.7.1.js"></script>
-<script type="text/javascript" src="../d3/d3.js"></script>
-<script type="text/javascript" src="../d3/d3.csv.js"></script>
-<script type="text/javascript" src="../d3/d3.layout.js"></script>
-<script type="text/javascript" src="../d3/d3.geom.js"></script>
-<script>
-	var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']]; // Change UA-XXXXX-X to be your site's ID
-	(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
-	g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-	s.parentNode.insertBefore(g,s)}(document,'script'));
+<script type="text/javascript" src="/js/jquery/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="/js/d3/d3.js"></script>
+<script type="text/javascript" src="/js/d3/d3.csv.js"></script>
+<script type="text/javascript" src="/js/d3/d3.layout.js"></script>
+<script type="text/javascript" src="/js/d3/d3.geom.js"></script>
+<!-- Google Analytics Code !-->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-27540909-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
 </script>
 <script>
 
@@ -633,7 +641,7 @@ function get_min_max(nodes, key){
 
 
 // Convert data CSV to array
-	d3.csv("../../CSV/MIT_DuKode_Dataset08.csv", function(csv){
+	d3.csv("/csv/MIT_DuKode_Dataset08.csv", function(csv){
 	
 	// Set networks nodes to CSV returned array
 	network["nodes"] = csv;
@@ -981,7 +989,7 @@ function build_network(network){
 			}
 		
 		d3.select("#country_name h2").text(p.Country)
-		d3.select("#country_name img").attr("src", "../img/flags/flag_"+p.abbrv.toLowerCase()+".png")
+		d3.select("#country_name img").attr("src", "/img/flags/flag_"+p.abbrv.toLowerCase()+".png")
 		d3.select("#buttons #EPI p").text(p.Environmental_Performance_Index)
 		d3.select("#buttons #IHDI p").text(p.IHDI_Inequality_adjusted_HDI_value)
 		d3.select("#buttons #GII p").text(p.GII_Gender_Inequality_Index_value)
