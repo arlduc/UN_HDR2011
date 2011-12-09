@@ -831,23 +831,27 @@ function build_network(network){
 //  { return a.Overall_loss_percent - b.Overall_loss_percent; }
 //  function SortBySUM(a,b)
 //  { return a.SUM - b.SUM; }
-		var sortedbyEPI= network.nodes.sort(SortByEnvironmental_Performance_Index );
-		var sortedbyIHDI= network.nodes.sort(SortByIHDI_Inequality_adjusted_HDI_value );
-		var sortedbyGII= network.nodes.sort(SortByGII_Gender_Inequality_Index_value );
-		var sortedbyGNI= network.nodes.sort(SortByGNI_Gross_National_Income);
+		// var sortedbyEPI= network.nodes.sort(SortByEnvironmental_Performance_Index );
+		// var sortedbyIHDI= network.nodes.sort(SortByIHDI_Inequality_adjusted_HDI_value );
+		// var sortedbyGII= network.nodes.sort(SortByGII_Gender_Inequality_Index_value );
+		// var sortedbyGNI= network.nodes.sort(SortByGNI_Gross_National_Income);
 
 		 node.append("svg:text")
 		.attr("class", "nodetext")
 		.style("font", "9px sans-serif")
 		.attr("text-anchor", "middle")
-		.style("text-shadow", "#bbb 1px 1px 2px")
+		.style("text-shadow", nodeOutlinecolor(1)+" 1px 1px 2px")
+		.style("color", nodeOutlinecolor(1))
 		.attr("dy", "1.35em")
 		.text(function(d) {   return "EPI RANK: "+network.nodes.sort(SortByEnvironmental_Performance_Index ).indexOf(d);});
+		
 		node.append("svg:text")
+
 		.attr("class", "nodetext")
 		.style("font", "9px sans-serif")
 		.attr("text-anchor", "middle")
-		.style("text-shadow", "#bbb 1px 1px 2px")
+		.style("text-shadow", nodeOutlinecolor(2)+" 1px 1px 2px")
+		.style("color", nodeOutlinecolor(2))
 		.attr("dy", "2.35em")
 		.text(function(d) {   console.log(d); return "IHDI RANK: "+network.nodes.sort(SortByIHDI_Inequality_adjusted_HDI_value ).indexOf(d);});
 		// 
@@ -855,15 +859,17 @@ function build_network(network){
 			.attr("class", "nodetext")
 			.style("font", "9px sans-serif")
 			.attr("text-anchor", "middle")
-			.style("text-shadow", "#bbb 1px 1px 2px")
+			.style("text-shadow", nodeOutlinecolor(3)+" 1px 1px 2px")
 			.attr("dy", "3.35em")
+					.style("color", nodeOutlinecolor(3))
 			.text(function(d) {   console.log(d); return "GII RANK: "+network.nodes.sort(SortByGII_Gender_Inequality_Index_value ).indexOf(d);});
 		// 
 		node.append("svg:text")
 			 .attr("class", "nodetext")
 			.style("font", "9px sans-serif")
 			.attr("text-anchor", "middle")
-			.style("text-shadow", "#bbb 1px 1px 2px")
+			.style("text-shadow",nodeOutlinecolor(4)+" 1px 1px 2px")
+					.style("color", nodeOutlinecolor(4))
 			 .attr("dy", "4.35em")
 			 .text(function(d) {   console.log(d); return "GNI RANK: "+network.nodes.sort(SortByGNI_Gross_National_Income).indexOf(d);});
 		// 	
@@ -920,6 +926,59 @@ function build_network(network){
 	 node.on("mouseover", function(p, j) {
 	//	force.start();
 		//clear scene
+		node.selectAll("text").remove();
+		
+	  node.append("svg:text")
+ 	    .attr("class", "nodetext")
+ 			.style("font", "9px sans-serif")
+ 			.attr("text-anchor", "middle")
+ 			.style("text-shadow", "#bbb 1px 1px 2px")
+ 	    .attr("dy", ".35em")
+ 	    .text(function(d) { return d.Country });
+
+		 node.append("svg:text")
+			.filter(function(d, j	) {  return d === p; })
+		.attr("class", "nodetext")
+		.style("font", "9px sans-serif")
+		.attr("text-anchor", "middle")
+		.style("text-shadow", nodeOutlinecolor(1)+" 1px 1px 2px")
+		.style("fill", nodeOutlinecolor(1))
+		.attr("dy", "1.35em")
+		.text(function(d) {   return "EPI rank: "+network.nodes.sort(SortByEnvironmental_Performance_Index ).indexOf(d);});
+		
+		node.append("svg:text")
+			.filter(function(d, j	) {  return d === p; })
+		.attr("class", "nodetext")
+		.style("font", "9px sans-serif")
+		.attr("text-anchor", "middle")
+		.style("text-shadow", nodeOutlinecolor(2)+" 1px 1px 2px")
+		.style("fill", nodeOutlinecolor(2))
+		.attr("dy", "2.35em")
+		.text(function(d) {   console.log(d); return "IHDI RANK: "+network.nodes.sort(SortByIHDI_Inequality_adjusted_HDI_value ).indexOf(d);});
+		// 
+		node.append("svg:text")
+			.filter(function(d, j	) {  return d === p; })
+			.attr("class", "nodetext")
+			.style("font", "9px sans-serif")
+			.attr("text-anchor", "middle")
+			.style("text-shadow", nodeOutlinecolor(3)+" 1px 1px 2px")
+			.attr("dy", "3.35em")
+					.style("fill", nodeOutlinecolor(3))
+			.text(function(d) {   console.log(d); return "GII RANK: "+network.nodes.sort(SortByGII_Gender_Inequality_Index_value ).indexOf(d);});
+		// 
+		node.append("svg:text")
+			.filter(function(d, j	) {  return d === p; })
+			 .attr("class", "nodetext")
+			.style("font", "9px sans-serif")
+			.attr("text-anchor", "middle")
+			.style("text-shadow",nodeOutlinecolor(4)+" 1px 1px 2px")
+					.style("fill", nodeOutlinecolor(4))
+			 .attr("dy", "4.35em")
+			 .text(function(d) {   console.log(d); return "GNI RANK: "+network.nodes.sort(SortByGNI_Gross_National_Income).indexOf(d);});
+		
+		
+		
+		
 		vis.selectAll("circle")
 		  // .attr("stroke", "white")
 		  // 		   	  .attr("stroke-width", 3)
@@ -939,6 +998,8 @@ function build_network(network){
 			.attr("z-index", 10)
 			.transition().duration(500)
 				.style("fill", function(d){return node_colors(d["continent_region"])});
+				
+		
 		 
 		var selected = vis.selectAll("line")
 			.attr("stroke-width",8)
@@ -1053,6 +1114,17 @@ function build_network(network){
 
 
 	node.on("mouseout", function(p, j) {
+			node.selectAll("text").remove();
+
+		  node.append("svg:text")
+	 	    .attr("class", "nodetext")
+	 			.style("font", "9px sans-serif")
+	 			.attr("text-anchor", "middle")
+	 			.style("text-shadow", "#bbb 1px 1px 2px")
+	 	    //.attr("dx", 12)
+	 	    .attr("dy", ".35em")
+	 	    .text(function(d) { return d.Country });
+		
 		d3.selectAll("circle")
 			.transition().duration(500)
 			// .attr("stroke", "white")
