@@ -1257,7 +1257,7 @@ function update_force(){
 					force //= self.force = d3.layout.force()
 					        .links(network.links)
 							.linkStrength(0.10) 
-						 	.charge(-110)
+						 	.charge(-120)
 							.gravity(.1)
 						    .size([w, h])
 							.nodes(network.nodes)
@@ -1293,7 +1293,7 @@ function update_force(){
 					force //= self.force = d3.layout.force()
 			        .links(network.links)
 					.linkStrength(0.10) 
-				 	.charge(-100)
+				 	.charge(-140)
 					.gravity(.1)
 				    .size([w, h])
 					.nodes(network.nodes)
@@ -1329,7 +1329,7 @@ function update_force(){
 					force //= self.force = d3.layout.force()
 			        .links(network.links)
 					.linkStrength(0.10) 
-				 	.charge(-100)
+				 	.charge(-160)
 					.gravity(.1)
 				    .size([w, h])
 					.nodes(network.nodes)
@@ -1366,30 +1366,30 @@ function update_force(){
 	 	if(selected_indices.length== 4){
 					force //= self.force = d3.layout.force()
 					        .links(network.links)
-							.linkDistance(function(d){ //console.log(d); 	
-									var linkDistanceVar = 0; 
-							 		selected_indices.each(function(index, i){
-										if(i.id == "EPI"){ 
-											linkDistanceVar +=Number(200 - d.source.Environmental_Performance_Index); 
-										 }
-									 	if(i.id == "IHDI"){
-												linkDistanceVar += Number(100-d.source.IHDI_Inequality_adjusted_HDI_value*100);
-										}
-									 	if(i.id == "GII"){ 
-												linkDistanceVar += Number(d.source.GII_Gender_Inequality_Index_value);
-										}
-									 	if(i.id == "GNI"){ 
-												linkDistanceVar += Number(d.source.GNI_Gross_National_Income/100);
-									 	}
-										else {}; 
-										})
-									
-									//	console.log(linkDistanceVar)
-									return linkDistanceVar;})
+							// .linkDistance(function(d){ //console.log(d); 	
+							// 		var linkDistanceVar = 0; 
+							//  		selected_indices.each(function(index, i){
+							// 			if(i.id == "EPI"){ 
+							// 				linkDistanceVar +=Number(100 - d.source.Environmental_Performance_Index); 
+							// 			 }
+							// 		 	if(i.id == "IHDI"){
+							// 					linkDistanceVar += Number(100-d.source.IHDI_Inequality_adjusted_HDI_value*100);
+							// 			}
+							// 		 	if(i.id == "GII"){ 
+							// 					linkDistanceVar += Number(d.source.GII_Gender_Inequality_Index_value);
+							// 			}
+							// 		 	if(i.id == "GNI"){ 
+							// 					linkDistanceVar += Number(d.source.GNI_Gross_National_Income/100);
+							// 		 	}
+							// 			else {}; 
+							// 			})
+							// 		
+							// 		//	console.log(linkDistanceVar)
+							// 		return linkDistanceVar;})
 //								.theta(1)
 							.linkStrength(0.01) 
 							// .friction(0)
-							// .charge(-100)
+							 .charge(-120)
 							// 							    .gravity(.1)
 						    .size([w, h])
 							.nodes(network.nodes)
