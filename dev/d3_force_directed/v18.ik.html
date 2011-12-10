@@ -924,11 +924,11 @@ function build_network(network){
 	// })
 	//node mouse related events 
 	 node.on("mouseover", function(p, j) {
-	//	force.start();
-		//clear scene
+
+		//text related 
 		node.selectAll("text").remove();
 		
-	  node.append("svg:text")
+	  	node.append("svg:text")
  	    .attr("class", "nodetext")
  			.style("font", "9px sans-serif")
  			.attr("text-anchor", "middle")
@@ -980,13 +980,11 @@ function build_network(network){
 		
 		
 		vis.selectAll("circle")
-		  // .attr("stroke", "white")
-		  // 		   	  .attr("stroke-width", 3)
 		    .attr("stroke", "white")
 			.attr("stroke-opacity", 1)
-	          .attr("stroke-width", function(d) { var returnValue =0; returnValue = ( Number(d.Overall_loss_percent)/5); return  returnValue; })
-						.transition().duration(500)
-						.style("fill", "white")
+	        .attr("stroke-width", function(d) { var returnValue =0; returnValue = ( Number(d.Overall_loss_percent)/5); return  returnValue; })
+			.transition().duration(500)
+			.style("fill", "white")
 						
 		var selected = vis.selectAll("circle")
 		.filter(function(d, j	) {  return d === p; })
@@ -1030,6 +1028,27 @@ function build_network(network){
 			 		.filter(function(d,j ){ if(d.source.Country ==p.Country || d.target.Country ==p.Country ){ return true; }else return false; })
 					.attr("stroke-width",12)
 					.attr("stroke-opacity", 1);
+					
+					//text
+					 node.append("svg:text")
+					.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByEPI(p.index);})//d === pr; })
+					.attr("class", "nodetext")
+					.style("font", "9px sans-serif")
+					.attr("text-anchor", "middle")
+					.style("text-shadow", nodeOutlinecolor(1)+" 1px 1px 2px")
+					.style("fill", nodeOutlinecolor(1))
+					.attr("dy", "1.35em")
+					.text(function(d) {   return "EPI rank: "+network.nodes.sort(SortByEnvironmental_Performance_Index ).indexOf(d);});
+					 node.append("svg:text")
+					.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByEPI(p.index);})//d === pr; })
+					.attr("class", "nodetext")
+					.style("font", "9px sans-serif")
+					.attr("text-anchor", "middle")
+					.style("text-shadow", nodeOutlinecolor(1)+" 1px 1px 2px")
+					.style("fill", nodeOutlinecolor(1))
+					.attr("dy", "1.35em")
+					.text(function(d) {   return "EPI rank: "+network.nodes.sort(SortByEnvironmental_Performance_Index ).indexOf(d);});
+					
 				}
 				if(i.id == "IHDI"){
 					var selected = vis.selectAll("circle")
@@ -1052,6 +1071,28 @@ function build_network(network){
 			 		.filter(function(d,j ){ if(d.source.Country ==p.Country || d.target.Country ==p.Country ){ return true; }else return false; })
 					.attr("stroke-width",12)
 					.attr("stroke-opacity", 1);	
+					
+					//text 
+					node.append("svg:text")
+					.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByIHDI(p.index)})//d === pr; })
+					.attr("class", "nodetext")
+					.style("font", "9px sans-serif")
+					.attr("text-anchor", "middle")
+					.style("text-shadow", nodeOutlinecolor(2)+" 1px 1px 2px")
+					.style("fill", nodeOutlinecolor(2))
+					.attr("dy", "2.35em")
+					.text(function(d) {   console.log(d); return "IHDI RANK: "+network.nodes.sort(SortByIHDI_Inequality_adjusted_HDI_value ).indexOf(d);});
+					node.append("svg:text")
+					.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByIHDI(p.index)})//d === pr; })
+					.attr("class", "nodetext")
+					.style("font", "9px sans-serif")
+					.attr("text-anchor", "middle")
+					.style("text-shadow", nodeOutlinecolor(2)+" 1px 1px 2px")
+					.style("fill", nodeOutlinecolor(2))
+					.attr("dy", "2.35em")
+					.text(function(d) {   console.log(d); return "IHDI RANK: "+network.nodes.sort(SortByIHDI_Inequality_adjusted_HDI_value ).indexOf(d);});
+					
+					
 				}
 		 		if(i.id == "GII"){ 
 					var selected = vis.selectAll("circle")
@@ -1074,6 +1115,27 @@ function build_network(network){
 			 		.filter(function(d,j ){ if(d.source.Country ==p.Country || d.target.Country ==p.Country ){  return true; }else return false; })
 					.attr("stroke-width",12)
 					.attr("stroke-opacity", 1);
+
+					//text 
+					node.append("svg:text")
+					.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByGII(p.index)})//d === pr; })
+					.attr("class", "nodetext")
+					.style("font", "9px sans-serif")
+					.attr("text-anchor", "middle")
+					.style("text-shadow", nodeOutlinecolor(3)+" 1px 1px 2px")
+					.attr("dy", "3.35em")
+					.style("fill", nodeOutlinecolor(3))
+					.text(function(d) {   console.log(d); return "GII RANK: "+network.nodes.sort(SortByGII_Gender_Inequality_Index_value ).indexOf(d);});					
+					node.append("svg:text")
+					.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByGII(p.index)})//d === pr; })
+					.attr("class", "nodetext")
+					.style("font", "9px sans-serif")
+					.attr("text-anchor", "middle")
+					.style("text-shadow", nodeOutlinecolor(3)+" 1px 1px 2px")
+					.attr("dy", "3.35em")
+					.style("fill", nodeOutlinecolor(3))
+					.text(function(d) {   console.log(d); return "GII RANK: "+network.nodes.sort(SortByGII_Gender_Inequality_Index_value ).indexOf(d);});
+					
 				}
 			 	if(i.id == "GNI"){ 
 					var selected = vis.selectAll("circle")
@@ -1096,6 +1158,27 @@ function build_network(network){
 			 		.filter(function(d,j ){ if(d.source.Country ==p.Country || d.target.Country ==p.Country ){  return true; }else return false; })
 					.attr("stroke-width",12)
 					.attr("stroke-opacity", 1);
+					
+					// text 
+					node.append("svg:text")
+					.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByGNI(p.index)})//d === pr; })
+					.attr("class", "nodetext")
+					.style("font", "9px sans-serif")
+					.attr("text-anchor", "middle")
+					.style("text-shadow",nodeOutlinecolor(4)+" 1px 1px 2px")
+					.style("fill", nodeOutlinecolor(4))
+					.attr("dy", "4.35em")
+					.text(function(d) {   console.log(d); return "GNI RANK: "+network.nodes.sort(SortByGNI_Gross_National_Income).indexOf(d);});
+					node.append("svg:text")
+					.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByGNI((p.index))})//d === pr; })
+					.attr("class", "nodetext")
+					.style("font", "9px sans-serif")
+					.attr("text-anchor", "middle")
+					.style("text-shadow",nodeOutlinecolor(4)+" 1px 1px 2px")
+					.style("fill", nodeOutlinecolor(4))
+					.attr("dy", "4.35em")
+					.text(function(d) {   console.log(d); return "GNI RANK: "+network.nodes.sort(SortByGNI_Gross_National_Income).indexOf(d);});
+					
 			 	}
  			});
 			}
