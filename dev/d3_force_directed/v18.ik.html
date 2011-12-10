@@ -891,7 +891,7 @@ function build_network(network){
 			target.sort(SortBySUM);
 
 			target.forEach(function(o, i) {
-				console.log(i);
+			//	console.log(i);
 				if(obj.Country == o.Country)
 				
 					return o; 
@@ -957,7 +957,7 @@ function build_network(network){
 		.style("fill", nodeOutlinecolor(2))
 		.attr("dy" , function(d) { return ((d.HDI)*30)* (Math.sin(225)*1.3)})
 		.attr("dx" , function(d) { return ((d.HDI)*30)* (Math.cos(225)*1.3)})
-		.text(function(d) {   console.log(d); return network.nodes.sort(SortByIHDI_Inequality_adjusted_HDI_value ).indexOf(d);});
+		.text(function(d) {    return network.nodes.sort(SortByIHDI_Inequality_adjusted_HDI_value ).indexOf(d);});
 		// 
 		node.append("svg:text")
 			.filter(function(d, j	) {  return d === p; })
@@ -968,7 +968,7 @@ function build_network(network){
 			.attr("dy" , function(d) { return ((d.HDI)*30)* (Math.sin(270)*1.3)})
 			.attr("dx" , function(d) { return ((d.HDI)*30)* (Math.cos(270)*1.3)})
 			.style("fill", nodeOutlinecolor(3))
-			.text(function(d) {   console.log(d); return network.nodes.sort(SortByGII_Gender_Inequality_Index_value ).indexOf(d);});
+			.text(function(d) {    return network.nodes.sort(SortByGII_Gender_Inequality_Index_value ).indexOf(d);});
 		// 
 		node.append("svg:text")
 			.filter(function(d, j	) {  return d === p; })
@@ -979,7 +979,7 @@ function build_network(network){
 			.style("fill", nodeOutlinecolor(4))
 			.attr("dy" , function(d) { return ((d.HDI)*30)* (Math.sin(359)*1.3)})
 			.attr("dx" , function(d) { return ((d.HDI)*30)* (Math.cos(359)*1.3)})
-			 .text(function(d) {   console.log(d); return network.nodes.sort(SortByGNI_Gross_National_Income).indexOf(d);});
+			 .text(function(d) {    return network.nodes.sort(SortByGNI_Gross_National_Income).indexOf(d);});
 		
 		
 		
@@ -1089,7 +1089,7 @@ function build_network(network){
 					.style("fill", nodeOutlinecolor(2))
 					.attr("dy" , function(d) { return ((d.HDI)*30)* (Math.sin(225)*1.3)})
 					.attr("dx" , function(d) { return ((d.HDI)*30)* (Math.cos(225)*1.3)})
-					.text(function(d) {   console.log(d); return network.nodes.sort(SortByIHDI_Inequality_adjusted_HDI_value ).indexOf(d);});
+					.text(function(d) {    return network.nodes.sort(SortByIHDI_Inequality_adjusted_HDI_value ).indexOf(d);});
 					node.append("svg:text")
 					.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByIHDI(p.index)})//d === pr; })
 					.attr("class", "nodetext")
@@ -1099,7 +1099,7 @@ function build_network(network){
 					.style("fill", nodeOutlinecolor(2))
 					.attr("dy" , function(d) { return ((d.HDI)*30)* (Math.sin(225)*1.3)})
 					.attr("dx" , function(d) { return ((d.HDI)*30)* (Math.cos(225)*1.3)})
-					.text(function(d) {   console.log(d); return network.nodes.sort(SortByIHDI_Inequality_adjusted_HDI_value ).indexOf(d);});
+					.text(function(d) {  return network.nodes.sort(SortByIHDI_Inequality_adjusted_HDI_value ).indexOf(d);});
 					
 					
 				}
@@ -1135,7 +1135,7 @@ function build_network(network){
 					.attr("dy" , function(d) { return ((d.HDI)*30)* (Math.sin(270)*1.3)})
 					.attr("dx" , function(d) { return ((d.HDI)*30)* (Math.cos(270)*1.3)})
 					.style("fill", nodeOutlinecolor(3))
-					.text(function(d) {   console.log(d); return network.nodes.sort(SortByGII_Gender_Inequality_Index_value ).indexOf(d);});					
+					.text(function(d) {    return network.nodes.sort(SortByGII_Gender_Inequality_Index_value ).indexOf(d);});					
 					node.append("svg:text")
 					.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByGII(p.index)})//d === pr; })
 					.attr("class", "nodetext")
@@ -1145,7 +1145,7 @@ function build_network(network){
 					.attr("dy" , function(d) { return ((d.HDI)*30)* (Math.sin(270)*1.3)})
 					.attr("dx" , function(d) { return ((d.HDI)*30)* (Math.cos(270)*1.3)})
 					.style("fill", nodeOutlinecolor(3))
-					.text(function(d) {   console.log(d); return network.nodes.sort(SortByGII_Gender_Inequality_Index_value ).indexOf(d);});
+					.text(function(d) {    return network.nodes.sort(SortByGII_Gender_Inequality_Index_value ).indexOf(d);});
 					
 				}
 			 	if(i.id == "GNI"){ 
@@ -1180,7 +1180,7 @@ function build_network(network){
 					.style("fill", nodeOutlinecolor(4))
 					.attr("dy" , function(d) { return ((d.HDI)*30)* (Math.sin(359)*1.3)})
 					.attr("dx" , function(d) { return ((d.HDI)*30)* (Math.cos(359)*1.3)})
-					.text(function(d) {   console.log(d); return network.nodes.sort(SortByGNI_Gross_National_Income).indexOf(d);});
+					.text(function(d) {    return network.nodes.sort(SortByGNI_Gross_National_Income).indexOf(d);});
 					node.append("svg:text")
 					.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByGNI((p.index))})//d === pr; })
 					.attr("class", "nodetext")
@@ -1190,7 +1190,7 @@ function build_network(network){
 					.style("fill", nodeOutlinecolor(4))
 					.attr("dy" , function(d) { return ((d.HDI)*30)* (Math.sin(359)*1.3)})
 					.attr("dx" , function(d) { return ((d.HDI)*30)* (Math.cos(359)*1.3)})
-					.text(function(d) {   console.log(d); return network.nodes.sort(SortByGNI_Gross_National_Income).indexOf(d);});
+					.text(function(d) {    return network.nodes.sort(SortByGNI_Gross_National_Income).indexOf(d);});
 					
 			 	}
  			});
@@ -1249,7 +1249,7 @@ function build_network(network){
 
 function update_force(){
 	//selected_indices = $("input:checkbox[name='indices']:checked");
-	 console.log("selected_indices.length "+ selected_indices.length);
+	 //console.log("selected_indices.length "+ selected_indices.length);
 
 	//force =0 ; 
 	var linkDistanceVar = 0; 
