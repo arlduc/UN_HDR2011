@@ -168,28 +168,51 @@
 			#main #meta #buttons #GNI button.active{ background-color: rgba(96,145,162, 1); }
 			/* NODES*/
 			
-
-			#main #meta #buttons #africa button{ color: rgb(255, 140, 0); }
-			#main #meta #buttons #africa button:hover { border-color: rgb(255, 140, 0);}
-			#main #meta #buttons #africa button.active{ background-color: rgb(255, 140, 0); }
+			#main #meta #region .index{
+				width: 100%;
+			}
+			#main #meta #region .index p{
+				float: left;
+				width: 125px;
+			}
+			#main #meta #region button {
+				border: solid 2px #efefef;
+				float: right;
+				font-size: 12px;
+				height: 45px;
+				margin: 0;
+				text-align: left;
+				width: 225px;
+			}
+			#main #meta #region button:hover,
+			#main #meta #region button.active { 
+				-moz-box-shadow:inset 0 0 10px #000000;
+				-webkit-box-shadow:inset 0 0 10px #000000;
+				box-shadow:inset 0 0 10px #000000;
+				border-right: none; 
+			}
+			#main #meta #region button.active { color: white !important; }
+			#main #meta #region #africa button{ color: rgb(255, 140, 0); }
+			#main #meta #region #africa button:hover { border-color: rgb(255, 140, 0);}
+			#main #meta #region #africa button.active{ background-color: rgb(255, 140, 0); }
 			
-			#main #meta #buttons #americas button{ color: rgb(255, 128, 130); }
-			#main #meta #buttons #americas button:hover { border-color: rgb(255, 128, 130);}
-			#main #meta #buttons #americas button.active{ background-color: rgb(255, 128, 130); }
+			#main #meta #region #americas button{ color: rgb(255, 128, 130); }
+			#main #meta #region #americas button:hover { border-color: rgb(255, 128, 130);}
+			#main #meta #region #americas button.active{ background-color: rgb(255, 128, 130); }
 			
-			#main #meta #buttons #asia button{ color: rgb(255, 225, 0); }
-			#main #meta #buttons #asia button:hover { border-color: rgb(255, 225, 0);}
-			#main #meta #buttons #asia button.active{ background-color: rgb(255, 225, 0); }
+			#main #meta #region #asia button{ color: rgb(255, 225, 0); }
+			#main #meta #region #asia button:hover { border-color: rgb(255, 225, 0);}
+			#main #meta #region #asia button.active{ background-color: rgb(255, 225, 0); }
 			
-			#main #meta #buttons #europe button{ color: rgb(255, 160, 110); }
-			#main #meta #buttons #europe button:hover { border-color: rgb(255, 160, 110);}
-			#main #meta #buttons #europe button.active{ background-color: rgb(255, 160, 110); }
+			#main #meta #region #europe button{ color: rgb(255, 160, 110); }
+			#main #meta #region #europe button:hover { border-color: rgb(255, 160, 110);}
+			#main #meta #region #europe button.active{ background-color: rgb(255, 160, 110); }
 			
-			#main #meta #buttons #oceania button{ color: rgb(200, 150, 100); }
-			#main #meta #buttons #oceania button:hover { border-color: rgb(200, 150, 100);}
-			#main #meta #buttons #oceania button.active{ background-color: rgb(200, 150, 100); }
+			#main #meta #region #oceania button{ color: rgb(200, 150, 100); }
+			#main #meta #region #oceania button:hover { border-color: rgb(200, 150, 100);}
+			#main #meta #region #oceania button.active{ background-color: rgb(200, 150, 100); }
 	
-		#main #meta #buttons  p{
+		#main #meta #buttons #region p{
 			font-size: 20px;
 			margin: 0;
 		}
@@ -309,30 +332,30 @@
 			</div>
 			
 			<h2>Nodes*:</h2>
-			<div id="buttons">
+			<div id="region">
 				<div class="index" id="africa">
 					<p>&nbsp;</p>
-					<button id="africa">Africa</button>
+					<button id="africa" class="active">Africa</button>
 					<br class="clear">
 				</div>
 				<div class="index" id="americas">
 					<p>&nbsp;</p>
-					<button id="americas">Americas</button>
+					<button id="americas" class="active">Americas</button>
 					<br class="clear">
 				</div>
 				<div class="index" id="asia">
 					<p>&nbsp;</p>
-					<button id="asia">Asia</button>
+					<button id="asia" class="active">Asia</button>
 					<br class="clear">
 				</div>
 				<div class="index" id="europe">
 					<p>&nbsp;</p>
-					<button id="europe">Europe</button>
+					<button id="europe" class="active">Europe</button>
 					<br class="clear">
 				</div>
 				<div class="index" id="oceania">
 					<p>&nbsp;</p>
-					<button id="oceania">Oceania</button>
+					<button id="oceania" class="active">Oceania</button>
 					<br class="clear">
 				</div>
 			</div>
@@ -397,7 +420,17 @@ $("#buttons button").toggle(
 	function(){
 		$(this).removeClass("active");
 	}
-)
+);
+$("#region button").toggle(
+
+		function(){
+			$(this).removeClass("active");
+		}
+		,function(){
+			$(this).addClass("active");
+		}
+	
+);
 // $("#buttons button").toggle(
 // 
 // 	function(){
@@ -538,6 +571,12 @@ var selected_indices = [];
 var selected_regions = []; 
 var links =[];
 var node_colors = d3.scale.ordinal().domain(["Africa","Americas","Asia","Europe","Oceania"]).range(["rgb(255, 140, 0)", "rgb(255, 128, 130)", "rgb(255, 225, 0)", "rgb(255, 160, 110)", "rgb(200, 150, 100)"]);
+var regionButtons = $('#region button');
+regionButtons.click(function(){
+  selected_regions = $('#region button.active');
+	update_network(network);
+
+});
 
 var checkboxes = $('#buttons button');
 checkboxes.click(function(){
@@ -717,16 +756,8 @@ function update_network(network){
 
 		vis.selectAll("circle.node")
 		.style("fill", "white");
-		selected_indices.each(function(index, i){
+		selected_regions.each(function(index, i){
 			
-			if(i.id == "africa" || i.id == "americas" ||i.id == "asia" ||i.id == "oceania"||i.id == "europe")
-			{
-		
-				}else
-				{ 
-				vis.selectAll("circle.node")
-				.style("fill", function(d){return node_colors(d["continent_region"])});	
-			}
 		if(i.id == "africa")
 		{
 			 	vis.selectAll("circle.node")
@@ -914,13 +945,13 @@ function build_network(network){
 	//	force.start();
 		//clear scene
 		//fade to white all nodes
-		var selected = vis.selectAll("circle")
-		 .attr("stroke", "white")
-		.attr("stroke-opacity", 1)
-		.attr("stroke-width", 1)
-		//.attr("stroke-width", function(d) { var returnValue =0; returnValue = ( Number(d.Overall_loss_percent)/Overall_loss_scaleFactor); return  returnValue; })
-		.transition().duration(500)
-		.style("fill", "white")
+		// var selected = vis.selectAll("circle")
+		// .attr("stroke", "white")
+		// .attr("stroke-opacity", 1)
+		// .attr("stroke-width", 1)
+		// //.attr("stroke-width", function(d) { var returnValue =0; returnValue = ( Number(d.Overall_loss_percent)/Overall_loss_scaleFactor); return  returnValue; })
+		// .transition().duration(500)
+		// .style("fill", "white")
 						
 		var selected = vis.selectAll("circle.node")
 		.filter(function(d, j	) {  return d === p; })
@@ -951,14 +982,14 @@ function build_network(network){
 				// console.log(index +" "+ i.id );
 				var target = network["nodes"];
 				if(i.id == "EPI"){ 
-					var selected = vis.selectAll("circle.node")
+					vis.selectAll("circle.node")
 					.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByEPI(p.index)})//d === pr; })
-					.transition().duration(500)
+//					.transition().duration(500)
 					.style("fill", function(d){return node_colors(d["continent_region"])});
 									
-					var selected = vis.selectAll("circle.node")
+					vis.selectAll("circle.node")
 					.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByEPI(p.index)})//d === pr; })
-					.transition().duration(500)
+//					.transition().duration(500)
 					.style("fill", function(d){return node_colors(d["continent_region"])});
 				
 							
@@ -966,18 +997,18 @@ function build_network(network){
 					.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByEPI(p.index);})//d === pr; })
 					.attr("stroke", nodeOutlinecolor(1))
 					.attr("stroke-width",4)
-					.attr("stroke-dasharray", "6, 6")
+//					.attr("stroke-dasharray", "6, 6")
 					.attr("stroke-opacity", 0.75)
-					.transition().duration(500)
+//					.transition().duration(500)
 //					.style("fill", function(d){return node_colors(d["continent_region"])})
 					//annotate +1 index 
 					var selected = vis.selectAll("circle.loss")
 					.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByEPI(p.index);})//d === pr; })
 					.attr("stroke", nodeOutlinecolor(1))
-					.attr("stroke-width",8)
-					.attr("stroke-dasharray", "12 ,12")	
+					.attr("stroke-width",10)
+//					.attr("stroke-dasharray", "12 ,12")	
 						.attr("stroke-opacity", 0.75)
-					.transition().duration(500)
+//					.transition().duration(500)
 //					.style("fill", function(d){return node_colors(d["continent_region"])})
 
 					var selected = vis.selectAll("line")
@@ -990,7 +1021,7 @@ function build_network(network){
 				if(i.id == "IHDI"){
 					var selected = vis.selectAll("circle.node")
 					.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByIHDI(p.index)})//d === pr; })
-					.transition().duration(500)
+//					.transition().duration(500)
 					.style("fill", function(d){return node_colors(d["continent_region"])});
 									
 					var selected = vis.selectAll("circle.node")
@@ -1003,17 +1034,17 @@ function build_network(network){
 					.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByIHDI(p.index)})//d === pr; })
 					.attr("stroke", nodeOutlinecolor(2))
 					.attr("stroke-width",4)
-					.attr("stroke-dasharray", "5, 5")
+//					.attr("stroke-dasharray", "5, 5")
 					.attr("stroke-opacity", 0.75)
 					
 					//annotate +1 index 
 					var selected = vis.selectAll("circle.loss")
 					.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByIHDI(p.index)})//d === pr; })
 					.attr("stroke", nodeOutlinecolor(2))
-					.attr("stroke-width",8)
-					.attr("stroke-dasharray", "10 ,10")	
+					.attr("stroke-width",10)
+//					.attr("stroke-dasharray", "10 ,10")	
 					.attr("stroke-opacity", 0.75)
-					.transition().duration(500)
+//					.transition().duration(500)
 				//	.style("fill", function(d){return node_colors(d["continent_region"])})
 					
 					var selected = vis.selectAll("line")
@@ -1036,18 +1067,18 @@ function build_network(network){
 					.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByGII(p.index)})//d === pr; })
 					.attr("stroke", nodeOutlinecolor(3))
 					.attr("stroke-width",4)
-					.attr("stroke-dasharray", "3, 3")
+//					.attr("stroke-dasharray", "3, 3")
 					.attr("stroke-opacity", 1)
-					.transition().duration(500)
+//					.transition().duration(500)
 				//	.style("fill", function(d){return node_colors(d["continent_region"])})
 					//annotate +1 index 
 					var selected = vis.selectAll("circle.loss")
 					.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByGII(p.index)})//d === pr; })
 					.attr("stroke", nodeOutlinecolor(3))
-					.attr("stroke-width",8)
-					.attr("stroke-dasharray", "6 ,6")	
+					.attr("stroke-width",10)
+//					.attr("stroke-dasharray", "6 ,6")	
 					.attr("stroke-opacity",0.75)
-					.transition().duration(500)
+//					.transition().duration(500)
 				//	.style("fill", function(d){return node_colors(d["continent_region"])})
 					
 					var selected = vis.selectAll("line.node")
@@ -1071,7 +1102,7 @@ function build_network(network){
 					.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByGNI(p.index)})//d === pr; })
 					.attr("stroke", nodeOutlinecolor(4))
 					.attr("stroke-width",4)
-					.attr("stroke-dasharray", "4, 4")
+//					.attr("stroke-dasharray", "4, 4")
 					.attr("stroke-opacity", 1)
 					.transition().duration(500)
 //					.style("fill", function(d){return node_colors(d["continent_region"])})
@@ -1079,8 +1110,8 @@ function build_network(network){
 					var selected = vis.selectAll("circle.loss")
 					.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByGNI((p.index))})//d === pr; })
 					.attr("stroke", nodeOutlinecolor(4))
-					.attr("stroke-width",8)
-					.attr("stroke-dasharray", "8 ,8")	
+					.attr("stroke-width",10)
+//					.attr("stroke-dasharray", "8 ,8")	
 					.attr("stroke-opacity", .75)
 					.transition().duration(500)
 //					.style("fill", function(d){return node_colors(d["continent_region"])})
@@ -1107,31 +1138,25 @@ function build_network(network){
 
 	node.on("mouseout", function(p, j) {
 		// 
-		d3.selectAll("circle.node")
-			.attr("stroke-dasharray", "0")	
-			
-			.transition().duration(500)
-			.attr("stroke-width",0)
-			.style("fill", function(d){return node_colors(d["continent_region"])})
-			.attr("stroke", "white")
-			.attr("stroke-opacity", 1);
-			//.attr("stroke-width", function(d) { var returnValue =0; returnValue = ( Number(d.Overall_loss_percent)/Overall_loss_scaleFactor); return  returnValue; })   
-		//	.style("fill", function(d) { return node_colors(d["continent_region"])});
+// 		vis.selectAll("circle.node")
+// 			//.attr("stroke-dasharray", "0")				
+// //			.transition().duration(500)
+// 			.attr("stroke-width",0)
+// 			//.style("fill", function(d){return node_colors(d["continent_region"])})
+// 			.attr("stroke", "white")
+// 			.attr("stroke-opacity", 1)
+// 			//.attr("stroke-width", function(d) { var returnValue =0; returnValue = ( Number(d.Overall_loss_percent)/Overall_loss_scaleFactor); return  returnValue; })   
+// 			.style("fill", function(d) { return node_colors(d["continent_region"])});
 			//node radious
 		//	.attr("r", function(d) { var returnValue =0; returnValue = (d.HDI*HDIscaleFactor); return  returnValue; });
-
-
-		d3.selectAll("circle.loss")
-			.style("fill", "white")
-			.attr("stroke-width", 0) 
-			.attr("stroke", "white")
-			// .style("fill", function(d){return node_colors(d["continent_region"])})
-			.attr("stroke-opacity", 1)
-				.transition().duration(500)
 		
-			//node radious
-		//	.attr("r", function(d) { var returnValue =0; returnValue = (Number(d.Overall_loss_percent)/Overall_loss_scaleFactor); return  returnValue; });
-
+		
+		 vis.selectAll("circle.loss")
+			.style("fill", "white")
+		 	.attr("stroke-width", 0) 
+		 	.attr("stroke", "white")
+		// 	.attr("stroke-opacity", 1);
+			
 
 			// //white "outline" - the value of OverallLoss.
 			// node.append("svg:circle")
