@@ -667,11 +667,8 @@ function build_network(network){
 
  	vis = d3.select("#network").append("svg:svg")
 	    .attr("width", w)
-	    .attr("height", h)
-		;
-		//.attr("scale", 0.1);;
-	
-	
+	    .attr("height", h);
+
 	var force = self.force = d3.layout.force()
 	        .nodes(network.nodes)
 	        .links(network.links)
@@ -1237,12 +1234,10 @@ function update_force(){
 				// console.log("no indices selected");
 										force 
 										        .links(network.links)
-												.linkStrength(.00) 
-												//.friction(1)
+												.linkStrength(.0) 
+												 //.friction(1)
 												 .charge(-40)
-												 //.gravity("dx",.05)
-												 //.gravity("dy",.05)
-												.gravity(0.05)
+												 .gravity(.05)
 											    .size([w, h])
 											//	.nodes(network.nodes)
 												.on("tick", function(e) {
