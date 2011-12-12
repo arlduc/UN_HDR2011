@@ -44,25 +44,20 @@
 	}
 	
 	#america{
-		color:rgb(227,140,80);
-		text-shadow: 1px 1px 3px rgba(0,0,0, 0.3);
+		color:rgb(255,128,130);
 	}
 	#europe{
-		color:rgb(249,209,89);
-		text-shadow: 1px 1px 3px rgba(0,0,0, 0.3);	
+		color:rgb(255,160,110);
 	}
 	#asia{
-		color:rgb(235,134,120);
-		text-shadow: 1px 1px 3px rgba(0,0,0, 0.3);	
+		color:rgb(255,225,0);
 	} 
 	#africa{		
 /*		color:rgb(237,228,180);*/
-		color: rgb(255,180,0);
-		text-shadow: 1px 1px 3px rgba(0,0,0, 0.3);	
+		color: rgb(255,140,0);
 	} 
-	#australia{			
-		color:rgb(243,253,242);
-		text-shadow: 1px 1px 3px rgba(0,0,0, 0.3);	
+	#oceania{			
+		color:rgb(200,150,100);
 	}
 	
 	#container {
@@ -273,7 +268,7 @@
 					<li id="africa">Africa</li>
 					<li id="america">Americas</li>
 					<li id="asia">Asia</li>
-					<li id="australia">Australia</li>
+					<li id="oceania">Oceania</li>
 					<li id="europe">Europe</li>
 				</ul>
 			</div>
@@ -310,7 +305,10 @@
 				<p class="asterisk">**</p>
 				<p>(Normalized value) The percent difference between the Human Development Index (HDI) and Inequality-Adjusted Human Development Index (IHDI). See UN HDR 2011, p. 138.</p>
 				<br class="clear">
+				
+				<p> More on the indices used in this visualization: </p>
 			</div>
+			
 			
 		</div>
 	</footer>
@@ -810,7 +808,7 @@ function build_network(network){
 	//	force.start();
 		//clear scene
 		//fade to white all nodes
-		vis.selectAll("circle")
+		var selected = vis.selectAll("circle")
 		 .attr("stroke", "white")
 		.attr("stroke-opacity", 1)
 		.attr("stroke-width", 1)
@@ -831,11 +829,13 @@ function build_network(network){
 		
 		var selected = vis.selectAll("circle.loss")
 			.filter(function(d, j	) {  return d === p; })
+				.transition().duration(500)
 			.attr("stroke", "grey")
 			//.attr("stroke-width", function(d) { var returnValue =0; returnValue = ( Number(d.Overall_loss_percent)/Overall_loss_scaleFactor); return  returnValue; })
 			.attr("stroke-width", 1)
 			.attr("stroke-opacity", 1)	
-			.transition().duration(500);	
+		
+			.style("fill" , "grey");	
 		 
 		var selected = vis.selectAll("line")
 			.attr("stroke-width",8)
@@ -846,6 +846,8 @@ function build_network(network){
 				// console.log(index +" "+ i.id );
 				var target = network["nodes"];
 				if(i.id == "EPI"){ 
+				
+							
 					var selected = vis.selectAll("circle.node")
 					.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByEPI(p.index);})//d === pr; })
 					.attr("stroke", nodeOutlinecolor(1))
@@ -961,24 +963,25 @@ function build_network(network){
 	node.on("mouseout", function(p, j) {
 		// 
 		d3.selectAll("circle.node")
-			.transition().duration(500)
-			// .attr("stroke", "white")
-			// .style("fill", function(d){return node_colors(d["continent_region"])})
-			.attr("stroke", "white")
-			.attr("stroke-opacity", 1)
+				.transition().duration(500)
+			 .style("fill", function(d){return node_colors(d["continent_region"])})
+			
+						.attr("stroke", "white")
+						.attr("stroke-opacity", 1);
 		//	.attr("stroke-width", function(d) { var returnValue =0; returnValue = ( Number(d.Overall_loss_percent)/Overall_loss_scaleFactor); return  returnValue; })   
-			.style("fill", function(d) { return node_colors(d["continent_region"])})
+		//	.style("fill", function(d) { return node_colors(d["continent_region"])});
 			//node radious
 		//	.attr("r", function(d) { var returnValue =0; returnValue = (d.HDI*HDIscaleFactor); return  returnValue; });
 
 
 		d3.selectAll("circle.loss")
-			.transition().duration(500)
+			.style("fill", "white")
+			.attr("stroke-width", 0) 
 			.attr("stroke", "white")
 			// .style("fill", function(d){return node_colors(d["continent_region"])})
-			.attr("stroke", "white")
 			.attr("stroke-opacity", 1)
-			.attr("stroke-width", 0)   
+				.transition().duration(500)
+		
 			//node radious
 		//	.attr("r", function(d) { var returnValue =0; returnValue = (Number(d.Overall_loss_percent)/Overall_loss_scaleFactor); return  returnValue; });
 
