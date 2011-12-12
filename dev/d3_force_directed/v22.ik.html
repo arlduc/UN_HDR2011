@@ -198,7 +198,7 @@
 		-webkit-box-shadow:inset 0 0 10px #000000;
 		box-shadow:inset 0 0 10px #000000;
 		float: right;
-		height: 750px;
+		height: 900PX;
 		width: 750px;
 	}
 	footer {
@@ -312,27 +312,27 @@
 			<div id="buttons">
 				<div class="index" id="africa">
 					<p>&nbsp;</p>
-					<button>Africa</button>
+					<button id="africa">Africa</button>
 					<br class="clear">
 				</div>
 				<div class="index" id="americas">
 					<p>&nbsp;</p>
-					<button>Americas</button>
+					<button id="americas">Americas</button>
 					<br class="clear">
 				</div>
 				<div class="index" id="asia">
 					<p>&nbsp;</p>
-					<button>Asia</button>
+					<button id="asia">Asia</button>
 					<br class="clear">
 				</div>
 				<div class="index" id="europe">
 					<p>&nbsp;</p>
-					<button>Europe</button>
+					<button id="europe">Europe</button>
 					<br class="clear">
 				</div>
 				<div class="index" id="oceania">
 					<p>&nbsp;</p>
-					<button>Oceania</button>
+					<button id="oceania">Oceania</button>
 					<br class="clear">
 				</div>
 			</div>
@@ -398,7 +398,15 @@ $("#buttons button").toggle(
 		$(this).removeClass("active");
 	}
 )
-
+// $("#buttons button").toggle(
+// 
+// 	function(){
+// 		$(this).addClass("active");
+// 	},
+// 	function(){
+// 		$(this).removeClass("active");
+// 	}
+// )
 
 // If using the chrome browser you will not be able to see the network 
 // since it is very strict about bringing in local files external to this 
@@ -527,6 +535,7 @@ function SortByGNI_Gross_National_Income(a,b)
  function SortBySUM(a,b)
  { return a.SUM - b.SUM; } 
 var selected_indices = [];
+var selected_regions = []; 
 var links =[];
 var node_colors = d3.scale.ordinal().domain(["Africa","Americas","Asia","Europe","Oceania"]).range(["rgb(255, 140, 0)", "rgb(255, 128, 130)", "rgb(255, 225, 0)", "rgb(255, 160, 110)", "rgb(200, 150, 100)"]);
 
@@ -595,8 +604,7 @@ checkboxes.click(function(){
 				}
 				network["links"] = network["links"].concat(links);
 	 	}
-		else {};
-		
+	//	else {};
 
     });
 	update_force();
@@ -625,7 +633,7 @@ var network ={"nodes":[], "links":[], },
 
 // All code here from: http://bl.ocks.org/950642
 var w = 750,
-	h = 750;
+	h = 900;
 var HDIscaleFactor = 25; 	
 var Overall_loss_scaleFactor = 2.5; 
 var vis;
@@ -706,7 +714,57 @@ function update_network(network){
         .attr("x2", function(d) { return d.target.x; })
         .attr("y2", function(d) { return d.target.y; })
         .attr("z", 10);
-	        
+
+		vis.selectAll("circle.node")
+		.style("fill", "white");
+		selected_indices.each(function(index, i){
+			
+			if(i.id == "africa" || i.id == "americas" ||i.id == "asia" ||i.id == "oceania"||i.id == "europe")
+			{
+		
+				}else
+				{ 
+				vis.selectAll("circle.node")
+				.style("fill", function(d){return node_colors(d["continent_region"])});	
+			}
+		if(i.id == "africa")
+		{
+			 	vis.selectAll("circle.node")
+				.filter(function(d, j	) {  return d.continent_region === "Africa"})
+				.attr("stroke", "grey")
+				.style("fill", function(d){return node_colors(d["continent_region"])});	
+		}
+		if(i.id == "americas")
+		{	
+		 	vis.selectAll("circle.node")
+			.filter(function(d, j	) {  if(d.continent_region == "Americas") return true; else return false;})
+			.attr("stroke", "grey")
+			.style("fill", function(d){return node_colors(d["continent_region"])});
+				
+		}
+		if(i.id == "asia")
+		{	
+		 	vis.selectAll("circle.node")
+			.filter(function(d, j	) {  return d.continent_region === "Asia"})
+			.attr("stroke", "grey")
+			.style("fill", function(d){return node_colors(d["continent_region"])});
+		}
+		if(i.id == "oceania")
+		{
+	
+		 	vis.selectAll("circle.node")
+			.filter(function(d, j	) {  return d.continent_region === "Oceania"})
+			.attr("stroke", "grey")
+			.style("fill", function(d){return node_colors(d["continent_region"])});
+		}
+		if(i.id == "europe")
+		{	
+		 	vis.selectAll("circle.node")
+			.filter(function(d, j	) {  return d.continent_region === "Europe"})
+			.attr("stroke", "grey")
+			.style("fill", function(d){return node_colors(d["continent_region"])});
+		}
+        })
 }
 // init
 function build_network(network){
