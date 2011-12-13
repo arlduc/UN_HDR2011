@@ -765,6 +765,7 @@ function update_regions(){
 		.attr("stroke", "grey")
 		.attr("stroke-width",1 )
 		
+		
 	}else{
 			vis.selectAll("circle.node")
 			.style("fill", "white")
@@ -1022,19 +1023,20 @@ function build_network(network){
 		//.classed("myclass", true)
 		.attr("stroke", "grey")
 		//.attr("stroke-width", function(d) { var returnValue =0; returnValue = ( Number(d.Overall_loss_percent)/Overall_loss_scaleFactor); return  returnValue; })
-		.attr("stroke-width", 0)
+		.attr("stroke-width", 1)
 		.style("fill", function(d){return node_colors(d["continent_region"])})
 		.attr("stroke-opacity", 1)	
-		.attr("z-index", 10)
-		.transition().duration(500);
+		.attr("z-index", 10);
+	//	.transition().duration(500);
 		
-		var selected = vis.selectAll("circle.loss")
+		vis.selectAll("circle.loss")
 			.filter(function(d, j	) {  return d === p; })
+				.attr("stroke-width", 1)
+				.attr("stroke-opacity", 1)
 			.transition().duration(500)
-			.attr("stroke", "grey")
+			.attr("stroke", "grey");
 			//.attr("stroke-width", function(d) { var returnValue =0; returnValue = ( Number(d.Overall_loss_percent)/Overall_loss_scaleFactor); return  returnValue; })
-			.attr("stroke-width", 1)
-			.attr("stroke-opacity", 1);	
+		
 		//	.style("fill" , "grey");	
 		 
 		var selected = vis.selectAll("line")
@@ -1193,8 +1195,8 @@ function build_network(network){
 		
 		d3.select("#country_name h2").text(p.Country)
 		d3.select("#country_name img").attr("src", "../img/flags/flag_"+p.abbrv.toLowerCase()+".png")
-		d3.select("#buttons #EPI p").text(p.Environmental_Performance_Index +" #:" + (Number(network.nodes.sort(SortByEnvironmental_Performance_Index ).indexOf(p))+1))
-		d3.select("#buttons #IHDI p").text(p.IHDI_Inequality_adjusted_HDI_value +" #:" +  Number(network.nodes.sort(SortByIHDI_Inequality_adjusted_HDI_value ).indexOf(p))+1)
+		d3.select("#buttons #EPI p").text(p.Environmental_Performance_Index +" #:" +    (Number(network.nodes.length)-(Number(network.nodes.sort(SortByEnvironmental_Performance_Index ).indexOf(p))))   )
+		d3.select("#buttons #IHDI p").text(p.IHDI_Inequality_adjusted_HDI_value +" #:" +  Number(network.nodes.sort(SortByIHDI_Inequality_adjusted_HDI_value ).indexOf(p)))
 		d3.select("#buttons #GII p").text(p.GII_Gender_Inequality_Index_value +" #:" + Number(network.nodes.sort(SortByGII_Gender_Inequality_Index_value ).indexOf(p))+1)
 		d3.select("#buttons #GNI p").text("$"+d3.format(",")(p.GNI_Gross_National_Income) +" #:" +Number(network.nodes.sort(SortByGNI_Gross_National_Income).indexOf(p))+1)
 		
@@ -1212,7 +1214,7 @@ function build_network(network){
 			.attr("stroke-width", 1);
 			vis.selectAll("circle.loss")
 			.attr("stroke-opacity", 1)
-			.attr("stroke-width", 1);
+			.attr("stroke-width", 0);
 			
 			vis.selectAll("circle.loss")
 			.filter(function(d, j	) {  return d ===p; })
