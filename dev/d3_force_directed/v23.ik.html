@@ -198,9 +198,9 @@
 				#main #meta #region #asia button:hover { border-color: rgb(255, 225, 0);}
 				#main #meta #region #asia button.active{ background-color: rgb(255, 225, 0); }
 
-				#main #meta #region #europe button{ color: rgb(255, 160, 110); }
-				#main #meta #region #europe button:hover { border-color: rgb(255, 160, 110);}
-				#main #meta #region #europe button.active{ background-color: rgb(255, 160, 110); }
+				#main #meta #region #europe button{ color: rgb(223, 189, 166); }
+				#main #meta #region #europe button:hover { border-color: rgb(223, 189, 166);}
+				#main #meta #region #europe button.active{ background-color: rgb(223, 189, 166); }
 
 				#main #meta #region #oceania button{ color: rgb(200, 150, 100); }
 				#main #meta #region #oceania button:hover { border-color: rgb(200, 150, 100);}
@@ -589,7 +589,7 @@ function SortByGNI_Gross_National_Income(a,b)
 var selected_indices = [];
 var selected_regions = []; 
 var links =[];
-var node_colors = d3.scale.ordinal().domain(["Africa","Americas","Asia","Europe","Oceania"]).range(["rgb(255, 140, 0)", "rgb(255, 128, 130)", "rgb(255, 225, 0)", "rgb(255, 160, 110)", "rgb(200, 150, 100)"]);
+var node_colors = d3.scale.ordinal().domain(["Africa","Americas","Asia","Europe","Oceania"]).range(["rgb(255, 140, 0)", "rgb(255, 128, 130)", "rgb(255, 225, 0)", "rgb(223, 189, 166)", "rgb(200, 150, 100)"]);
 //initialize selected regions.
 selected_regions = $('#region button.active');
 var regionButtons = $('#region button');
