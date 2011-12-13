@@ -44,7 +44,7 @@
 	}
 	
 	#america{ color:rgb(255, 128, 130); }
-	#europe{ color: rgb(255, 160, 110); }
+	#europe{ color: rgb(223, 189, 166); }
 	#asia{ color:rgb(255, 225, 0); } 
 	#africa{ color: rgb(255, 140, 0); } 
 	#oceania{ color:rgb(200, 150, 100); }
@@ -772,17 +772,12 @@ function update_regions(){
 			.attr("stroke", "lightgrey")
 			.attr("stroke-width",1 )
 		}
-	$("#europe p").text("X");
-	$("#africa p").text("X")
-	$("#americas p").text("X")
-	$("#asia p").text("X")
-	$("#oceania p").text("X")
 				
 	selected_regions.each(function(index, i){
 
 	if(i.id == "africa")
 	{
-			$("#africa p").text("✔")
+//			$("#africa p").text("✔")
 		
 		 	vis.selectAll("circle.node")
 			.filter(function(d, j	) {  return d.continent_region === "Africa"})
@@ -792,7 +787,7 @@ function update_regions(){
 	}
 	if(i.id == "americas")
 	{	
-			$("#americas p").text("✔")
+//			$("#americas p").text("✔")
 			
 	 	vis.selectAll("circle.node")
 		.filter(function(d, j	) {  if(d.continent_region == "Americas") return true; else return false;})
@@ -803,7 +798,7 @@ function update_regions(){
 	}
 	if(i.id == "asia")
 	{	
-			$("#asia p").text("✔")
+//			$("#asia p").text("✔")
 		
 	 	vis.selectAll("circle.node")
 		.filter(function(d, j	) {  return d.continent_region === "Asia"})
@@ -813,7 +808,7 @@ function update_regions(){
 	}
 	if(i.id == "oceania")
 	{
-			$("#oceania p").text("✔")
+//			$("#oceania p").text("✔")
 		
 	 	vis.selectAll("circle.node")
 		.filter(function(d, j	) {  return d.continent_region === "Oceania"})
@@ -823,7 +818,7 @@ function update_regions(){
 	}
 	if(i.id == "europe")
 	{	
-			$("#europe p").text("✔")
+//			$("#europe p").text("✔")
 			
 	 	vis.selectAll("circle.node")
 		.filter(function(d, j	) {  return d.continent_region === "Europe"})
@@ -1034,6 +1029,16 @@ function build_network(network){
 
 	
 	function node_mouseOver(p, j){
+	
+	
+		$("#europe p").text("");
+		$("#africa p").text("")
+		$("#americas p").text("")
+		$("#asia p").text("")
+		$("#oceania p").text("")
+	
+		$("#"+p.continent_region.toLowerCase()+" p").text("✔");
+	
 	
 		//fade to white all nodes
 		vis.selectAll("circle.node")
