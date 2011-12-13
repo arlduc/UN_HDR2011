@@ -43,27 +43,11 @@
 		border-color: #6091a2;
 	}
 	
-	#america{
-		color:rgb(227,140,80);
-		text-shadow: 1px 1px 3px rgba(0,0,0, 0.3);
-	}
-	#europe{
-		color:rgb(249,209,89);
-		text-shadow: 1px 1px 3px rgba(0,0,0, 0.3);	
-	}
-	#asia{
-		color:rgb(235,134,120);
-		text-shadow: 1px 1px 3px rgba(0,0,0, 0.3);	
-	} 
-	#africa{		
-/*		color:rgb(237,228,180);*/
-		color: rgb(255,180,0);
-		text-shadow: 1px 1px 3px rgba(0,0,0, 0.3);	
-	} 
-	#australia{			
-		color:rgb(243,253,242);
-		text-shadow: 1px 1px 3px rgba(0,0,0, 0.3);	
-	}
+	#americas{ color:rgb(255, 128, 130); }
+	#europe{ color: rgb(223, 189, 166); }
+	#asia{ color:rgb(255, 225, 0); } 
+	#africa{ color: rgb(255, 140, 0); } 
+	#oceania{ color:rgb(200, 150, 100); }
 	
 	#container {
 		margin: 0 auto 40px auto;
@@ -85,72 +69,157 @@
 		background: #efefef;
 /*		border: solid 2px black;*/
 	}
-		#main #country_name {
-			padding: 5px;
+	#main #meta {
+		float: left;
+		width: 350px;
+	}
+		#main #meta hr {
+			margin: 0 0 4px 0;
 		}
-		#main #country_name img{
+		#main #meta #country_name {
+		}
+		#main #meta #country_name img{
 /*			float: left;*/
 			vertical-align: top;
 			width: 45px;
 		}
-		#main #country_name h2{
+		#main #meta #country_name h2{
 			display: inline;
 			font-size: 24px;
 			line-height: 48px;
 			padding: 0 5px;
 		}
-		#main #buttons {
+		#main #meta h2 {
+			font-size: 20px;
+			margin: 5px 0;
+		}
+		#main #meta h2.links_nodes {
+			font-size: 20px;
+			margin: 5px 0 0 136px;
+		}
+		#main #meta p {
+			font-size: 13px;
+			line-height: 18px;
+		}
+		#main #meta p img {
+			margin: 0 4px 0 0;
+			vertical-align: middle;
+			height: 15px;
+			width: 15px;
+		}
+/*		#main #meta #buttons {*/
 /*			box-shadow: 1px 5px 5px #888;*/
-			background: rgba(255, 255, 255, 0.5);
+/*			width: 100%;*/
+/*		}*/
+		#main #meta #buttons .index{
 			width: 100%;
 		}
-		#main button {
-/*			border: solid 1px green;*/
-			font-size: 10px;
+		#main #meta #buttons .index p{
+			font-size: 18px;
+			float: left;
+			margin: 0;
+			width: 125px;
+			padding: 12px 0 0 0;
+		}
+		#main #meta #buttons .index p .rank{
+			font-size: 12px;
+		}
+		#main #meta #buttons button {
+			border: solid 2px #efefef;
+			float: right;
+			font-size: 12px;
+			height: 45px;
 			margin: 0;
 			text-align: left;
-			width: 25%;
+			width: 225px;
 		}
-		#main button:hover,
-		#main button.active { 
-			color: white !important;
+		#main #meta #buttons button:hover,
+		#main #meta #buttons button.active { 
 			-moz-box-shadow:inset 0 0 10px #000000;
 			-webkit-box-shadow:inset 0 0 10px #000000;
 			box-shadow:inset 0 0 10px #000000;
+			border-right: none; 
 		}
-			#main #EPI{
+		#main #meta #buttons button.active { color: white !important; }
+			/* LINKS */
+			#main #meta #buttons #EPI button{
 				color: #232B59;
-				border-color: #232B59;
 			}
-			#main #EPI:hover { background-color: rgba(35,43,89, 0.75) !important;}
-			#main #EPI.active{ background-color: rgba(35,43,89, 1); }
-			#main #IHDI{
+			#main #meta #buttons #EPI button:hover { border-color: rgb(35,43,89);}
+			#main #meta #buttons #EPI button.active{ background-color: rgba(35,43,89, 1); }
+			#main #meta #buttons #IHDI button{
 				color: #93A608;
-				border-color: #93A608;
 			}
-			#main #IHDI:hover { background-color: rgba(147,166,8, 0.75) !important; }
-			#main #IHDI.active{ background-color: rgba(147,166,8, 1); }
-			#main #GII{
+			#main #meta #buttons #IHDI button:hover { border-color: rgb(147,166,8);}
+			#main #meta #buttons #IHDI button.active{ background-color: rgba(147,166,8, 1); }
+			#main #meta #buttons #GII button{
 				color: #8301b0;
-				border-color: #8301b0;
 			}
-			#main #GII:hover { background-color: rgba(131,1,176, 0.75) !important; }
-			#main #GII.active{ background-color: rgba(131,1,176, 1); }
-			#main #GNI{
+			#main #meta #buttons #GII button:hover { border-color: rgb(131,1,176); }
+			#main #meta #buttons #GII button.active{ background-color: rgba(131,1,176, 1); }
+			#main #meta #buttons #GNI button{
 				color: #6091a2;
-				border-color: #6091a2;
 			}
-			#main #GNI:hover { background-color: rgba(96,145,162, 0.75) !important; }
-			#main #GNI.active{ background-color: rgba(96,145,162, 1); }
-		#main #buttons p{
-			font-size: 20px;
-			margin: 0;
-		}
-		#main #network {
-			-moz-box-shadow:inset 0 0 10px #000000;
-			-webkit-box-shadow:inset 0 0 10px #000000;
-			box-shadow:inset 0 0 10px #000000;
-		}
+			#main #meta #buttons #GNI button:hover { border-color: rgb(96,145,162); }
+			#main #meta #buttons #GNI button.active{ background-color: rgba(96,145,162, 1); }
+			/* NODES*/
+			
+				#main #meta #region .index{
+					width: 100%;
+				}
+				#main #meta #region .index p{
+					float: left;
+					width: 125px;
+				}
+				#main #meta #region button {
+					border: solid 2px #efefef;
+					float: right;
+					font-size: 12px;
+					height: 45px;
+					margin: 0;
+					text-align: left;
+					width: 225px;
+				}
+				#main #meta #region button:hover,
+				#main #meta #region button.active { 
+					-moz-box-shadow:inset 0 0 10px #000000;
+					-webkit-box-shadow:inset 0 0 10px #000000;
+					box-shadow:inset 0 0 10px #000000;
+					border-right: none; 
+				}
+				#main #meta #region button.active { color: white !important; }
+				#main #meta #region #africa button{ color: rgb(255, 140, 0); }
+				#main #meta #region #africa button:hover { border-color: rgb(255, 140, 0);}
+				#main #meta #region #africa button.active{ background-color: rgb(255, 140, 0); }
+
+				#main #meta #region #americas button{ color: rgb(255, 128, 130); }
+				#main #meta #region #americas button:hover { border-color: rgb(255, 128, 130);}
+				#main #meta #region #americas button.active{ background-color: rgb(255, 128, 130); }
+
+				#main #meta #region #asia button{ color: rgb(255, 225, 0); }
+				#main #meta #region #asia button:hover { border-color: rgb(255, 225, 0);}
+				#main #meta #region #asia button.active{ background-color: rgb(255, 225, 0); }
+
+				#main #meta #region #europe button{ color: rgb(223, 189, 166); }
+				#main #meta #region #europe button:hover { border-color: rgb(223, 189, 166);}
+				#main #meta #region #europe button.active{ background-color: rgb(223, 189, 166); }
+
+				#main #meta #region #oceania button{ color: rgb(200, 150, 100); }
+				#main #meta #region #oceania button:hover { border-color: rgb(200, 150, 100);}
+				#main #meta #region #oceania button.active{ background-color: rgb(200, 150, 100); }
+
+			#main #meta #buttons #region p{
+				font-size: 20px;
+				margin: 0;
+			}
+	#main #network {
+		-moz-box-shadow:inset 0 0 10px #000000;
+		-webkit-box-shadow:inset 0 0 10px #000000;
+		box-shadow:inset 0 0 10px #000000;
+		float: right;
+		height: 800px;
+		width: 750px;
+	}
 	footer {
 		margin: 0 0 50px 0;
 	}
@@ -163,7 +232,7 @@
 		margin: 5px 0 0 0;
 	}
 	footer p {
-		font-size: 14px;
+		font-size: 13px;
 		line-height: 18px;
 		text-shadow: 1px 1px 3px rgba(0,0,0, 0.3);
 	}
@@ -182,49 +251,21 @@
 		float: left;
 		width: 45%;
 	}
-/*	footer .key {*/
-/*		float: left;*/
-/*		width: 45%;*/
-/*	}*/
-/*	footer .key #keytext {
-		font-size: 14px;
-		letter-spacing: 3px;
-		padding:0px 0px 0px 0px; 
 
-	}*/
-	footer .key .key_section {
-		float: left;
-		width: 30%;
-		text-shadow: 1px 1px 3px rgba(0,0,0, 0.3);
-	}
-	footer .key .key_section#node_color {
-		width: 15%;
-	}
-		footer .key .key_section#node_color li {
-			font-size: 16px !important;
-		}
-	footer .key .key_section#node_size {
-		width: 35%;
-	}
-		footer .key .key_section#node_size p{
-			line-height: 33px;
-		}
-	footer .key .key_section#link_color {
-		width: 30%;
-	}
-	footer .key .key_section#layout {
-		width: 20%;
-	}
 	
-	footer #notes p {
+	
+	p.asterisk {
 		float: left;
-		width: 600px;
-	}
-	footer #notes p.asterisk {
 		font-size: 26px;
 		line-height: 16px;
-		margin: 14px 0 0 0;
-		width: 40px;
+		margin: 5px 0 0 0;
+		width: 20px;
+	}
+	p.after_asterisk {
+		float: left;
+		font-size: 11px !important;
+		margin: 5px 0 0 0;
+		width: 320px;
 	}
 	
 	button {
@@ -237,6 +278,44 @@
 		border: 0;
 		border-radius: 0;
 		margin: 0;
+	}
+	.context_help {
+		color: #222;
+		font-weight: 100;
+		position: absolute;
+		text-shadow: 1px 1px 3px rgba(0,0,0, 0.3);
+	}
+	.context_help.brace {
+		font-size: 180px;
+		margin: 75px 0 0 350px;
+		opacity: 0.6;
+	}
+	.context_help.brace#nodes {
+		font-size: 224px;
+		margin-top: 260px;
+	}
+	.context_help.text {
+		color: #222;
+		font-weight: 100;
+		margin: 144px 0 0 415px;
+/*		opacity: 0.8;*/
+		position: absolute;
+		text-shadow: 1px 1px 3px rgba(0,0,0, 0.3);
+		width: 50px;
+	}
+	.context_help.text#nodes {
+		margin-top: 370px;
+	}
+	h2#v_r{
+		float: left;
+		width: 136px;
+	}
+	h2#v_r span{
+		font-size: 12px;
+	}
+	h2#links{
+		float: left;
+		width: 200px;
 	}
 	</style>
 	
@@ -251,83 +330,110 @@
 		between socioeconomic equity and environmental sustainability. This visualization, by members of the <a href="http://media.mit.edu">MIT Media Lab</a> and <a href="http://dukode.com">
 		The DuKode Studio</a>, organizes some of the HDR’s summative 
 		indicators into network graphs to show how nations are multi-dimensionally linked.
-</p>
+		</p>
 	</header>
 	<div id="main" role="main">
-		<div id="country_name">
-			<img src="/img/magnifying.png" />
-			<h2>Select A Country Below</h2>
-		</div>
-		<div id="buttons">
-			<button id="EPI">Environmental Performance Index<p>&nbsp;</p></button><button id="IHDI">Inequality-adjusted Human Development Index<p>&nbsp;</p></button><button id="GII">Gender Inequality Index<p>&nbsp;</p></button><button id="GNI">Gross National Income (per capita)<p>&nbsp;</p></button>
+		<div id="meta">
+			<div class="context_help brace">}</div>
+			<div class="context_help text">Click to toggle on/off</div>
+			<div class="context_help brace" id="nodes">}</div>
+			<div class="context_help text" id="nodes">Click to toggle on/off</div>
+			<div id="country_name">
+				<img src="../img/magnifying.png" />
+				<h2>Select A Country</h2>
+			</div>
+			
+			<hr />
+			
+			<h2 id="v_r">Value<span> / Rank</span></h2>
+			<h2 id="links">Links:</h2>
+			<div id="buttons">
+				<div class="index" id="EPI">
+					<p>&nbsp; <span class="rank"></span></p>
+					<button id="EPI">Environmental Performance Index</button>
+					<br class="clear">
+				</div>
+				<div class="index" id="IHDI">
+					<p>&nbsp; <span class="rank"></span></p>
+					<button id="IHDI">Inequality-adjusted Human Development Index</button>
+					<br class="clear">
+				</div>
+				<div class="index" id="GII">
+					<p>&nbsp; <span class="rank"></span></p>
+					<button id="GII">Gender Inequality Index</button>
+					<br class="clear">
+				</div>
+				<div class="index"  id="GNI">
+					<p>&nbsp; <span class="rank"></span></p>
+					<button id="GNI">Gross National Income (per capita)</button>
+					<br class="clear">
+				</div>
+			</div>
+			
+			<h2 class="links_nodes">Nodes:</h2>
+				<div id="region">
+					<div class="index" id="africa">
+						<p>&nbsp;</p>
+						<button id="africa" class="active">Africa</button>
+						<br class="clear">
+					</div>
+					<div class="index" id="americas">
+						<p>&nbsp;</p>
+						<button id="americas" class="active">Americas</button>
+						<br class="clear">
+					</div>
+					<div class="index" id="asia">
+						<p>&nbsp;</p>
+						<button id="asia" class="active">Asia</button>
+						<br class="clear">
+					</div>
+					<div class="index" id="europe">
+						<p>&nbsp;</p>
+						<button id="europe" class="active">Europe</button>
+						<br class="clear">
+					</div>
+					<div class="index" id="oceania">
+						<p>&nbsp;</p>
+						<button id="oceania" class="active">Oceania</button>
+						<br class="clear">
+					</div>
+			</div>
+			
+			<h2>Node Size:</h2> 
+            <p><img src="../img/innercircle.png" width="30" height="30"/> Human Development Index (inner circle) </p>
+    		<p><img src="../img/outercircle.png" width="30" height="30"/> Overall Loss of Human Potential** (outer circle)</p>
+			
+			<br />
+			
+			<p class="asterisk">*</p>
+			<p class="after_asterisk">Countries with 1 or fewer data values are not visualized. Ranking numbers are based on the list of visualized countries only. </p>
+			<br class="clear">
+			<p class="asterisk">**</p>
+			<p class="after_asterisk">(Normalized value) The percent difference between the Human Development Index (HDI) and Inequality-Adjusted Human Development Index (IHDI). See UN HDR 2011, p. 138.</p>
+			<br class="clear">
+			
 		</div>
 		<div id="network"></div>
+		<br class="clear">
 	</div>
 	<footer>
-		<div class="key">
-			<h3>Key*</h3>
-			
-			<div class="key_section" id="node_color">
-				<h2>Node Color:</h2>
-				<ul>
-					<li id="africa">Africa</li>
-					<li id="america">Americas</li>
-					<li id="asia">Asia</li>
-					<li id="australia">Australia</li>
-					<li id="europe">Europe</li>
-				</ul>
-			</div>
-			
-			<div class="key_section" id="node_size">
-				<h2>Node Size:</h2> 
-                <p><img src="/img/innercircle.png" width="30" height="30"/> Human Development Index (inner circle) </p>
-        		<p><img src="/img/outercircle.png" width="30" height="30"/> Overall Loss of Human Potential** (outer circle)</p>
-			</div>
-			
-			<div class="key_section" id="link_color">
-				<h2>Link Color: </h2>
-				<p id="IHDI">2011 Inequality-Adjusted Human Development Index (IHDI) </p>
-				<p id="EPI">2010 Environmental Performance Index (EPI)</p>
-				<p id="GII">2011 Gender Inequality Index (GII)</p>
-				<p id="GNI">2011 Gross National Income (GNI) per capita</p>
-			</div>
-			
-			<div class="key_section" id="layout">
-				<h2>Layout: </h2>
-				<p>Node arrangement is based on the sum of checked indicators.</p>
-				<p>Rollovers show a node's neighbors for the checked indicators.</p>
-				<ul>
-					<li>Thick outlines = smaller  value</li>
-					<li>Thin outlines =  larger value </li>
-				</ul>
-			</div>
-			
-			<br class="clear">
-			<div id="notes">
-				<p class="asterisk">*</p>
-				<p>Countries with 1 or fewer data values are not visualized. </p>
-				<br class="clear">
-				<p class="asterisk">**</p>
-				<p>(Normalized value) The percent difference between the Human Development Index (HDI) and Inequality-Adjusted Human Development Index (IHDI). See UN HDR 2011, p. 138.</p>
-				<br class="clear">
-			</div>
-			
-		</div>
-	</footer>
+		<br><br>
+		<p> More on the visualization: The UN HDR dataset includes dozens of metrics. Those chosen for this visualization were selected to reflect composite calculations for equity, sustainability, gender, development, and income. Of the chosen metrics, a higher number indicates a comparatively positive status. The only exception is the Gender Inequality Index (GII), in which lower numbers indicate positive status. Some of the metrics are too new to analyze temporally; for instance, the Environmenal Performance Index was first calculated in 2010. As a result, this visualization is not time-based.
+			</footer>
 	
-	<br class="clear">
+	
+	
+	
 	<hr size="1" noshade>
 	<table width="100%" border="0">
 		<tr>
-			<td align="center"><a href="http://media.mit.edu" target="_blank"><img src="/img/logos/ML-text-logo.small.png"></a></td>
-			<td align="center"><a href="http://dukode.com" target="_blank"><img src="/img/logos/DuKodeLogo.v2.72dpi.small.png"></a></td>
-			<td align="center"><a href="http://macroconnections.media.mit.edu" target="_blank"><img src="/img/logos/logoNew.png"></a></td>
-			<td align="center"><a href="http://media.mit.edu" target="_blank"><img src="/img/logos/eco_logo.png"></a></td>
+			<td align="center"><a href="http://media.mit.edu" target="_blank"><img src="../../logos/ML-text-logo.small.png"></a></td>
+			<td align="center"><a href="http://dukode.com" target="_blank"><img src="../../logos/DuKodeLogo.v2.72dpi.small.png"></a></td>
+			<td align="center"><a href="http://macroconnections.media.mit.edu" target="_blank"><img src="../../logos/logoNew.png"></a></td>
+			<td align="center"><a href="http://media.mit.edu" target="_blank"><img src="../../logos/eco_logo.png"></a></td>
 		</tr>
 	</table>
 </div> <!--! end of #container -->
-
-
 
 
 <!-- Beginning of JS !-->
@@ -352,7 +458,7 @@
 </script>
 <script>
 
-$("button").toggle(
+$("#buttons button").toggle(
 	function(){
 		$(this).addClass("active");
 	},
@@ -360,7 +466,20 @@ $("button").toggle(
 		$(this).removeClass("active");
 	}
 )
+$("#buttons button, #region button").mouseover(function(){
+	$(".context_help").fadeOut("slow");
+})
 
+$("#region button").toggle(
+
+		function(){
+			$(this).removeClass("active");
+		}
+		,function(){
+			$(this).addClass("active");
+		}
+	
+);
 
 // If using the chrome browser you will not be able to see the network 
 // since it is very strict about bringing in local files external to this 
@@ -489,35 +608,21 @@ function SortByGNI_Gross_National_Income(a,b)
  function SortBySUM(a,b)
  { return a.SUM - b.SUM; } 
 var selected_indices = [];
+var selected_regions = []; 
 var links =[];
-var node_colors = d3.scale.ordinal().domain(["Africa","Americas","Asia","Europe","Oceania"]).range(["rgb(255, 180, 0)", "rgb(255, 128, 114)", "rgb(255, 225, 0)", "rgb(234, 164, 96)", "rgb(243,253,242)"]);
+var node_colors = d3.scale.ordinal().domain(["Africa","Americas","Asia","Europe","Oceania"]).range(["rgb(255, 140, 0)", "rgb(255, 128, 130)", "rgb(255, 225, 0)", "rgb(223, 189, 166)", "rgb(200, 150, 100)"]);
+//initialize selected regions.
+selected_regions = $('#region button.active');
+var regionButtons = $('#region button');
+regionButtons.click(function(){
+
+  selected_regions = $('#region button.active');
+	update_regions();
+
+});
 
 var checkboxes = $('#buttons button');
 checkboxes.click(function(){
-	
-	
-	/*d3.selectAll("circle").attr("r", function(d){
-		var this_val = 0;
-		var selected_checkboxes = $('input[name=indices]:checked');
-
-		selected_checkboxes.each(function(i, index){
-		
-			if(d[$(index).val()] != ".."){
-				var normalize = d3.scale.linear().domain(all_min_max[$(index).val()]).range([0, 100])
-				var index_val = parseFloat(d[$(index).val()].replace(/,/g, ''))
-				// console.log($(index).val())
-				this_val += normalize(index_val);
-			}
-		})
-		
-		var node_size = d3.scale.linear().domain([0, (100*selected_checkboxes.length)]).range([10, 35])
-		
-		return node_size(this_val)
-		// var size_val = 0;
-		// console.log(checkboxes.val())
-		// console.log(d["Environmental_Performance_Index"])
-	})
-	*/
 	
 	// Need to clear links array to empty
 	network["links"] = [];
@@ -610,8 +715,10 @@ var network ={"nodes":[], "links":[], },
 /* global variables*/ 
 
 // All code here from: http://bl.ocks.org/950642
-var w = 1100,
-	h = 850;
+var w = 750,
+	h = 800;
+var HDIscaleFactor = 25; 	
+var Overall_loss_scaleFactor = 2.5; 
 var vis;
 var force;
 var link;
@@ -641,7 +748,7 @@ function get_min_max(nodes, key){
 
 
 // Convert data CSV to array
-	d3.csv("/csv/MIT_DuKode_Dataset08.csv", function(csv){
+	d3.csv("../../CSV/MIT_DuKode_Dataset08.csv", function(csv){
 	
 	// Set networks nodes to CSV returned array
 	network["nodes"] = csv;
@@ -669,9 +776,98 @@ function get_min_max(nodes, key){
 	// Now pass the network JSON object to a function that will build it via SVG
 	build_network(network);
 	update_force();
+	update_regions();
 });
 
+function update_regions(){
+//	console.log("update_regions()");
+	if(selected_regions.length>0){
+		vis.selectAll("circle.node")
+		.style("fill", "white")
+		.attr("stroke", "lightgrey")
+		.attr("stroke-width",1 )
+		
+		
+	}else{
+			vis.selectAll("circle.node")
+			.style("fill", "white")
+			.attr("stroke", "lightgrey")
+			.attr("stroke-width",1 )
+		}
+				
+	selected_regions.each(function(index, i){
 
+	if(i.id == "africa")
+	{
+//			$("#africa p").text("✔")
+		
+		 	vis.selectAll("circle.node")
+			.filter(function(d, j	) {  return d.continent_region === "Africa"})
+			.attr("stroke", "lightgrey")
+			.attr("stroke-width",1 )
+			.style("fill", function(d){return node_colors(d["continent_region"])});	
+	}
+	if(i.id == "americas")
+	{	
+//			$("#americas p").text("✔")
+			
+	 	vis.selectAll("circle.node")
+		.filter(function(d, j	) {  if(d.continent_region == "Americas") return true; else return false;})
+		.attr("stroke", "lightgrey")
+		.attr("stroke-width",1 )
+		.style("fill", function(d){return node_colors(d["continent_region"])});
+			
+	}
+	if(i.id == "asia")
+	{	
+//			$("#asia p").text("✔")
+		
+	 	vis.selectAll("circle.node")
+		.filter(function(d, j	) {  return d.continent_region === "Asia"})
+		.attr("stroke", "lightgrey")
+		.attr("stroke-width",1 )
+		.style("fill", function(d){return node_colors(d["continent_region"])});
+	}
+	if(i.id == "oceania")
+	{
+//			$("#oceania p").text("✔")
+		
+	 	vis.selectAll("circle.node")
+		.filter(function(d, j	) {  return d.continent_region === "Oceania"})
+		.attr("stroke", "lightgrey")
+		.attr("stroke-width",1 )
+		.style("fill", function(d){return node_colors(d["continent_region"])});
+	}
+	if(i.id == "europe")
+	{	
+//			$("#europe p").text("✔")
+			
+	 	vis.selectAll("circle.node")
+		.filter(function(d, j	) {  return d.continent_region === "Europe"})
+		.attr("stroke", "lightgrey")
+		.attr("stroke-width",1 )
+		.style("fill", function(d){return node_colors(d["continent_region"])});
+	}
+    });
+}
+
+function update_to_defaultschema()
+{
+	// // 
+	//update to default stroke
+	d3.selectAll("circle.node")
+		.attr("stroke-dasharray", "0")	
+		.attr("stroke-width",0)
+		.attr("stroke", "white");
+
+	
+	d3.selectAll("circle.loss")
+//		.style("fill", "white")
+		.attr("stroke-width", 0) 
+		.attr("stroke", "white");
+	
+//	update_regions();
+}
 //update network links and other drawing updates. 
 function update_network(network){
 
@@ -690,37 +886,6 @@ function update_network(network){
         .attr("x2", function(d) { return d.target.x; })
         .attr("y2", function(d) { return d.target.y; })
         .attr("z", 10);
-
-        
-    /*
-    node = vis.selectAll("g.node")
-        .data(network.nodes)
-        .enter().append("svg:g")
-        .attr("class", "node")
-        .attr("cx", function(d) { return d.x})
-      	.attr("cy", function(d) { return d.y; })
-     	.style("fill", function(d) { return (d.color); }) 
-		.call(force.drag);
-		
-		 //circle
-      node.append("svg:circle")
-      .attr("stroke", "white")
-      .attr("stroke-width", function(d) { var returnValue =0; returnValue = ( (100-Number(d.Overall_loss_percent))%10); return  returnValue; })   
-      .style("fill", function(d) { 
-                  return node_colors(d["continent_region"])
-    })
-    //node radious
-    .attr("r", function(d) { var returnValue =0; returnValue = (d.HDI*30); return  returnValue; });
-
-       node.append("svg:text")
- 	    .attr("class", "nodetext")
- 			.style("font", "9px sans-serif")
- 			.attr("text-anchor", "middle")
- 			.style("text-shadow", "#bbb 1px 1px 2px")
- 	    //.attr("dx", 12)
- 	    .attr("dy", ".35em")
- 	    .text(function(d) { return d.Country });
-        */
 	        
 }
 // init
@@ -728,6 +893,7 @@ function build_network(network){
 	
 	// All code here from: http://bl.ocks.org/950642
 
+	
  	vis = d3.select("#network").append("svg:svg")
 	    .attr("width", w)
 	    .attr("height", h);
@@ -788,33 +954,37 @@ function build_network(network){
 				  });
 		      node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 		    });
+		
+		
 
 
     node = vis.selectAll("g.node")
         .data(network.nodes)
         .enter().append("svg:g")
-        .attr("class", "node")
+      
         .attr("cx", function(d) { return d.x})
       	.attr("cy", function(d) { return d.y; })
      	.style("fill", function(d) { return (d.color); }) 
 		.call(force.drag);
 		
-		 //circle
-      node.append("svg:circle")
-      .attr("stroke", "white")
-      .attr("stroke-width", function(d) { var returnValue =0; returnValue = ( Number(d.Overall_loss_percent)/5); return  returnValue; })   
-      .style("fill", function(d) { 
-                  return node_colors(d["continent_region"])
-    })
-    //node radious
-    .attr("r", function(d) { var returnValue =0; returnValue = (d.HDI*30); return  returnValue; });
+		
 
-	// node.append("svg:circle")
-	//           .attr("stroke", "white")
-	//           .attr("stroke-width", 1)   
-	//           .style("fill", "black")
-	//         //node radious
-	//         .attr("r", function(d) { var returnValue =0; returnValue = ((d.HDI*10)+(Number(d.Overall_loss_percent))); return  returnValue; });
+		//white "outline" - the value of OverallLoss.
+		node.append("svg:circle")
+		.attr("class", "loss")
+		.style("fill", "white")
+		.attr("fill-opacity", 1)
+		//node radious
+		.attr("r", function(d) { var returnValue =0; returnValue = (d.HDI*HDIscaleFactor+Number(d.Overall_loss_percent)/Overall_loss_scaleFactor); return  returnValue; });
+
+		 //circle class node - the value of HDI
+		node.append("svg:circle")
+		  .attr("class", "node")
+		.attr("fill", function(d) { return node_colors(d["continent_region"])})	
+		.attr("stroke", "lightgrey")
+		.attr("stroke-width",1 )
+		//node radious
+		.attr("r", function(d) { var returnValue =0; returnValue = (d.HDI*HDIscaleFactor); return  returnValue; });
 
   
        node.append("svg:text")
@@ -836,6 +1006,17 @@ function build_network(network){
         .attr("y1", function(d) { return d.source.y; })
         .attr("x2", function(d) { return d.target.x; })
         .attr("y2", function(d) { return d.target.y; });
+
+		link = vis.selectAll("line.link")
+	        .data(network.links)
+	        .enter().append("svg:line")
+	        .attr("class", "link")
+			.attr("stroke", function(d){ return d.color; })
+	        .style("stroke-width", function(d){ return 0.5;})
+	        .attr("x1", function(d) { return d.source.x; })
+	        .attr("y1", function(d) { return d.source.y; })
+	        .attr("x2", function(d) { return d.target.x; })
+	        .attr("y2", function(d) { return d.target.y; });
 
 
 
@@ -863,163 +1044,200 @@ function build_network(network){
 	// 	// 	    .size([w, h])
 	// 	// 		.start();
 	// })
-	//node mouse related events 
-	 node.on("mouseover", function(p, j) {
-	//	force.start();
-		//clear scene
-		vis.selectAll("circle")
-		  // .attr("stroke", "white")
-		  // 		   	  .attr("stroke-width", 3)
-		    .attr("stroke", "white")
-			.attr("stroke-opacity", 1)
-	          .attr("stroke-width", function(d) { var returnValue =0; returnValue = ( Number(d.Overall_loss_percent)/5); return  returnValue; })
-						.transition().duration(500)
-						.style("fill", "white")
-						
-		var selected = vis.selectAll("circle")
+	
+
+	
+
+
+	
+	function node_mouseOver(p, j){
+	
+	
+		$("#europe p").text("");
+		$("#africa p").text("")
+		$("#americas p").text("")
+		$("#asia p").text("")
+		$("#oceania p").text("")
+	
+		$("#"+p.continent_region.toLowerCase()+" p").text("✔");
+	
+	
+		//fade to white all nodes
+		vis.selectAll("circle.node")
+		.attr("stroke", "lightgrey")
+		.attr("stroke-width",1 )
+
+		.style("fill", "white");
+
+		//color node to the color of the continent. 
+		vis.selectAll("circle.node")
 		.filter(function(d, j	) {  return d === p; })
-		//.filter(function(d, j	) {  return d === getNetworkNodeWithid((p.index)-1)});//d === pr; })
-		.classed("myclass", true)
-		.attr("stroke", "grey")
-		.attr("stroke-width", function(d) { var returnValue =0; returnValue = ( Number(d.Overall_loss_percent)/5); return  returnValue; })
-		.attr("stroke-opacity", 1)
-			.attr("z-index", 10)
-			.transition().duration(500)
-				.style("fill", function(d){return node_colors(d["continent_region"])});
-		 
+		.attr("stroke", "lightgrey")
+		.attr("stroke-width", 1)
+
+		.style("fill", function(d){return node_colors(d["continent_region"])});
+
+		//color selected loss circle to grey. 
+		vis.selectAll("circle.loss")
+		.filter(function(d, j	) {  return d === p; })
+		.attr("stroke", "lightgrey")
+		.attr("stroke-width", 1);
+
+
 		var selected = vis.selectAll("line")
-			.attr("stroke-width",8)
-			.attr("stroke-opacity", .33);			
+		.attr("stroke-opacity", 0.33);
+
 		if(selected_indices.length>=1){
 		 selected_indices.each(function(index, i){
-		 				 			
-				// console.log(index +" "+ i.id );
 				var target = network["nodes"];
 				if(i.id == "EPI"){ 
-					var selected = vis.selectAll("circle")
+					// vis.selectAll("circle.node")
+					// .filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByEPI(p.index)})//d === pr; })
+					// .style("fill", function(d){return node_colors(d["continent_region"])});
+					// 
+					// vis.selectAll("circle.node")
+					// .filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByEPI(p.index)})//d === pr; })
+					// .style("fill", function(d){return node_colors(d["continent_region"])});
+
+					vis.selectAll("circle.loss")
 					.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByEPI(p.index);})//d === pr; })
 					.attr("stroke", nodeOutlinecolor(1))
-					.attr("stroke-width",8)
-						.attr("stroke-opacity", 1)
-					.transition().duration(500)
-					.style("fill", function(d){return node_colors(d["continent_region"])})
-					//annotate +1 index 
-					var selected = vis.selectAll("circle")
+					.attr("stroke-width",4);
+					
+					vis.selectAll("circle.loss")
 					.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByEPI(p.index);})//d === pr; })
 					.attr("stroke", nodeOutlinecolor(1))
-					.attr("stroke-width",4)
-						.attr("stroke-opacity", 1)
-					.transition().duration(500)
-					.style("fill", function(d){return node_colors(d["continent_region"])})
-
+					.attr("stroke-width",10);
+				
 					var selected = vis.selectAll("line")
-			 		.filter(function(d,j ){ if(d.source.Country ==p.Country || d.target.Country ==p.Country ){ return true; }else return false; })
-					.attr("stroke-width",12)
+			 		.filter(function(d,j ){ if(d.source.Country ==p.Country || d.target.Country ==p.Country ){ return true; } else return false; })
 					.attr("stroke-opacity", 1);
 
 
 				}
 				if(i.id == "IHDI"){
-					var selected = vis.selectAll("circle")
+				// 	vis.selectAll("circle.node")
+				// 	.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByIHDI(p.index)})//d === pr; })
+				// 	.style("fill", function(d){return node_colors(d["continent_region"])});
+				// 
+				// 	vis.selectAll("circle.node")
+				// 	.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByIHDI(p.index)})//d === pr; })
+				// //	.transition().duration(500)
+				// 	.style("fill", function(d){return node_colors(d["continent_region"])});
+
+					vis.selectAll("circle.loss")
 					.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByIHDI(p.index)})//d === pr; })
 					.attr("stroke", nodeOutlinecolor(2))
-					.attr("stroke-width",8)
-						.attr("stroke-opacity", 1)
-					.transition().duration(500)
-					.style("fill", function(d){return node_colors(d["continent_region"])})
+					.attr("stroke-width",4);
+					
 					//annotate +1 index 
-					var selected = vis.selectAll("circle")
+					var selected = vis.selectAll("circle.loss")
 					.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByIHDI(p.index)})//d === pr; })
 					.attr("stroke", nodeOutlinecolor(2))
-					.attr("stroke-width",4)
-						.attr("stroke-opacity", 1)
-					.transition().duration(500)
-					.style("fill", function(d){return node_colors(d["continent_region"])})
-					
+					.attr("stroke-width",10);
+
 					var selected = vis.selectAll("line")
 			 		.filter(function(d,j ){ if(d.source.Country ==p.Country || d.target.Country ==p.Country ){ return true; }else return false; })
-					.attr("stroke-width",12)
 					.attr("stroke-opacity", 1);	
 				}
 		 		if(i.id == "GII"){ 
-					var selected = vis.selectAll("circle")
+					// vis.selectAll("circle.node")
+					// .filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByGII(p.index)})//d === pr; })
+					// .style("fill", function(d){return node_colors(d["continent_region"])});
+					// 
+					// vis.selectAll("circle.node")
+					// .filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByGII(p.index)})//d === pr; })
+					// .style("fill", function(d){return node_colors(d["continent_region"])});
+
+					vis.selectAll("circle.loss")
 					.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByGII(p.index)})//d === pr; })
 					.attr("stroke", nodeOutlinecolor(3))
-					.attr("stroke-width",8)
-					.attr("stroke-opacity", 1)
-					.transition().duration(500)
-					.style("fill", function(d){return node_colors(d["continent_region"])})
-					//annotate +1 index 
-					var selected = vis.selectAll("circle")
+					.attr("stroke-width",4);
+					
+					vis.selectAll("circle.loss")
 					.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByGII(p.index)})//d === pr; })
 					.attr("stroke", nodeOutlinecolor(3))
-					.attr("stroke-width",4)
-						.attr("stroke-opacity", 1)
-					.transition().duration(500)
-					.style("fill", function(d){return node_colors(d["continent_region"])})
-					
-					var selected = vis.selectAll("line")
+					.attr("stroke-width",10);
+
+					var selected = vis.selectAll("line.node")
 			 		.filter(function(d,j ){ if(d.source.Country ==p.Country || d.target.Country ==p.Country ){  return true; }else return false; })
-					.attr("stroke-width",12)
 					.attr("stroke-opacity", 1);
 				}
 			 	if(i.id == "GNI"){ 
-					var selected = vis.selectAll("circle")
+
+					// var selected = vis.selectAll("circle.node")
+					// .filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByGNI(p.index)})//d === pr; })
+					// .style("fill", function(d){return node_colors(d["continent_region"])});
+					// 
+					// var selected = vis.selectAll("circle.node")
+					// .filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByGNI(p.index)})//d === pr; })
+					// .style("fill", function(d){return node_colors(d["continent_region"])});
+
+					var selected = vis.selectAll("circle.loss")
 					.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByGNI(p.index)})//d === pr; })
 					.attr("stroke", nodeOutlinecolor(4))
-					.attr("stroke-width",8)
-						.attr("stroke-opacity", 1)
-					.transition().duration(500)
-					.style("fill", function(d){return node_colors(d["continent_region"])})
-					//annotate +1 index 
-					var selected = vis.selectAll("circle")
+					.attr("stroke-width",4);
+
+					var selected = vis.selectAll("circle.loss")
 					.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByGNI((p.index))})//d === pr; })
 					.attr("stroke", nodeOutlinecolor(4))
-					.attr("stroke-width",4)
-						.attr("stroke-opacity", 1)
-					.transition().duration(500)
-					.style("fill", function(d){return node_colors(d["continent_region"])})
-					
+					.attr("stroke-width",10);
+
 					var selected = vis.selectAll("line")
 			 		.filter(function(d,j ){ if(d.source.Country ==p.Country || d.target.Country ==p.Country ){  return true; }else return false; })
-					.attr("stroke-width",12)
 					.attr("stroke-opacity", 1);
 			 	}
  			});
 			}
-		
-		d3.select("#country_name h2").text(p.Country)
-		d3.select("#country_name img").attr("src", "/img/flags/flag_"+p.abbrv.toLowerCase()+".png")
-		d3.select("#buttons #EPI p").text(p.Environmental_Performance_Index)
-		d3.select("#buttons #IHDI p").text(p.IHDI_Inequality_adjusted_HDI_value)
-		d3.select("#buttons #GII p").text(p.GII_Gender_Inequality_Index_value)
-		d3.select("#buttons #GNI p").text("$"+d3.format(",")(p.GNI_Gross_National_Income))
-		
 
-	});
+			d3.select("#country_name h2").text(p.Country)
+			d3.select("#country_name img").attr("src", "../img/flags/flag_"+p.abbrv.toLowerCase()+".png")
+			d3.select("#buttons #EPI p").html(p.Environmental_Performance_Index +" <span class='rank'> / " +    (Number(network.nodes.length)-(Number(network.nodes.sort(SortByEnvironmental_Performance_Index ).indexOf(p)))) + "</span>")
+			d3.select("#buttons #IHDI p").html(p.IHDI_Inequality_adjusted_HDI_value +" <span class='rank'> / " + (Number(network.nodes.length)- (Number(network.nodes.sort(SortByIHDI_Inequality_adjusted_HDI_value ).indexOf(p)))) + "</span>")
+			d3.select("#buttons #GII p").html(p.GII_Gender_Inequality_Index_value +" <span class='rank'> / " + (Number(network.nodes.length)- (Number(network.nodes.sort(SortByGII_Gender_Inequality_Index_value ).indexOf(p)))) + "</span>")
+			d3.select("#buttons #GNI p").html("$"+d3.format(",")(p.GNI_Gross_National_Income) +" <span class='rank'> / " + (Number(network.nodes.length)-  (Number(network.nodes.sort(SortByGNI_Gross_National_Income).indexOf(p)))) + "</span>")
+	}
 	
+	function node_mouseClick(p, j){
+	}
+	
+	function node_mouseOut(p, j){ 
+				// console.log("mouseout");
+
+				// var selected = vis.selectAll("circle.node")
+				// .attr("stroke-opacity", 1)
+				// .attr("stroke", "grey")
+				// .attr("stroke-width",1 )
+				//  .attr("stroke", "grey")
+
+				// 		//fade to white all nodes
+				vis.selectAll("circle")
+				.style("fill", "white")
+				.attr("stroke-width", 1);
+				
+				vis.selectAll("circle.loss")
+				.attr("stroke-width", 0);
+
+				vis.selectAll("circle.loss")
+				.filter(function(d, j	) {  return d ===p; })
+				.attr("stroke-width", 0);
+				// 		//.attr("stroke-width", function(d) { var returnValue =0; returnValue = ( Number(d.Overall_loss_percent)/Overall_loss_scaleFactor); return  returnValue; })
+				// 		.transition().duration(500)
+				// 		 .attr("stroke", "grey")
+				// 		.style("fill", "white");
 
 
-	node.on("mouseout", function(p, j) {
-		d3.selectAll("circle")
-			.transition().duration(500)
-			// .attr("stroke", "white")
-			// .style("fill", function(d){return node_colors(d["continent_region"])})
-	          .attr("stroke", "white")
-			  .attr("stroke-opacity", 1)
-	          .attr("stroke-width", function(d) { var returnValue =0; returnValue = ( Number(d.Overall_loss_percent)/5); return  returnValue; })   
-	          .style("fill", function(d) { 
-	                      return node_colors(d["continent_region"])
-	        })
-	        //node radious
-	        .attr("r", function(d) { var returnValue =0; returnValue = (d.HDI*30); return  returnValue; });
-							
-	//	vis.selectAll("line").remove();
-		
-		update_force();
-		update_network(network);
-			
-	});
+					update_regions();
+					update_force();
+					update_network(network);
+		//	update_to_defaultschema();
+		//	update_regions();
+	}
+	
+		//node mouse related events 
+//	node.on("click", null);
+	node.on("mouseover", function(p, j) { node_mouseOver(p, j)});
+	node.on("mouseout", function(p, j) { node_mouseOut(p, j)});
 
 
    
@@ -1029,7 +1247,7 @@ function build_network(network){
 
 function update_force(){
 	//selected_indices = $("input:checkbox[name='indices']:checked");
-	 console.log("selected_indices.length "+ selected_indices.length);
+	 //console.log("selected_indices.length "+ selected_indices.length);
 
 	//force =0 ; 
 	var linkDistanceVar = 0; 
@@ -1037,7 +1255,7 @@ function update_force(){
 					force //= self.force = d3.layout.force()
 					        .links(network.links)
 							.linkStrength(0.10) 
-						 	.charge(-110)
+						 	.charge(-60)
 							.gravity(.1)
 						    .size([w, h])
 							.nodes(network.nodes)
@@ -1073,7 +1291,7 @@ function update_force(){
 					force //= self.force = d3.layout.force()
 			        .links(network.links)
 					.linkStrength(0.10) 
-				 	.charge(-100)
+				 	.charge(-90)
 					.gravity(.1)
 				    .size([w, h])
 					.nodes(network.nodes)
@@ -1109,7 +1327,7 @@ function update_force(){
 					force //= self.force = d3.layout.force()
 			        .links(network.links)
 					.linkStrength(0.10) 
-				 	.charge(-100)
+				 	.charge(-110)
 					.gravity(.1)
 				    .size([w, h])
 					.nodes(network.nodes)
@@ -1146,30 +1364,30 @@ function update_force(){
 	 	if(selected_indices.length== 4){
 					force //= self.force = d3.layout.force()
 					        .links(network.links)
-							.linkDistance(function(d){ //console.log(d); 	
-									var linkDistanceVar = 0; 
-							 		selected_indices.each(function(index, i){
-										if(i.id == "EPI"){ 
-											linkDistanceVar +=Number(200 - d.source.Environmental_Performance_Index); 
-										 }
-									 	if(i.id == "IHDI"){
-												linkDistanceVar += Number(100-d.source.IHDI_Inequality_adjusted_HDI_value*100);
-										}
-									 	if(i.id == "GII"){ 
-												linkDistanceVar += Number(d.source.GII_Gender_Inequality_Index_value);
-										}
-									 	if(i.id == "GNI"){ 
-												linkDistanceVar += Number(d.source.GNI_Gross_National_Income/100);
-									 	}
-										else {}; 
-										})
-									
-									//	console.log(linkDistanceVar)
-									return linkDistanceVar;})
+							// .linkDistance(function(d){ //console.log(d); 	
+							// 		var linkDistanceVar = 0; 
+							//  		selected_indices.each(function(index, i){
+							// 			if(i.id == "EPI"){ 
+							// 				linkDistanceVar +=Number(100 - d.source.Environmental_Performance_Index); 
+							// 			 }
+							// 		 	if(i.id == "IHDI"){
+							// 					linkDistanceVar += Number(100-d.source.IHDI_Inequality_adjusted_HDI_value*100);
+							// 			}
+							// 		 	if(i.id == "GII"){ 
+							// 					linkDistanceVar += Number(d.source.GII_Gender_Inequality_Index_value);
+							// 			}
+							// 		 	if(i.id == "GNI"){ 
+							// 					linkDistanceVar += Number(d.source.GNI_Gross_National_Income/100);
+							// 		 	}
+							// 			else {}; 
+							// 			})
+							// 		
+							// 		//	console.log(linkDistanceVar)
+							// 		return linkDistanceVar;})
 //								.theta(1)
-							.linkStrength(0.01) 
+							.linkStrength(0.04) 
 							// .friction(0)
-							// .charge(-100)
+							 .charge(-110)
 							// 							    .gravity(.1)
 						    .size([w, h])
 							.nodes(network.nodes)
@@ -1206,10 +1424,10 @@ function update_force(){
 				// console.log("no indices selected");
 										force 
 										        .links(network.links)
-												.linkStrength(.0) 
+												.linkStrength(.05) 
 												 //.friction(1)
 												 .charge(-40)
-												 .gravity(.05)
+												 .gravity(.07)
 											    .size([w, h])
 											//	.nodes(network.nodes)
 												.on("tick", function(e) {
@@ -1259,5 +1477,6 @@ function update_force(){
 //      { return a.Overall_loss_percent - b.Overall_loss_percent; }
 
 </script>
+
 </body>
 </html>
