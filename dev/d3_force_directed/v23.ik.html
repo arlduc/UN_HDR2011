@@ -1039,13 +1039,16 @@ function build_network(network){
 		 
 		var selected = vis.selectAll("line")
 			.attr("stroke-width",8)
-			.attr("stroke-opacity", .33);			
+			.attr("stroke-opacity", .33);
+						
 		if(selected_indices.length>=1){
 		 selected_indices.each(function(index, i){
 		 				 			
 				// console.log(index +" "+ i.id );
 				var target = network["nodes"];
 				if(i.id == "EPI"){ 
+					
+					
 					var selected = vis.selectAll("circle.node")
 					.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByEPI(p.index)})//d === pr; })
 					.transition().duration(500)
@@ -1085,12 +1088,12 @@ function build_network(network){
 				if(i.id == "IHDI"){
 					var selected = vis.selectAll("circle.node")
 					.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByIHDI(p.index)})//d === pr; })
-					.transition().duration(500)
+				//	.transition().duration(500)
 					.style("fill", function(d){return node_colors(d["continent_region"])});
 									
 					var selected = vis.selectAll("circle.node")
 					.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByIHDI(p.index)})//d === pr; })
-					.transition().duration(500)
+				//	.transition().duration(500)
 					.style("fill", function(d){return node_colors(d["continent_region"])});
 					
 					
@@ -1107,8 +1110,8 @@ function build_network(network){
 					.attr("stroke", nodeOutlinecolor(2))
 					.attr("stroke-width",10)
 //					.attr("stroke-dasharray", "10 ,10")	
-					.attr("stroke-opacity", 0.75)
-					.transition().duration(500)
+					.attr("stroke-opacity", 0.75);
+				//	.transition().duration(500)
 				//	.style("fill", function(d){return node_colors(d["continent_region"])})
 					
 					var selected = vis.selectAll("line")
@@ -1154,30 +1157,30 @@ function build_network(network){
 				
 					var selected = vis.selectAll("circle.node")
 					.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByGNI(p.index)})//d === pr; })
-					.transition().duration(500)
+//					.transition().duration(500)
 					.style("fill", function(d){return node_colors(d["continent_region"])});
 									
 					var selected = vis.selectAll("circle.node")
 					.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByGNI(p.index)})//d === pr; })
-					.transition().duration(500)
+//					.transition().duration(500)
 					.style("fill", function(d){return node_colors(d["continent_region"])});
 					
 					var selected = vis.selectAll("circle.loss")
 					.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByGNI(p.index)})//d === pr; })
 					.attr("stroke", nodeOutlinecolor(4))
 					.attr("stroke-width",4)
-					.attr("stroke-dasharray", "4, 4")
-					.attr("stroke-opacity", 1)
-					.transition().duration(500)
+//					.attr("stroke-dasharray", "4, 4")
+					.attr("stroke-opacity", 1);
+//					.transition().duration(500)
 //					.style("fill", function(d){return node_colors(d["continent_region"])})
 					//annotate +1 index 
 					var selected = vis.selectAll("circle.loss")
 					.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByGNI((p.index))})//d === pr; })
 					.attr("stroke", nodeOutlinecolor(4))
 					.attr("stroke-width",10)
-					.attr("stroke-dasharray", "8 ,8")	
-					.attr("stroke-opacity", .75)
-					.transition().duration(500)
+//					.attr("stroke-dasharray", "8 ,8")	
+					.attr("stroke-opacity", .75);
+//					.transition().duration(500)
 //					.style("fill", function(d){return node_colors(d["continent_region"])})
 					
 					var selected = vis.selectAll("line")
@@ -1190,10 +1193,12 @@ function build_network(network){
 		
 		d3.select("#country_name h2").text(p.Country)
 		d3.select("#country_name img").attr("src", "../img/flags/flag_"+p.abbrv.toLowerCase()+".png")
-		d3.select("#buttons #EPI p").text(p.Environmental_Performance_Index)
-		d3.select("#buttons #IHDI p").text(p.IHDI_Inequality_adjusted_HDI_value)
-		d3.select("#buttons #GII p").text(p.GII_Gender_Inequality_Index_value)
-		d3.select("#buttons #GNI p").text("$"+d3.format(",")(p.GNI_Gross_National_Income))
+		d3.select("#buttons #EPI p").text(p.Environmental_Performance_Index +" #:" + (Number(network.nodes.sort(SortByEnvironmental_Performance_Index ).indexOf(p))+1))
+		d3.select("#buttons #IHDI p").text(p.IHDI_Inequality_adjusted_HDI_value +" #:" +  Number(network.nodes.sort(SortByIHDI_Inequality_adjusted_HDI_value ).indexOf(p))+1)
+		d3.select("#buttons #GII p").text(p.GII_Gender_Inequality_Index_value +" #:" + Number(network.nodes.sort(SortByGII_Gender_Inequality_Index_value ).indexOf(p))+1)
+		d3.select("#buttons #GNI p").text("$"+d3.format(",")(p.GNI_Gross_National_Income) +" #:" +Number(network.nodes.sort(SortByGNI_Gross_National_Income).indexOf(p))+1)
+		
+	
 		
 
 	})
