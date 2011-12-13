@@ -594,7 +594,7 @@ var node_colors = d3.scale.ordinal().domain(["Africa","Americas","Asia","Europe"
 selected_regions = $('#region button.active');
 var regionButtons = $('#region button');
 regionButtons.click(function(){
-	console.log("hello");
+
   selected_regions = $('#region button.active');
 	update_regions();
 
@@ -608,7 +608,7 @@ checkboxes.click(function(){
 			
     selected_indices = $('#buttons button.active');
     selected_indices.each(function(index, i){
-	//console.log("clicked");
+	
 		console.log(index +": "+ i.id );
 		var target = network["nodes"];
 		if(i.id == "EPI"){ 
@@ -975,6 +975,16 @@ function build_network(network){
         .attr("x2", function(d) { return d.target.x; })
         .attr("y2", function(d) { return d.target.y; });
 
+		link = vis.selectAll("line.link")
+	        .data(network.links)
+	        .enter().append("svg:line")
+	        .attr("class", "link")
+			.attr("stroke", function(d){ return d.color; })
+	        .style("stroke-width", function(d){ return 0.5;})
+	        .attr("x1", function(d) { return d.source.x; })
+	        .attr("y1", function(d) { return d.source.y; })
+	        .attr("x2", function(d) { return d.target.x; })
+	        .attr("y2", function(d) { return d.target.y; });
 
 
 
@@ -1002,243 +1012,248 @@ function build_network(network){
 	// 	// 	    .size([w, h])
 	// 	// 		.start();
 	// })
-	//node mouse related events 
-	 node
-	//.selectAll("circle.node")
-	.on("mouseover", function(p, j) {
-		console.log("mouseover");
-		
-		//fade to white all nodes
-		var selected = vis.selectAll("circle.node")
-		.attr("stroke-opacity", 1)
-		.attr("stroke", "grey")
-		.attr("stroke-width",1 )
-		 .attr("stroke", "grey")
-		.style("fill", "white");
 	
-		var selected = vis.selectAll("circle.node")
-		.filter(function(d, j	) {  return d === p; })
-		//.classed("myclass", true)
-		.attr("stroke", "grey")
-		//.attr("stroke-width", function(d) { var returnValue =0; returnValue = ( Number(d.Overall_loss_percent)/Overall_loss_scaleFactor); return  returnValue; })
-		.attr("stroke-width", 1)
-		.style("fill", function(d){return node_colors(d["continent_region"])})
-		.attr("stroke-opacity", 1)	
-		.attr("z-index", 10);
-	//	.transition().duration(500);
-		
-		vis.selectAll("circle.loss")
-			.filter(function(d, j	) {  return d === p; })
-				.attr("stroke-width", 1)
+
+	
+
+
+	
+	function node_mouseOver(p, j){ 
+				console.log("mouseover");
+
+				//fade to white all nodes
+				var selected = vis.selectAll("circle.node")
 				.attr("stroke-opacity", 1)
-		//	.transition().duration(500)
-			.attr("stroke", "grey");
-			//.attr("stroke-width", function(d) { var returnValue =0; returnValue = ( Number(d.Overall_loss_percent)/Overall_loss_scaleFactor); return  returnValue; })
-		
-		//	.style("fill" , "grey");	
-		 
-		var selected = vis.selectAll("line")
-			.attr("stroke-width",8)
-			.attr("stroke-opacity", .33);
-						
-		if(selected_indices.length>=1){
-		 selected_indices.each(function(index, i){
-		 				 			
-				// console.log(index +" "+ i.id );
-				var target = network["nodes"];
-				if(i.id == "EPI"){ 
-					
-					
-					var selected = vis.selectAll("circle.node")
-					.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByEPI(p.index)})//d === pr; })
-					.transition().duration(500)
-					.style("fill", function(d){return node_colors(d["continent_region"])});
-									
-					var selected = vis.selectAll("circle.node")
-					.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByEPI(p.index)})//d === pr; })
-					.transition().duration(500)
-					.style("fill", function(d){return node_colors(d["continent_region"])});
-				
-							
-					var selected = vis.selectAll("circle.loss")
-					.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByEPI(p.index);})//d === pr; })
-					.attr("stroke", nodeOutlinecolor(1))
-					.attr("stroke-width",4)
-//					.attr("stroke-dasharray", "6, 6")
-					.attr("stroke-opacity", 0.75)
-					//.transition().duration(500)
-//					.style("fill", function(d){return node_colors(d["continent_region"])})
-					//annotate +1 index 
-					var selected = vis.selectAll("circle.loss")
-					.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByEPI(p.index);})//d === pr; })
-					.attr("stroke", nodeOutlinecolor(1))
-					.attr("stroke-width",10)
-//					.attr("stroke-dasharray", "12 ,12")	
-						.attr("stroke-opacity", 0.75)
-				//	.transition().duration(500)
-//					.style("fill", function(d){return node_colors(d["continent_region"])})
+				.attr("stroke", "grey")
+				.attr("stroke-width",1 )
+				 .attr("stroke", "grey")
+				.style("fill", "white");
 
-					var selected = vis.selectAll("line")
-			 		.filter(function(d,j ){ if(d.source.Country ==p.Country || d.target.Country ==p.Country ){ return true; }else return false; })
-					.attr("stroke-width",12)
-					.attr("stroke-opacity", 1);
+				var selected = vis.selectAll("circle.node")
+				.filter(function(d, j	) {  return d === p; })
+				//.classed("myclass", true)
+				.attr("stroke", "grey")
+				//.attr("stroke-width", function(d) { var returnValue =0; returnValue = ( Number(d.Overall_loss_percent)/Overall_loss_scaleFactor); return  returnValue; })
+				.attr("stroke-width", 1)
+				.style("fill", function(d){return node_colors(d["continent_region"])})
+				.attr("stroke-opacity", 1)	
+				.attr("z-index", 10);
+			//	.transition().duration(500);
+
+				vis.selectAll("circle.loss")
+					.filter(function(d, j	) {  return d === p; })
+						.attr("stroke-width", 1)
+						.attr("stroke-opacity", 1)
+				//	.transition().duration(500)
+					.attr("stroke", "grey");
+					//.attr("stroke-width", function(d) { var returnValue =0; returnValue = ( Number(d.Overall_loss_percent)/Overall_loss_scaleFactor); return  returnValue; })
+
+				//	.style("fill" , "grey");	
+
+				var selected = vis.selectAll("line")
+					.attr("stroke-width",8)
+					.attr("stroke-opacity", .33);
+
+				if(selected_indices.length>=1){
+				 selected_indices.each(function(index, i){
+
+						// console.log(index +" "+ i.id );
+						var target = network["nodes"];
+						if(i.id == "EPI"){ 
 
 
-				}
-				if(i.id == "IHDI"){
-					var selected = vis.selectAll("circle.node")
-					.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByIHDI(p.index)})//d === pr; })
-				//	.transition().duration(500)
-					.style("fill", function(d){return node_colors(d["continent_region"])});
-									
-					var selected = vis.selectAll("circle.node")
-					.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByIHDI(p.index)})//d === pr; })
-				//	.transition().duration(500)
-					.style("fill", function(d){return node_colors(d["continent_region"])});
-					
-					
-					var selected = vis.selectAll("circle.loss")
-					.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByIHDI(p.index)})//d === pr; })
-					.attr("stroke", nodeOutlinecolor(2))
-					.attr("stroke-width",4)
-//					.attr("stroke-dasharray", "5, 5")
-					.attr("stroke-opacity", 0.75)
-					
-					//annotate +1 index 
-					var selected = vis.selectAll("circle.loss")
-					.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByIHDI(p.index)})//d === pr; })
-					.attr("stroke", nodeOutlinecolor(2))
-					.attr("stroke-width",10)
-//					.attr("stroke-dasharray", "10 ,10")	
-					.attr("stroke-opacity", 0.75);
-				//	.transition().duration(500)
-				//	.style("fill", function(d){return node_colors(d["continent_region"])})
-					
-					var selected = vis.selectAll("line")
-			 		.filter(function(d,j ){ if(d.source.Country ==p.Country || d.target.Country ==p.Country ){ return true; }else return false; })
-					.attr("stroke-width",12)
-					.attr("stroke-opacity", 1);	
-				}
-		 		if(i.id == "GII"){ 
-					var selected = vis.selectAll("circle.node")
-					.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByGII(p.index)})//d === pr; })
-//					.transition().duration(500)
-					.style("fill", function(d){return node_colors(d["continent_region"])});
-									
-					var selected = vis.selectAll("circle.node")
-					.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByGII(p.index)})//d === pr; })
-//					.transition().duration(500)
-					.style("fill", function(d){return node_colors(d["continent_region"])});
-			
-					var selected = vis.selectAll("circle.loss")
-					.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByGII(p.index)})//d === pr; })
-					.attr("stroke", nodeOutlinecolor(3))
-					.attr("stroke-width",4)
-//					.attr("stroke-dasharray", "3, 3")
-					.attr("stroke-opacity", 1)
-//					.transition().duration(500)
-				//	.style("fill", function(d){return node_colors(d["continent_region"])})
-					//annotate +1 index 
-					var selected = vis.selectAll("circle.loss")
-					.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByGII(p.index)})//d === pr; })
-					.attr("stroke", nodeOutlinecolor(3))
-					.attr("stroke-width",10)
-//					.attr("stroke-dasharray", "6 ,6")	
-					.attr("stroke-opacity",0.75)
-//					.transition().duration(500)
-				//	.style("fill", function(d){return node_colors(d["continent_region"])})
-					
-					var selected = vis.selectAll("line.node")
-			 		.filter(function(d,j ){ if(d.source.Country ==p.Country || d.target.Country ==p.Country ){  return true; }else return false; })
-					.attr("stroke-width",12)
-					.attr("stroke-opacity", 1);
-				}
-			 	if(i.id == "GNI"){ 
-				
-					var selected = vis.selectAll("circle.node")
-					.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByGNI(p.index)})//d === pr; })
-//					.transition().duration(500)
-					.style("fill", function(d){return node_colors(d["continent_region"])});
-									
-					var selected = vis.selectAll("circle.node")
-					.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByGNI(p.index)})//d === pr; })
-//					.transition().duration(500)
-					.style("fill", function(d){return node_colors(d["continent_region"])});
-					
-					var selected = vis.selectAll("circle.loss")
-					.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByGNI(p.index)})//d === pr; })
-					.attr("stroke", nodeOutlinecolor(4))
-					.attr("stroke-width",4)
-//					.attr("stroke-dasharray", "4, 4")
-					.attr("stroke-opacity", 1);
-//					.transition().duration(500)
-//					.style("fill", function(d){return node_colors(d["continent_region"])})
-					//annotate +1 index 
-					var selected = vis.selectAll("circle.loss")
-					.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByGNI((p.index))})//d === pr; })
-					.attr("stroke", nodeOutlinecolor(4))
-					.attr("stroke-width",10)
-//					.attr("stroke-dasharray", "8 ,8")	
-					.attr("stroke-opacity", .75);
-//					.transition().duration(500)
-//					.style("fill", function(d){return node_colors(d["continent_region"])})
-					
-					var selected = vis.selectAll("line")
-			 		.filter(function(d,j ){ if(d.source.Country ==p.Country || d.target.Country ==p.Country ){  return true; }else return false; })
-					.attr("stroke-width",12)
-					.attr("stroke-opacity", 1);
-			 	}
- 			});
-			}
-		
-		d3.select("#country_name h2").text(p.Country)
-		d3.select("#country_name img").attr("src", "../img/flags/flag_"+p.abbrv.toLowerCase()+".png")
-		d3.select("#buttons #EPI p").text(p.Environmental_Performance_Index +" #:" +    (Number(network.nodes.length)-(Number(network.nodes.sort(SortByEnvironmental_Performance_Index ).indexOf(p))))   )
-		d3.select("#buttons #IHDI p").text(p.IHDI_Inequality_adjusted_HDI_value +" #:" + (Number(network.nodes.length)- (Number(network.nodes.sort(SortByIHDI_Inequality_adjusted_HDI_value ).indexOf(p))))   )
-		d3.select("#buttons #GII p").text(p.GII_Gender_Inequality_Index_value +" #:" + (Number(network.nodes.length)- (Number(network.nodes.sort(SortByGII_Gender_Inequality_Index_value ).indexOf(p))))   )
-		d3.select("#buttons #GNI p").text("$"+d3.format(",")(p.GNI_Gross_National_Income) +" #:" + (Number(network.nodes.length)-  (Number(network.nodes.sort(SortByGNI_Gross_National_Income).indexOf(p))) ) )
-		
+							var selected = vis.selectAll("circle.node")
+							.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByEPI(p.index)})//d === pr; })
+							.transition().duration(500)
+							.style("fill", function(d){return node_colors(d["continent_region"])});
+
+							var selected = vis.selectAll("circle.node")
+							.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByEPI(p.index)})//d === pr; })
+							.transition().duration(500)
+							.style("fill", function(d){return node_colors(d["continent_region"])});
+
+
+							var selected = vis.selectAll("circle.loss")
+							.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByEPI(p.index);})//d === pr; })
+							.attr("stroke", nodeOutlinecolor(1))
+							.attr("stroke-width",4)
+		//					.attr("stroke-dasharray", "6, 6")
+							.attr("stroke-opacity", 0.75)
+							//.transition().duration(500)
+		//					.style("fill", function(d){return node_colors(d["continent_region"])})
+							//annotate +1 index 
+							var selected = vis.selectAll("circle.loss")
+							.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByEPI(p.index);})//d === pr; })
+							.attr("stroke", nodeOutlinecolor(1))
+							.attr("stroke-width",10)
+		//					.attr("stroke-dasharray", "12 ,12")	
+								.attr("stroke-opacity", 0.75)
+						//	.transition().duration(500)
+		//					.style("fill", function(d){return node_colors(d["continent_region"])})
+
+							var selected = vis.selectAll("line")
+					 		.filter(function(d,j ){ if(d.source.Country ==p.Country || d.target.Country ==p.Country ){ return true; }else return false; })
+							.attr("stroke-width",12)
+							.attr("stroke-opacity", 1);
+
+
+						}
+						if(i.id == "IHDI"){
+							var selected = vis.selectAll("circle.node")
+							.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByIHDI(p.index)})//d === pr; })
+						//	.transition().duration(500)
+							.style("fill", function(d){return node_colors(d["continent_region"])});
+
+							var selected = vis.selectAll("circle.node")
+							.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByIHDI(p.index)})//d === pr; })
+						//	.transition().duration(500)
+							.style("fill", function(d){return node_colors(d["continent_region"])});
+
+
+							var selected = vis.selectAll("circle.loss")
+							.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByIHDI(p.index)})//d === pr; })
+							.attr("stroke", nodeOutlinecolor(2))
+							.attr("stroke-width",4)
+		//					.attr("stroke-dasharray", "5, 5")
+							.attr("stroke-opacity", 0.75)
+
+							//annotate +1 index 
+							var selected = vis.selectAll("circle.loss")
+							.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByIHDI(p.index)})//d === pr; })
+							.attr("stroke", nodeOutlinecolor(2))
+							.attr("stroke-width",10)
+		//					.attr("stroke-dasharray", "10 ,10")	
+							.attr("stroke-opacity", 0.75);
+						//	.transition().duration(500)
+						//	.style("fill", function(d){return node_colors(d["continent_region"])})
+
+							var selected = vis.selectAll("line")
+					 		.filter(function(d,j ){ if(d.source.Country ==p.Country || d.target.Country ==p.Country ){ return true; }else return false; })
+							.attr("stroke-width",12)
+							.attr("stroke-opacity", 1);	
+						}
+				 		if(i.id == "GII"){ 
+							var selected = vis.selectAll("circle.node")
+							.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByGII(p.index)})//d === pr; })
+		//					.transition().duration(500)
+							.style("fill", function(d){return node_colors(d["continent_region"])});
+
+							var selected = vis.selectAll("circle.node")
+							.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByGII(p.index)})//d === pr; })
+		//					.transition().duration(500)
+							.style("fill", function(d){return node_colors(d["continent_region"])});
+
+							var selected = vis.selectAll("circle.loss")
+							.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByGII(p.index)})//d === pr; })
+							.attr("stroke", nodeOutlinecolor(3))
+							.attr("stroke-width",4)
+		//					.attr("stroke-dasharray", "3, 3")
+							.attr("stroke-opacity", 1)
+		//					.transition().duration(500)
+						//	.style("fill", function(d){return node_colors(d["continent_region"])})
+							//annotate +1 index 
+							var selected = vis.selectAll("circle.loss")
+							.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByGII(p.index)})//d === pr; })
+							.attr("stroke", nodeOutlinecolor(3))
+							.attr("stroke-width",10)
+		//					.attr("stroke-dasharray", "6 ,6")	
+							.attr("stroke-opacity",0.75)
+		//					.transition().duration(500)
+						//	.style("fill", function(d){return node_colors(d["continent_region"])})
+
+							var selected = vis.selectAll("line.node")
+					 		.filter(function(d,j ){ if(d.source.Country ==p.Country || d.target.Country ==p.Country ){  return true; }else return false; })
+							.attr("stroke-width",12)
+							.attr("stroke-opacity", 1);
+						}
+					 	if(i.id == "GNI"){ 
+
+							var selected = vis.selectAll("circle.node")
+							.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByGNI(p.index)})//d === pr; })
+		//					.transition().duration(500)
+							.style("fill", function(d){return node_colors(d["continent_region"])});
+
+							var selected = vis.selectAll("circle.node")
+							.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByGNI(p.index)})//d === pr; })
+		//					.transition().duration(500)
+							.style("fill", function(d){return node_colors(d["continent_region"])});
+
+							var selected = vis.selectAll("circle.loss")
+							.filter(function(d, j	) {  return d === getPreviousNetworkNodeWithindexAndSortByGNI(p.index)})//d === pr; })
+							.attr("stroke", nodeOutlinecolor(4))
+							.attr("stroke-width",4)
+		//					.attr("stroke-dasharray", "4, 4")
+							.attr("stroke-opacity", 1);
+		//					.transition().duration(500)
+		//					.style("fill", function(d){return node_colors(d["continent_region"])})
+							//annotate +1 index 
+							var selected = vis.selectAll("circle.loss")
+							.filter(function(d, j	) {  return d === getNextNetworkNodeWithindexAndSortByGNI((p.index))})//d === pr; })
+							.attr("stroke", nodeOutlinecolor(4))
+							.attr("stroke-width",10)
+		//					.attr("stroke-dasharray", "8 ,8")	
+							.attr("stroke-opacity", .75);
+		//					.transition().duration(500)
+		//					.style("fill", function(d){return node_colors(d["continent_region"])})
+
+							var selected = vis.selectAll("line")
+					 		.filter(function(d,j ){ if(d.source.Country ==p.Country || d.target.Country ==p.Country ){  return true; }else return false; })
+							.attr("stroke-width",12)
+							.attr("stroke-opacity", 1);
+					 	}
+		 			});
+					}
+
+					d3.select("#country_name h2").text(p.Country)
+					d3.select("#country_name img").attr("src", "../img/flags/flag_"+p.abbrv.toLowerCase()+".png")
+					d3.select("#buttons #EPI p").text(p.Environmental_Performance_Index +" #:" +    (Number(network.nodes.length)-(Number(network.nodes.sort(SortByEnvironmental_Performance_Index ).indexOf(p))))   )
+					d3.select("#buttons #IHDI p").text(p.IHDI_Inequality_adjusted_HDI_value +" #:" + (Number(network.nodes.length)- (Number(network.nodes.sort(SortByIHDI_Inequality_adjusted_HDI_value ).indexOf(p))))   )
+					d3.select("#buttons #GII p").text(p.GII_Gender_Inequality_Index_value +" #:" + (Number(network.nodes.length)- (Number(network.nodes.sort(SortByGII_Gender_Inequality_Index_value ).indexOf(p))))   )
+					d3.select("#buttons #GNI p").text("$"+d3.format(",")(p.GNI_Gross_National_Income) +" #:" + (Number(network.nodes.length)-  (Number(network.nodes.sort(SortByGNI_Gross_National_Income).indexOf(p))) ) )
+	}
 	
-		
+	function node_mouseClick(p, j){
+	}
+	
+	function node_mouseOut(p, j){ 
+				// console.log("mouseout");
 
-	})
+				// var selected = vis.selectAll("circle.node")
+				// .attr("stroke-opacity", 1)
+				// .attr("stroke", "grey")
+				// .attr("stroke-width",1 )
+				//  .attr("stroke", "grey")
+
+				// 		//fade to white all nodes
+				vis.selectAll("circle")
+				.style("fill", "white")
+				.attr("stroke-opacity", 1)
+				.attr("stroke-width", 1);
+				vis.selectAll("circle.loss")
+				.attr("stroke-opacity", 1)
+				.attr("stroke-width", 0);
+
+				vis.selectAll("circle.loss")
+				.filter(function(d, j	) {  return d ===p; })
+				.attr("stroke-opacity", 1)
+				.attr("stroke-width", 0);
+				// 		//.attr("stroke-width", function(d) { var returnValue =0; returnValue = ( Number(d.Overall_loss_percent)/Overall_loss_scaleFactor); return  returnValue; })
+				// 		.transition().duration(500)
+				// 		 .attr("stroke", "grey")
+				// 		.style("fill", "white");
 
 
-	node.on("mouseout", function(p, j) {
-			// console.log("mouseout");
-			
-			// var selected = vis.selectAll("circle.node")
-			// .attr("stroke-opacity", 1)
-			// .attr("stroke", "grey")
-			// .attr("stroke-width",1 )
-			//  .attr("stroke", "grey")
-		
-			// 		//fade to white all nodes
-			vis.selectAll("circle")
-			.style("fill", "white")
-			.attr("stroke-opacity", 1)
-			.attr("stroke-width", 1);
-			vis.selectAll("circle.loss")
-			.attr("stroke-opacity", 1)
-			.attr("stroke-width", 0);
-			
-			vis.selectAll("circle.loss")
-			.filter(function(d, j	) {  return d ===p; })
-			.attr("stroke-opacity", 1)
-			.attr("stroke-width", 0);
-			// 		//.attr("stroke-width", function(d) { var returnValue =0; returnValue = ( Number(d.Overall_loss_percent)/Overall_loss_scaleFactor); return  returnValue; })
-			// 		.transition().duration(500)
-			// 		 .attr("stroke", "grey")
-			// 		.style("fill", "white");
-		
-			
-				update_regions();
-				update_force();
-				update_network(network);
-	//	update_to_defaultschema();
-	//	update_regions();
-			
-	});
+					update_regions();
+					update_force();
+					update_network(network);
+		//	update_to_defaultschema();
+		//	update_regions();
+	}
+	
+		//node mouse related events 
+//	node.on("click", null);
+	node.on("mouseover", function(p, j) { node_mouseOver(p, j)});
+	node.on("mouseout", function(p, j) { node_mouseOut(p, j)});
 
 
    
