@@ -1013,8 +1013,6 @@ function build_network(network){
 		.attr("stroke-opacity", 1)
 		.attr("stroke", "grey")
 		.attr("stroke-width",1 )
-		//.attr("stroke-width", function(d) { var returnValue =0; returnValue = ( Number(d.Overall_loss_percent)/Overall_loss_scaleFactor); return  returnValue; })
-		//.transition().duration(500)
 		 .attr("stroke", "grey")
 		.style("fill", "white");
 	
@@ -1033,7 +1031,7 @@ function build_network(network){
 			.filter(function(d, j	) {  return d === p; })
 				.attr("stroke-width", 1)
 				.attr("stroke-opacity", 1)
-			.transition().duration(500)
+		//	.transition().duration(500)
 			.attr("stroke", "grey");
 			//.attr("stroke-width", function(d) { var returnValue =0; returnValue = ( Number(d.Overall_loss_percent)/Overall_loss_scaleFactor); return  returnValue; })
 		
@@ -1068,7 +1066,7 @@ function build_network(network){
 					.attr("stroke-width",4)
 //					.attr("stroke-dasharray", "6, 6")
 					.attr("stroke-opacity", 0.75)
-					.transition().duration(500)
+					//.transition().duration(500)
 //					.style("fill", function(d){return node_colors(d["continent_region"])})
 					//annotate +1 index 
 					var selected = vis.selectAll("circle.loss")
@@ -1077,7 +1075,7 @@ function build_network(network){
 					.attr("stroke-width",10)
 //					.attr("stroke-dasharray", "12 ,12")	
 						.attr("stroke-opacity", 0.75)
-					.transition().duration(500)
+				//	.transition().duration(500)
 //					.style("fill", function(d){return node_colors(d["continent_region"])})
 
 					var selected = vis.selectAll("line")
@@ -1208,8 +1206,16 @@ function build_network(network){
 
 	node.on("mouseout", function(p, j) {
 			// console.log("mouseout");
+			
+			// var selected = vis.selectAll("circle.node")
+			// .attr("stroke-opacity", 1)
+			// .attr("stroke", "grey")
+			// .attr("stroke-width",1 )
+			//  .attr("stroke", "grey")
+		
 			// 		//fade to white all nodes
-			vis.selectAll("circle.node")
+			vis.selectAll("circle")
+			.style("fill", "white")
 			.attr("stroke-opacity", 1)
 			.attr("stroke-width", 1);
 			vis.selectAll("circle.loss")
@@ -1250,7 +1256,7 @@ function update_force(){
 					force //= self.force = d3.layout.force()
 					        .links(network.links)
 							.linkStrength(0.10) 
-						 	.charge(-120)
+						 	.charge(-60)
 							.gravity(.1)
 						    .size([w, h])
 							.nodes(network.nodes)
@@ -1286,7 +1292,7 @@ function update_force(){
 					force //= self.force = d3.layout.force()
 			        .links(network.links)
 					.linkStrength(0.10) 
-				 	.charge(-140)
+				 	.charge(-90)
 					.gravity(.1)
 				    .size([w, h])
 					.nodes(network.nodes)
@@ -1322,7 +1328,7 @@ function update_force(){
 					force //= self.force = d3.layout.force()
 			        .links(network.links)
 					.linkStrength(0.10) 
-				 	.charge(-160)
+				 	.charge(-110)
 					.gravity(.1)
 				    .size([w, h])
 					.nodes(network.nodes)
@@ -1382,7 +1388,7 @@ function update_force(){
 //								.theta(1)
 							.linkStrength(0.04) 
 							// .friction(0)
-							 .charge(-160)
+							 .charge(-110)
 							// 							    .gravity(.1)
 						    .size([w, h])
 							.nodes(network.nodes)
@@ -1419,10 +1425,10 @@ function update_force(){
 				// console.log("no indices selected");
 										force 
 										        .links(network.links)
-												.linkStrength(.0) 
+												.linkStrength(.05) 
 												 //.friction(1)
 												 .charge(-40)
-												 .gravity(.05)
+												 .gravity(.07)
 											    .size([w, h])
 											//	.nodes(network.nodes)
 												.on("tick", function(e) {
